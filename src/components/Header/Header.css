@@ -1,0 +1,82 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: white;
+    height: 165px;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.header-top {
+    background-color: #E9E9E9;
+    height: 30px;
+    line-height: 30px;
+}
+
+.header-top-right {
+    margin-left: auto;
+    display: flex;
+}
+
+.header .bookstore-highlight {
+    font-weight: 700;
+    color: #539E31;
+}
+
+.header-top .hotline {
+    margin-right: 20px;
+}
+
+.header .header-center {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+
+.search-wrapper {
+    position: relative;
+}
+
+.search .form-control {
+    width: 500px;
+    border: 1px solid #E1E1E1;
+}
+
+
+.search .form-control:focus {
+    border-color: #80bdff;
+  }
+
+.search .search-btn {
+    position: absolute;
+    right: 0;
+    color: white;
+    background-color: #80C063;
+    line-height: normal;
+    width: 50px;
+    height: 100%;
+}
+
+.header-center .header-center-right {
+    margin-left: auto;
+}
+
+.header-center .header-center-right svg {
+    font-size: 24px;
+}
+
+.header-center .header-center-right .header-icon:not(:first-child) {
+    margin-left: 10px;
+}
+
+.header-center .header-icon {
+    text-align: center;
+}
+
+
+.header .header-bottom {
+    height: 50px;
+}

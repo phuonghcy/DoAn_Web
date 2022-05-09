@@ -1,0 +1,44 @@
+.footer {
+    background-color: #252932;
+    height: 250px;
+    padding: 20px 0;
+}
+
+.footer .footer-group p,
+.footer .footer-group a {
+    color: #ccc;
+    font-weight: 300;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.footer .bookstore-highlight {
+    font-weight: 700;
+    color: #539E31;
+    margin-top: -10px;
+}
+
+.footer .footer-group .title {
+    font-weight: 600;
+    font-size: 17px;
+    color: white;
+}
+
+.footer .form-group {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.footer .subscribe-btn {
+    position: absolute;
+    right: 8px;
+    color: #0FA958;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.footer .box-social .bookstore-btn {
+    color: #A4A4A4;
+    font-size: 28px;
+    margin-right: 12px;
+}
