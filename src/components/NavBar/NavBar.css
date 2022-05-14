@@ -1,0 +1,26 @@
+.navbar .nav-item {
+    position: relative;
+}
+
+.header .navbar {
+    justify-content: flex-start;
+    padding: 0;
+}
+
+.navbar .nav-item a {
+    display: block;
+    padding: 0px 20px;
+    font-weight: 600;
+    line-height: 50px;
+}
+
+
+.navbar .nav-item a:hover {
+    color: #539E31;
+}
+
+.navbar .nav-item.active a {
+    background-color: #539E31;
+    color: white;
+    border-radius: 4px;
+}
