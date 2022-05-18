@@ -9,7 +9,7 @@ function NavBar() {
                 <Link to="/" >Trang chủ</Link>
             </div>
             <div className="nav-item">
-                <Link to="/gio-hang">Cửa hàng</Link>
+                <Link to="/">Cửa hàng</Link>
             </div>
             <div className="nav-item">
                 <Link to="/">Liên hệ</Link>

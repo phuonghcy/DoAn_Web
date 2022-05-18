@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from "./components/Footer";
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
+import LoginPage from './pages/LoginPage';
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gio-hang" element={<CartPage />} />
+        <Route path="/dang-nhap" element={<LoginPage />} />
       </Routes>
       <Footer />
     </div>

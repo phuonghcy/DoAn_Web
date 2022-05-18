@@ -1,12 +1,64 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { BsSearch, BsSuitHeart, BsPerson, BsCart2 } from "react-icons/bs";
 import { IoMailOutline } from "react-icons/io5";
 import NavBar from "../NavBar";
+import authApi from "../../api/authApi";
+import userApi from "../../api/userApi";
+import authorApi from "../../api/authorApi"
+import { login, logout } from '../../redux/actions/user';
 
 import './Header.css';
+import { useEffect, memo } from "react";
 function Header() {
+
+  console.log('header Render')
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const currentUser = useSelector((state) => state.user.currentUser)
+ 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await userApi.getCurrentUser()
+      const { email, fullName, avatar, _id } = data?.user
+      dispatch(login({email, fullName, avatar, userId: _id}))
+    }
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      fetchData()
+    }
+  },[dispatch])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await authorApi.getAll()
+      console.log(data)
+    }
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      fetchData()
+    }
+    
+  },[])
+
+  const handleLogout = async () => {
+    const resultLogout = await authApi.logout()
+    console.log(resultLogout)
+    dispatch(logout())
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      localStorage.setItem('accessToken', '')
+    }
+    navigate({ pathname: '/' })
+  }
+
+  // console.log(currentUser)
+ 
   return (
     <header className="header">
       <div className="header-top">
@@ -49,15 +101,24 @@ function Header() {
                   </Link>
                 </div>
                 <div className="header-icon">
-                  <Link to="">
-                    <BsPerson />
-                    <p>Tài khoản</p>
-                  </Link>
+                  {
+                    currentUser.email && currentUser.fullName ? 
+                    <div className="account">
+                      <img className="avatar" src={currentUser.avatar} alt="" />
+                      <p>{currentUser.fullName}</p>
+                      <div className="account-popup">
+                          <div className="item"><Link className="popup-link" to="">Tài khoản của tôi</Link></div>
+                          <div className="item"><Link className="popup-link" to="">Đơn hàng</Link></div>
+                          <div className="item"><p className="popup-link" onClick={handleLogout} to="">Đăng xuất</p></div>
+                      </div>
+                    </div>
+                    : <Link to="/dang-nhap"><BsPerson /><p>Tài khoản</p></Link>
+                  }
                 </div>
                 <div className="header-icon">
-                  <Link to="">
+                  <Link to="/gio-hang">
                     <BsCart2 />
-                    <p>Yêu thích</p>
+                    <p>Giỏ hàng</p>
                   </Link>
                 </div>
               </div>
@@ -76,4 +137,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);

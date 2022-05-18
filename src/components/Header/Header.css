@@ -80,3 +80,43 @@
 .header .header-bottom {
     height: 50px;
 }
+
+.account {
+    position: relative;
+    cursor: pointer;
+}
+
+.account .avatar {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.account .account-popup {
+    position: absolute;
+    z-index: 100;
+    text-align: left;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+    color: black;
+    background-color: white;
+    display: none;
+}
+
+.account:hover .account-popup {
+    display: block;
+}
+
+.account-popup .item {
+    border-bottom: 1px solid #ccc;
+}
+
+.account-popup .popup-link {
+    display: block;
+    padding: 8px;
+}
+
+.account-popup .popup-link:hover {
+    background-color: #fafafa;
+}

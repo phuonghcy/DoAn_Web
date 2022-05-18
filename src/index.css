@@ -32,7 +32,7 @@ code {
 
 .title {
   font-weight: 500;
-  color: white;
+  color: #539E31;
 }
 
 .subtitle {
@@ -57,6 +57,7 @@ a, a.active, a:hover {
 
 img {
   width: 100%;
+  object-fit: cover;
 }
 
 .page {
@@ -96,4 +97,8 @@ svg {
 
 .form-control:focus {
   box-shadow: none;
+}
+
+.main {
+  margin: 200px 0;
 }
