@@ -12,10 +12,10 @@ function NavBar() {
                 <Link to="/gio-hang">Cửa hàng</Link>
             </div>
             <div className="nav-item">
-                <Link to="/">Liên hệ</Link>
+                <Link to="/lien-he">Liên hệ</Link>
             </div>
             <div className="nav-item">
-                <Link to="/">Khuyễn mãi</Link>
+                <Link to="/khuyen-mai">Khuyến mãi</Link>
             </div>
         </div>
     )

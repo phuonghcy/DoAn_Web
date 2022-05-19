@@ -35,4 +35,15 @@
   to {
     transform: rotate(360deg);
   }
-} */
+}
+
+<Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/gio-hang" element={<CartPage />} />
+        <Route path="/lien-he" element={<ContactPage />} /> 
+        <Route path="/khuyen-mai" element={<DiscountPage />} />
+      </Routes> 
+      <Footer />
+
+*/

@@ -3,17 +3,15 @@ import Header from './components/Header'
 import Footer from "./components/Footer";
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
+import ContactPage from "./pages/ContactPage";
+import DiscountPage from "./pages/DiscountPage";
+import LoginPage from "./pages/LoginPage";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/gio-hang" element={<CartPage />} />
-      </Routes>
-      <Footer />
+      <LoginPage />
     </div>
   );
 }
