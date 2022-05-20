@@ -8,6 +8,7 @@ import DiscountPage from "./pages/DiscountPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProductPage from "./pages/ProductPage";
+import LikePage from "./pages/LikePage";
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/dang-nhap" element={<LoginPage />} />
         <Route path="/dang-ki" element={<RegisterPage />} />
         <Route path="/san-pham" element={<ProductPage />} />
+        <Route path="/yeu-thich" element={<LikePage />} />
       </Routes> 
       <Footer />
     </div>
