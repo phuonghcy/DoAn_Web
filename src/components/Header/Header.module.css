@@ -9,48 +9,48 @@
     box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
 }
 
-.header-top {
+.headerTop {
     background-color: #E9E9E9;
     height: 30px;
     line-height: 30px;
 }
 
-.header-top-right {
+.headerTopRight {
     margin-left: auto;
     display: flex;
 }
 
-.header .bookstore-highlight {
+.header .bookstoreHighlight {
     font-weight: 700;
     color: #539E31;
 }
 
-.header-top .hotline {
+.headerTop .hotline {
     margin-right: 20px;
 }
 
-.header .header-center {
+.header .headerCenter {
     display: flex;
     align-items: center;
     height: 80px;
 }
 
 
-.search-wrapper {
+.searchWrapper {
     position: relative;
 }
 
-.search .form-control {
+.search .formControl {
     width: 500px;
     border: 1px solid #E1E1E1;
 }
 
 
-.search .form-control:focus {
+.search .formControl:focus {
     border-color: #80bdff;
   }
 
-.search .search-btn {
+.search .searchBtn {
     position: absolute;
     right: 0;
     color: white;
@@ -60,24 +60,24 @@
     height: 100%;
 }
 
-.header-center .header-center-right {
+.headerCenter .headerCenterRight {
     margin-left: auto;
 }
 
-.header-center .header-center-right svg {
+.headerCenter .headerCenterRight svg {
     font-size: 24px;
 }
 
-.header-center .header-center-right .header-icon:not(:first-child) {
+.headerCenter .headerCenterRight .headerIcon:not(:first-child) {
     margin-left: 10px;
 }
 
-.header-center .header-icon {
+.headerCenter .headerIcon {
     text-align: center;
 }
 
 
-.header .header-bottom {
+.header .headerBottom {
     height: 50px;
 }
 
@@ -91,7 +91,7 @@
     border-radius: 50%;
 }
 
-.account .account-popup {
+.account .accountPopup {
     position: absolute;
     z-index: 100;
     text-align: left;
@@ -104,19 +104,19 @@
     display: none;
 }
 
-.account:hover .account-popup {
+.account:hover .accountPopup {
     display: block;
 }
 
-.account-popup .item {
-    border-bottom: 1px solid #ccc;
+.accountPopup .item {
+    border-bottom: 1px solid #eee;
 }
 
-.account-popup .popup-link {
+.accountPopup .popupLink {
     display: block;
     padding: 8px;
 }
 
-.account-popup .popup-link:hover {
+.accountPopup .popupLink:hover {
     background-color: #fafafa;
 }

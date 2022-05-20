@@ -1,0 +1,40 @@
+.contact h3 {
+    text-align: left;
+    color: #539E31;
+}
+
+.contact h2 {
+    text-align: center;
+    color: #539E31;
+}
+
+.item {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.item button {
+    background-image: linear-gradient(#539E31, #1c7d13);
+    font-size: 18px;
+    color: white;
+    padding: 10px 15px;
+    min-width: 400px;
+    text-align: left;
+    border: none;
+    box-shadow: 5px 10px rgba(192, 191, 191, 0.784);
+}
+
+.item p {
+    margin: 20px 0px;
+}
+
+.contact {
+    margin: 30px 30px;
+
+}
+
+.hr {
+    height: 15px;
+    background-image: linear-gradient(#539E31, #1c7d13);
+    margin: 20px 0px;
+}

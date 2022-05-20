@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom';
 
-import './NavBar.css';
+import styles from './NavBar.module.css';
 function NavBar() {
 
     return (
-        <div className="navbar">
-            <div className="nav-item active">
+        <div className={`navbar ${styles.navbar}`}>
+            <div className={`${styles.navItem} ${styles.active}`}>
                 <Link to="/" >Trang chủ</Link>
             </div>
-            <div className="nav-item">
-                <Link to="/">Cửa hàng</Link>
+            <div className={styles.navItem}>
+                <Link to="/san-pham">Sản phẩm</Link>
             </div>
-            <div className="nav-item">
-                <Link to="/">Liên hệ</Link>
+            <div className={styles.navItem}>
+                <Link to="/lien-he">Liên hệ</Link>
             </div>
-            <div className="nav-item">
-                <Link to="/">Khuyễn mãi</Link>
+            <div className={styles.navItem}>
+                <Link to="/khuyen-mai">Khuyến mãi</Link>
             </div>
         </div>
     )

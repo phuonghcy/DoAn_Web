@@ -4,32 +4,32 @@
     padding: 20px 0;
 }
 
-.footer .footer-group p,
-.footer .footer-group a {
+.footer .footerGroup p,
+.footer .footerGroup a {
     color: #ccc;
     font-weight: 300;
     margin-bottom: 6px;
     display: block;
 }
 
-.footer .bookstore-highlight {
+.footer .bookstoreHighlight {
     font-weight: 700;
     color: #539E31;
     margin-top: -10px;
 }
 
-.footer .footer-group .title {
+.footer .footerGroup .title {
     font-weight: 600;
     font-size: 17px;
     color: white;
 }
 
-.footer .form-group {
+.footer .formGroup {
     position: relative;
     margin-bottom: 10px;
 }
 
-.footer .subscribe-btn {
+.footer .subscribeBtn {
     position: absolute;
     right: 8px;
     color: #0FA958;
@@ -37,7 +37,7 @@
     transform: translateY(-50%);
 }
 
-.footer .box-social .bookstore-btn {
+.footer .boxSocial .bookstoreBtn {
     color: #A4A4A4;
     font-size: 28px;
     margin-right: 12px;

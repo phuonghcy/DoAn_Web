@@ -6,8 +6,9 @@ import authApi from '../../api/authApi';
 import { login } from '../../redux/actions/user';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import './LoginPage.css';
 import { useEffect } from "react";
+
+import styles from './LoginPage.module.css';
 
 function LoginPage() {
 
@@ -41,19 +42,19 @@ function LoginPage() {
   
   return (
     <div className="main">
-      <div className="login-page">
+      <div className={styles.loginPage}>
         <Container>
-          <div className="wrapper">
-            <h2 className="title">ĐĂNG NHẬP</h2>
+          <div className={styles.wrapper}>
+            <h2 className={styles.title}>ĐĂNG NHẬP</h2>
             <form className="form-login">
-              <div className="form-group">
+              <div className={`form-group ${styles.formGroup}`}>
                 <input type="text" name="email" className="form-control" placeholder="Email..." />
               </div>
-              <div className="form-group">
+              <div className={`form-group ${styles.formGroup}`}>
                 <input type="password" name="password" className="form-control" autoComplete="on" placeholder="Mật khẩu..." />
               </div>
               <Link className="forgot-password" to="/quen-mat-khau">Quên mật khẩu?</Link>
-              <button className="bookstore-btn submit-btn">Đăng nhập</button>
+              <button className={`bookstore-btn ${styles.submitBtn}`}>Đăng nhập</button>
             </form>
             <p style={{color: '#ccc', textAlign: 'center'}}>HOẶC</p>
             {/* <GoogleLogin
@@ -63,7 +64,7 @@ function LoginPage() {
               onFailure={responseFailureGoogle}
               cookiePolicy={'single_host_origin'}
             />             */}
-            <div className="box-login-with-google">
+            <div className={styles.boxLoginWithGoogle}>
               <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png" alt="" />
               <OAuth2Login  className="bookstore-btn"
                   buttonText="Login with Google"
