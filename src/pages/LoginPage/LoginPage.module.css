@@ -70,12 +70,19 @@
 
 .third_party_wrapper button {
     background-color: white;
-    border: none;
+    border: 1px solid gray;
+    padding: 15px;
     border-radius: 10px;
-    font-size: large;
+    font-size: 20px;
     padding: 12px 20px 7px;
+
 }
 
 .third_party_wrapper button img {
     width: 20px;
 }
+
+.third_party_wrapper button i{
+    margin-right: 10px;
+}
+

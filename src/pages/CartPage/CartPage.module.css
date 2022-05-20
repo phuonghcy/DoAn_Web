@@ -1,0 +1,32 @@
+.cart_header {
+    padding: 50px;
+    text-align: center;
+    color: #000;
+}
+
+.cart_header ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart_header li {
+    display: inline;
+}
+
+.cart_header li:not(:last-child) {
+    padding-right: 10px;
+}
+
+.cart_header li:not(:last-child)::after {
+    content: ">";
+    position: relative;
+    left: 5px;
+}
+
+.cart_header li:last-child {
+    color: red;
+}
+
+.cart_header h1 {
+    color: #539E31;
+}

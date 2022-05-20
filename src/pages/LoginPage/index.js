@@ -46,8 +46,8 @@ export default function LoginPage() {
               redirectUri="http://localhost:3000/auth/google/diamonjewelry"
               scope="profile"
             >
+              <i className="fa fa-google" />Google
                
-              <h3>Google</h3>
             </OAuth2Login>
             <OAuth2Login
               className={styles.button}
@@ -57,7 +57,7 @@ export default function LoginPage() {
               redirectUri="http://localhost:3000/auth/facebook/diamonjewelry"
               scope="public_profile"
             >
-              <h3>Facebook</h3>
+              <i className="fa fa-facebook" />Facebook
             </OAuth2Login>
           </div>
         </form>

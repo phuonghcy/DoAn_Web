@@ -43,21 +43,21 @@ function Header() {
 
               <div className="header-center-right d-flex">
                 <div className="header-icon">
-                  <Link to="">
+                  <Link to="/yeu-thich">
                     <BsSuitHeart />
                     <p>Yêu thích</p>
                   </Link>
                 </div>
                 <div className="header-icon">
-                  <Link to="">
+                  <Link to="/dang-nhap">
                     <BsPerson />
                     <p>Tài khoản</p>
                   </Link>
                 </div>
                 <div className="header-icon">
-                  <Link to="">
+                  <Link to="/gio-hang">
                     <BsCart2 />
-                    <p>Yêu thích</p>
+                    <p>Giỏ hàng</p>
                   </Link>
                 </div>
               </div>
