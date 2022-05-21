@@ -6,6 +6,10 @@ const authApi = {
         const url = 'auth/google'
         return axiosClient.post(url, {accessToken: accessToken})
     },
+    loginWithFacebook: (data) => {
+        const url = 'auth/facebook'
+        return axiosClient.post(url, data)
+    },
     getRefreshToken: () => {
         const url = 'auth/refresh-token'
         return axiosClient.post(url)

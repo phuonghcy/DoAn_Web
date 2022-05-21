@@ -14,7 +14,7 @@
     margin-bottom: 16px;
 }
 
-.forgot-password {
+.forgotPassword {
     color: red;
 }
 
@@ -27,21 +27,26 @@
     margin: 10px 0;
 }
 
-.boxLoginWithGoogle {
+.boxLoginThirdParty {
     display: flex;
     justify-content: center;
     border: 1px solid #ccc;
     width: 200px;
     padding: 6px;
+    border-radius: 4px;
 }
 
-.boxLoginWithGoogle button {
+.boxLoginThirdParty:hover {
+    background-color: #f3f2f2;
+}
+
+.boxLoginThirdParty button {
     margin-left: 8px;
     font-size: 15px;
     font-weight: 500;
 }
 
-.boxLoginWithGoogle img {
+.boxLoginThirdParty img {
     width: 30px;
     height: 30px;
 }
