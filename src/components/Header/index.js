@@ -107,7 +107,7 @@ function Header() {
                       <img className={styles.avatar} src={currentUser.avatar} alt="" />
                       <p>{currentUser.fullName}</p>
                       <div className={styles.accountPopup}>
-                          <div className={styles.item}><Link className={styles.popupLink} to="">Tài khoản của tôi</Link></div>
+                          <div className={styles.item}><Link className={styles.popupLink} to="/tai-khoan">Tài khoản của tôi</Link></div>
                           <div className={styles.item}><Link className={styles.popupLink} to="">Đơn hàng</Link></div>
                           <div className={styles.item}><p className={styles.popupLink} onClick={handleLogout} to="">Đăng xuất</p></div>
                       </div>

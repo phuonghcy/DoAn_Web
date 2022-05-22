@@ -30,6 +30,15 @@ code {
   position: relative;
 }
 
+.bookstore-btn:hover {
+  opacity: 0.9;
+}
+
+.bookstore-btn.disabled, .bookstore-btn:disabled{
+  pointer-events: none;
+  opacity: .65;
+}
+
 .title {
   font-weight: 500;
   color: #539E31;
@@ -101,4 +110,9 @@ svg {
 
 .main {
   margin: 200px 0;
+}
+
+
+.table > tbody {
+  vertical-align: middle;
 }

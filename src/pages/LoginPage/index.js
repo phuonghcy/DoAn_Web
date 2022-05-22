@@ -6,12 +6,14 @@ import authApi from '../../api/authApi';
 import { login } from '../../redux/actions/user';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import styles from './LoginPage.module.css';
 
 function LoginPage() {
 
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -64,6 +66,20 @@ function LoginPage() {
     }
   }, [navigate])
 
+  const handleLogin = async (e) => {
+    e.preventDefault()
+
+    const res = await authApi.login({email, password})
+    console.log({res})
+    if (res.error) return alert (res.message)
+    // Nhan token tu server
+    const { token, user } = res
+    localStorage.setItem('accessToken', token)
+    const { fullName, userId, avatar } = user
+    dispatch(login({ email, fullName, avatar, userId }))
+    navigate({ pathname: '/' })
+  }
+
   
   return (
     <div className="main">
@@ -71,12 +87,16 @@ function LoginPage() {
         <Container>
           <div className={styles.wrapper}>
             <h2 className={`title ${styles.title}`}>ĐĂNG NHẬP</h2>
-            <form className="form-login">
+            <form className="form-login" onSubmit={handleLogin}>
               <div className={`form-group ${styles.formGroup}`}>
-                <input type="text" name="email" className="form-control" placeholder="Email..." />
+                <input required type="text" name="email" className="form-control" placeholder="Email..."
+                  value={email} onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className={`form-group ${styles.formGroup}`}>
-                <input type="password" name="password" className="form-control" autoComplete="on" placeholder="Mật khẩu..." />
+                <input required type="password" name="password" className="form-control" autoComplete="on" placeholder="Mật khẩu..." 
+                  value={password} onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <Link className={styles.forgotPassword} to="/quen-mat-khau">Quên mật khẩu?</Link>
               <button className={`bookstore-btn ${styles.submitBtn}`}>Đăng nhập</button>

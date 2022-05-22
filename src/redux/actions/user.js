@@ -5,6 +5,13 @@ export const login = (user) => {
     }
 }
 
+export const updateFullName = (data) => {
+    return {
+        type: 'UPDATE_FULLNAME',
+        payload: data
+    }
+}
+
 export const logout = () => {
     return {
         type: 'LOGOUT',

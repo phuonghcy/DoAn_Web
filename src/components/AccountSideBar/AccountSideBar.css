@@ -1,0 +1,31 @@
+.sideBarTitle {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.navList {
+    display: block;
+    margin-top: 5px;
+}
+
+.navItem {
+    max-width: 200px;
+}
+
+.navLink {
+    display: block;
+    padding: 6px 12px;
+    color: #333;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.navItem.active .navLink {
+    background-color: rgba(84, 158, 49, 0.911);
+    color: white;
+    border-radius: 20px;
+}
+
+.navLink:hover {
+    color: #539E31;
+}

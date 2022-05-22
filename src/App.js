@@ -9,6 +9,9 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProductPage from "./pages/ProductPage";
 import LikePage from "./pages/LikePage";
+import AccountPage from "./pages/AccountPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage"
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import './App.css';
 
 function App() {
@@ -21,9 +24,12 @@ function App() {
         <Route path="/lien-he" element={<ContactPage />} /> 
         <Route path="/khuyen-mai" element={<DiscountPage />} />
         <Route path="/dang-nhap" element={<LoginPage />} />
+        <Route path="/quen-mat-khau" element={<ForgotPasswordPage />} />
+        <Route path="/dat-lai-mat-khau/:code" element={<ResetPasswordPage />} />
         <Route path="/dang-ki" element={<RegisterPage />} />
         <Route path="/san-pham" element={<ProductPage />} />
         <Route path="/yeu-thich" element={<LikePage />} />
+        <Route path="/tai-khoan" element={<AccountPage />} />
       </Routes> 
       <Footer />
     </div>
