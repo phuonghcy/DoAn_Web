@@ -1,0 +1,80 @@
+.container {
+    padding: 20px 50px;
+}
+.payment_header {
+    padding: 20px;
+    text-align: center;
+    color: #000;
+}
+
+.payment_header ul {
+    list-style: none;
+    padding: 0;
+}
+
+.payment_header li {
+    display: inline;
+}
+
+.payment_header li:not(:last-child) {
+    padding-right: 10px;
+}
+
+.payment_header li:not(:last-child)::after {
+    content: ">";
+    position: relative;
+    left: 5px;
+}
+
+.payment_header li:last-child {
+    color: red;
+}
+
+.payment_header h1 {
+    color: #539E31;
+}
+.payment_body {
+    display: flex;
+}
+.payment_info {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 25px 20px;
+    margin: 10px auto;
+}
+.payment_info input {
+    margin: 12px auto;
+    width: 100%;
+    padding: 15px;
+}
+.payment_form {
+    border: 1px solid gray;
+    margin: 10px auto;
+    padding: 25px 20px;
+    font-size: 18px;
+    line-height: 40px;
+    height:fit-content;
+}
+
+.form_right {
+    float: right;
+    color: #539E31;
+    font-weight: bold;
+}
+.form_right1 {
+    float: right;
+}
+.payment_form p {
+    border-bottom: 1px solid gray;
+}
+.payment_form button {
+    width: 100%;
+    border: none;
+    margin-top: 10px;
+    background-color: #539E31;
+    color: white;
+    font-weight: bold;
+}

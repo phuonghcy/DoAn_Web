@@ -22,7 +22,7 @@ function Footer() {
                   <Col xl={4}>
                     <div className={styles.footerBoxLink}>
                         <p className={styles.title}>SẢN PHẨM</p>
-                        <Link to="/">Văn học</Link>
+                        <Link to="/san-pham/the-loai">Văn học</Link>
                         <Link to="/">Ẩm thực</Link>
                         <Link to="/">Tâm lý - Kỹ năng sống</Link>
                         <Link to="/">Kinh tế</Link>
@@ -33,7 +33,7 @@ function Footer() {
                         <p className={styles.title}>DANH MỤC</p>
                         <Link to="/">Trang chủ</Link>
                         <Link to="/">Giới thiệu</Link>
-                        <Link to="/">Liên hệ</Link>
+                        <Link to="/lien-he">Liên hệ</Link>
                         <Link to="/">Danh mục sản phẩm</Link>
                     </div>
                   </Col>

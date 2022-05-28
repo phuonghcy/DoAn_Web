@@ -12,6 +12,8 @@ import LikePage from "./pages/LikePage";
 import AccountPage from "./pages/AccountPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import PaymentPage from "./pages/PaymentPage";
+import GenreDetailPage from "./pages/GenreDetailPage";
 import './App.css';
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
         <Route path="/san-pham" element={<ProductPage />} />
         <Route path="/yeu-thich" element={<LikePage />} />
         <Route path="/tai-khoan" element={<AccountPage />} />
+        <Route path="/thanh-toan" element={<PaymentPage />} />
+        <Route path="/san-pham/the-loai" element={<GenreDetailPage/>} />
       </Routes> 
       <Footer />
     </div>

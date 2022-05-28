@@ -6,6 +6,9 @@ button {
 	border: none;
 	border-bottom: 1px solid #707070;
 }
+.wrapper img {
+	width: 50px;
+}
 
 .remove_button {
 	border: none;
@@ -14,13 +17,12 @@ button {
 }
 
 .price {
-	color: #46cfbe;
+	color:#539E31;
 }
 
 .quantity_wrapper input {
 	width: 30px;
-	border-left: none;
-	border-right: none;
+	border: none;
 	text-align: center;
 }
 
@@ -29,15 +31,15 @@ button {
 }
 
 .increase_button {
-	border-left: none;
-	border-top-right-radius: 28px;
-	border-bottom-right-radius: 28px;
+	border: none;
+	font-size: large;
+	font-weight: bold;
 }
 
 .decrease_button {
-	border-right: none;
-	border-top-left-radius: 28px;
-	border-bottom-left-radius: 28px;
+	border: none;
+	font-size: large;
+	font-weight: bold;
 }
 
 /* Hide Arrows From Input Number */
