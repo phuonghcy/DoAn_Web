@@ -36,6 +36,30 @@ export default function GenreDetailPage() {
             quantity: 1,
             total_cost: 320000
           },
+          {
+          bookId: "book05",
+            image: "https://picsum.photos/175/120",
+            name: "Đắc nhân tâm 5",
+            price: 320000,
+            quantity: 1,
+            total_cost: 320000
+          },
+          {
+            bookId: "book06",
+            image: "https://picsum.photos/175/120",
+            name: "Đắc nhân tâm 6",
+            price: 320000,
+            quantity: 1,
+            total_cost: 320000
+          },
+          {
+            bookId: "book07",
+            image: "https://picsum.photos/175/120",
+            name: "Đắc nhân tâm 7",
+            price: 320000,
+            quantity: 1,
+            total_cost: 320000
+          },
         ] 
 
   return (
