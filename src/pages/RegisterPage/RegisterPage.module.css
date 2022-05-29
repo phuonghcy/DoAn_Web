@@ -1,78 +1,52 @@
-.container {
-    padding: 50px;
-    text-align: center;
-    height: calc(100vh - 100px);
-}
-
 .wrapper {
-    border: 1px solid #539E31;
-    border-radius: 25px;
-    display: inline-block;
-    padding: 40px 70px 100px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 600px;
-}
-
-.container form h1 {
-    color: #539E31;
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-.container form input {
-    display: block;
-    border: 1px solid gray;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(100% - 20px);
-    margin-bottom: 15px;
-    padding: 10px;
-}
-
-.container a {
-    text-decoration: none;
-}
-.container p {
-    margin: 10px 0px;
-}
-
-.signup_button {
-    color: white;
-    background-color: #539E31;
-    border: none;
-    border-radius: 5px;
-    width: calc(100% - 20px);
-    padding: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    margin: 10px 0px 20px 0px;
-}
-
-.third_party_wrapper {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.third_party_wrapper button {
-    background-color: white;
-    border: 1px solid gray;
-    padding: 15px;
+    width: 500px;
+    padding: 16px;
+    border: 2px solid #539E31;
     border-radius: 10px;
-    font-size: 20px;
-    padding: 12px 20px 7px;
-
+    margin: 0 auto;
 }
 
-.third_party_wrapper button img {
-    width: 20px;
+.wrapper .title {
+    text-align: center;
 }
 
-.third_party_wrapper button i{
-    margin-right: 10px;
+p {
+    margin-bottom: 8px;
 }
 
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.submitBtn {
+    padding: 8px 12px;
+    width: 100%;
+    background-color: #539E31;
+    color: white;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.boxLoginThirdParty {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ccc;
+    width: 200px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.boxLoginThirdParty:hover {
+    background-color: #f3f2f2;
+}
+
+.boxLoginThirdParty button {
+    margin-left: 8px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.boxLoginThirdParty img {
+    width: 30px;
+    height: 30px;
+}

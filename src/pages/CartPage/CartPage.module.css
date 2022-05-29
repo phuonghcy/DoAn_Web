@@ -1,5 +1,5 @@
 .cart_header {
-    padding: 50px;
+    padding: 20px;
     text-align: center;
     color: #000;
 }
@@ -29,4 +29,82 @@
 
 .cart_header h1 {
     color: #539E31;
+}
+
+.cart_body {
+    display: flex;
+
+}
+
+.cart_table {
+    width: 750px;
+    margin: 10px auto;
+}
+
+.cart_table table {
+    width: 100%;
+    border-top: 1px solid gray;
+
+}
+
+.cart_table td,tr {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+.cart_table td:last-child {
+    border: none;
+}
+
+.cart_voucher {
+    width: 350px;
+    margin: 10px auto;
+    line-height: 40px;
+    padding: 10px;
+    background-color: rgb(241, 241, 241);
+    height: fit-content;
+}
+
+.cart_voucher table {
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: large;
+}
+
+.cart_voucher button {
+
+    border: none;
+    background-color: #539E31;
+    color: white;
+    font-weight: bold;
+}
+.cart_value {
+    color: #539E31;
+    font-size: large;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input input {
+    width: 80%;
+}
+
+.input button {
+    width: 20%;
+}
+
+.pay_button {
+    width: 100%;
+    border: none;
+    margin-top: 10px;
+}
+
+.container {
+    padding: 20px 50px;
 }

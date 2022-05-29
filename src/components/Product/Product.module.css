@@ -1,0 +1,17 @@
+.container {
+    background-color: rgb(241, 241, 241);
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+.name {
+    font-size: 18px;
+    margin-top: 20px;
+}
+.price {
+    color: #539E31;
+    font-size: large;
+}
+

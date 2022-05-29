@@ -1,13 +1,13 @@
-.navbar .nav-item {
+.navbar .navItem {
     position: relative;
 }
 
-.header .navbar {
+.navbar {
     justify-content: flex-start;
     padding: 0;
 }
 
-.navbar .nav-item a {
+.navbar .navItem a {
     display: block;
     padding: 0px 20px;
     font-weight: 600;
@@ -15,11 +15,11 @@
 }
 
 
-.navbar .nav-item a:hover {
+.navbar .navItem a:hover {
     color: #539E31;
 }
 
-.navbar .nav-item.active a {
+.navbar .navItem.active a {
     background-color: #539E31;
     color: white;
     border-radius: 4px;

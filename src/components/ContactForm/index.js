@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ContactForm.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { IoPaperPlane } from "react-icons/io5";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -79,7 +79,7 @@ export default function ContactForm() {
         >
           Gửi đi{" "}
           <span>
-          <FontAwesomeIcon icon={faPaperPlane} />
+          <IoPaperPlane />
           </span>
         </button>
       </form>

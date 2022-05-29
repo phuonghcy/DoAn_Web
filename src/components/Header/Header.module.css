@@ -1,0 +1,122 @@
+.header {
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: white;
+    height: 165px;
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.headerTop {
+    background-color: #E9E9E9;
+    height: 30px;
+    line-height: 30px;
+}
+
+.headerTopRight {
+    margin-left: auto;
+    display: flex;
+}
+
+.header .bookstoreHighlight {
+    font-weight: 700;
+    color: #539E31;
+}
+
+.headerTop .hotline {
+    margin-right: 20px;
+}
+
+.header .headerCenter {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+
+.searchWrapper {
+    position: relative;
+}
+
+.search .formControl {
+    width: 500px;
+    border: 1px solid #E1E1E1;
+}
+
+
+.search .formControl:focus {
+    border-color: #80bdff;
+  }
+
+.search .searchBtn {
+    position: absolute;
+    right: 0;
+    color: white;
+    background-color: #80C063;
+    line-height: normal;
+    width: 50px;
+    height: 100%;
+}
+
+.headerCenter .headerCenterRight {
+    margin-left: auto;
+}
+
+.headerCenter .headerCenterRight svg {
+    font-size: 24px;
+}
+
+.headerCenter .headerCenterRight .headerIcon:not(:first-child) {
+    margin-left: 10px;
+}
+
+.headerCenter .headerIcon {
+    text-align: center;
+}
+
+
+.header .headerBottom {
+    height: 50px;
+}
+
+.account {
+    position: relative;
+    cursor: pointer;
+}
+
+.account .avatar {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.account .accountPopup {
+    position: absolute;
+    z-index: 100;
+    text-align: left;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+    color: black;
+    background-color: white;
+    display: none;
+}
+
+.account:hover .accountPopup {
+    display: block;
+}
+
+.accountPopup .item {
+    border-bottom: 1px solid #eee;
+}
+
+.accountPopup .popupLink {
+    display: block;
+    padding: 8px;
+}
+
+.accountPopup .popupLink:hover {
+    background-color: #fafafa;
+}
