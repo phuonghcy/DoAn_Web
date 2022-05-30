@@ -49,7 +49,7 @@
 
 .cart_table td,tr {
     padding: 10px;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
 }
 .cart_table td:last-child {
     border: none;

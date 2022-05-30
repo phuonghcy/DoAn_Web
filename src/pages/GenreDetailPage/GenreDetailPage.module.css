@@ -1,6 +1,6 @@
-.container {
+/* .container {
     padding: 20px 50px;
-}
+} */
 .genre_header {
     padding: 20px;
     text-align: center;
@@ -33,18 +33,32 @@
 .genre_header h1 {
     color: #539E31;
 }
-.genre_select select{
+/* .genre_select select{
     width:fit-content;
     padding: 5px 30px;
     margin: 0px 30px 0px 10px;
-}
-.genre_select {
+} */
+/* .genre_select {
     font-size: large;
+} */
+
+.orderItem {
+    display: flex;
+    align-items: center;
 }
-.products {
+
+.orderItem select {
+    width: fit-content;
+    margin-left: 10px;
+}
+
+/* .products {
     display: flex;
     flex-wrap: wrap;
     justify-content:stretch;
     padding: 20px 10px;
-    margin: auto;
+} */
+
+.pagination {
+    margin-top: 20px;
 }

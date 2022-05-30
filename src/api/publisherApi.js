@@ -1,13 +1,12 @@
 import axiosClient from "./axiosClient"
 
-const authorApi = {
+const publisherApi = {
 
     getAll: ({page, limit}) => {
-        const url = 'authors/'
+        const url = 'publishers/'
         return axiosClient.get(url, { params: {page, limit}})
-    }
+    },
 
-   
 }
 
-export default authorApi
+export default publisherApi

@@ -9,7 +9,6 @@ function AccountPage() {
   const [content, setContent] = useState("address")
 
   const handleOnChangeContent = (nContent) => {
-    console.log(nContent)
     setContent(nContent)
   }
 
