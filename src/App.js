@@ -18,8 +18,10 @@ import PaymentPage from "./pages/PaymentPage";
 import GenreDetailPage from "./pages/GenreDetailPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FormAddBook from "./components/FormAddBook"
+import FormUpdateBook from "./components/FormUpdateBook"
 import WelcomeAdmin from "./components/WelcomeAdmin"
 import BookList from "./components/BookList"
+import AccessDenied from "./pages/AccessDenied"
 import './App.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "./api/userApi";
@@ -71,9 +73,14 @@ function App() {
               <Route path="" element={<WelcomeAdmin />} />
               <Route path="book" element={<BookList />} />
               <Route path="book/add" element={<FormAddBook />} />
+              <Route path="book/update/:id" element={<FormUpdateBook />} />
             </Route>
           </Route>
         )}
+
+        {/* {!currentUser.role && (
+          <Route path="/admin/*" element={<ProtectedRoute role={currentUser.role} />} />
+        )} */}
 
       </Routes> 
     </div>

@@ -12,7 +12,7 @@ function AddressSelect({ onChangeAddress }) {
 
   useEffect(() => {
     onChangeAddress({ province, district, ward, address });
-  }, [province, district, ward, address]);
+  }, [province, district, ward, address, onChangeAddress]);
 
   useEffect(() => {
     const fetchProvince = async () => {

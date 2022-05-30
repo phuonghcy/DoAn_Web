@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 import { Row, Col, Card, Table, Spinner } from "react-bootstrap";
 import bookApi from "../../api/bookApi";
 import format from "../../helper/format";
@@ -38,13 +39,18 @@ function BookList() {
                   <th>Xuất bản</th>
                   <th>Giá</th>
                   <th>Khuyến mãi (%)</th>
+                  <th colSpan="2">Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
                     <td colSpan={6}>
-                      <Spinner style={{ margin: "0 auto" }} animation="border" variant="success" />
+                      <Spinner
+                        style={{ margin: "0 auto" }}
+                        animation="border"
+                        variant="success"
+                      />
                     </td>
                   </tr>
                 ) : bookData.books && bookData.books.length > 0 ? (
@@ -66,6 +72,26 @@ function BookList() {
                         </td>
                         <td>{format.formatPrice(item.price)}</td>
                         <td>{item.discount}</td>
+                        <td>
+                          <Link
+                            to={`/admin/book/update/${item._id}`}
+                            className="btn btn-warning"
+                            data-id={item._id}
+                            // data-address={item.address}
+                            // onClick={handleUpdateAddress}
+                          >
+                            Sửa
+                          </Link>
+                        </td>
+                        <td>
+                          <button
+                            className="btn btn-danger"
+                            data-id={item._id}
+                            // onClick={handleDeleteAddress}
+                          >
+                            Xóa
+                          </button>
+                        </td>
                       </tr>
                     );
                   })

@@ -8,7 +8,7 @@ import { IoMailOutline } from "react-icons/io5";
 import NavBar from "../NavBar";
 import authApi from "../../api/authApi";
 import userApi from "../../api/userApi";
-import authorApi from "../../api/authorApi"
+// import authorApi from "../../api/authorApi"
 import { login, logout } from '../../redux/actions/user';
 
 import { useEffect, memo } from "react";

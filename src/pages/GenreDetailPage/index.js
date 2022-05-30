@@ -14,8 +14,8 @@ export default function GenreDetailPage() {
 
   const [bookData, setBookData] = useState({});
   const [genreData, setGenreData] = useState({});
-  const [orderByPrice, setOrderByPrice] = useState("asc");
-  const [orderByDate, setOrderByDate] = useState("asc");
+  const [orderByPrice, setOrderByPrice] = useState("");
+  const [orderByDate, setOrderByDate] = useState("");
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -28,13 +28,14 @@ export default function GenreDetailPage() {
           sortByPrice: orderByPrice,
           sortByDate: orderByDate,
         });
+        console.log(res.data)
         setBookData({ books: res.data, totalPage: res.pagination.totalPage });
       } catch (error) {
         console.log(error);
       }
     };
 
-    if (genreData) {
+    if (genreData._id) {
       fetchData();
     }
   }, [genreData, orderByPrice, orderByDate, page]);
