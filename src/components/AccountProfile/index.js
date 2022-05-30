@@ -16,16 +16,20 @@ function AccountProfile() {
 
   useEffect(() => {
     const fetchDataUser = async () => {
-        const res = await userApi.getById(currentUser.userId)
-        const profileOjb = {
-          _id: res.data._id,
-          email: res.data.email,
-          fullName: res.data.fullName,
-          phoneNumber: res.data.phoneNumber,
-          gender: res.data.gender,
-          birthday: res.data.birthday
+        try {
+          const res = await userApi.getById(currentUser.userId)
+          const profileOjb = {
+            _id: res.data._id,
+            email: res.data.email,
+            fullName: res.data.fullName,
+            phoneNumber: res.data.phoneNumber,
+            gender: res.data.gender,
+            birthday: res.data.birthday
+          }
+          setProfile(profileOjb)
+        } catch (error) {
+          console.log(error)
         }
-        setProfile(profileOjb)
     }
     
     if (currentUser.userId) {
@@ -54,11 +58,13 @@ function AccountProfile() {
       console.log('kiem tra', formik.values)
       const  { fullName, gender, phoneNumber, birthday } = formik.values
 
-      const result = await userApi.updateById(profile._id, {
-        fullName, gender, phoneNumber, birthday
-      })
-      if (!result.error) {
+      try {
+        const result = await userApi.updateById(profile._id, {
+          fullName, gender, phoneNumber, birthday
+        })
         dispatch(updateFullName({fullName: result.data.fullName}))
+      } catch (error) {
+        console.log(error)
       }
     }
   });

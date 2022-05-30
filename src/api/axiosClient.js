@@ -25,10 +25,18 @@ axiosClient.interceptors.request.use(async (config) => {
     const date = new Date()
     const decodedToken = jwt_decode(accessToken)
     if (decodedToken.exp < date.getTime() / 1000) {
-      const res = await jwtAxios.post(`auth/refresh-token/`);
-      const newAccessToken = res.data.token
-      localStorage.setItem('accessToken', newAccessToken)
-      config.headers.Authorization = `Bearer ${newAccessToken}`;
+      try {
+
+        const res = await jwtAxios.post(`auth/refresh-token/`);
+        const newAccessToken = res.data.token
+        localStorage.setItem('accessToken', newAccessToken)
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
+        
+      } catch (error) {
+        if (error.response.status === 403 || error.response.status === 401) {
+          localStorage.removeItem('accessToken')
+        }
+      }
     } else {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }

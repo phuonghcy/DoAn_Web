@@ -1,0 +1,12 @@
+.title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.name {
+    width: 450px;
+}
+
+.bookList {
+    padding: 10px;
+}

@@ -22,10 +22,10 @@ function Footer() {
                   <Col xl={4}>
                     <div className={styles.footerBoxLink}>
                         <p className={styles.title}>SẢN PHẨM</p>
-                        <Link to="/san-pham/the-loai">Văn học</Link>
-                        <Link to="/">Ẩm thực</Link>
-                        <Link to="/">Tâm lý - Kỹ năng sống</Link>
-                        <Link to="/">Kinh tế</Link>
+                        <Link to="/san-pham/the-loai/van-hoc">Văn học</Link>
+                        <Link to="/san-pham/the-loai/van-hoc">Ẩm thực</Link>
+                        <Link to="/san-pham/the-loai/tam-ly-ky-nang-song">Tâm lý - Kỹ năng sống</Link>
+                        <Link to="/san-pham/the-loai/kinh-te">Kinh tế</Link>
                     </div>
                   </Col>
                   <Col xl={4}>

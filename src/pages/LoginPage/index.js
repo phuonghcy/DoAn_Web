@@ -19,15 +19,19 @@ function LoginPage() {
   const navigate = useNavigate()
 
   const responseSuccessGoogle = async (response) => {
+   try {
     const accessToken = response.access_token
     console.log('accessToken-Google', accessToken)
     const responseServer = await authApi.loginWithGoogle(accessToken)
     console.log({responseServer})
     const { token, user } = responseServer
     localStorage.setItem('accessToken', token)
-    const { email, fullName, userId, avatar } = user
-    dispatch(login({ email, fullName, avatar, userId }))
+    const { email, fullName, userId, avatar, role } = user
+    dispatch(login({ email, fullName, avatar, userId, role }))
     navigate({ pathname: '/' })
+   } catch (error) {
+     console.log(error)
+   }
   }
 
   const responseFailureGoogle = (response) => {
@@ -50,8 +54,8 @@ function LoginPage() {
     // Nhan token tu server
     const { token, user } = responseServer
     localStorage.setItem('accessToken', token)
-    const { userId } = user
-    dispatch(login({ email, fullName: name, avatar, userId }))
+    const { userId, role } = user
+    dispatch(login({ email, fullName: name, avatar, userId, role }))
     navigate({ pathname: '/' })
   }
 
@@ -75,8 +79,8 @@ function LoginPage() {
     // Nhan token tu server
     const { token, user } = res
     localStorage.setItem('accessToken', token)
-    const { fullName, userId, avatar } = user
-    dispatch(login({ email, fullName, avatar, userId }))
+    const { fullName, userId, avatar, role } = user
+    dispatch(login({ email, fullName, avatar, userId, role }))
     navigate({ pathname: '/' })
   }
 

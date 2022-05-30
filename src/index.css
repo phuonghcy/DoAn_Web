@@ -88,9 +88,9 @@ p {
   padding: 0;
 }
 
-.row {
+/* .row {
   flex-wrap: nowrap;
-}
+} */
 
 svg {
   vertical-align: inherit;
@@ -113,6 +113,15 @@ svg {
 }
 
 
-.table > tbody {
+.table > tbody,
+.table > thead {
   vertical-align: middle;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.card-body {
+  padding: 0 10px;
 }

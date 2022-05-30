@@ -24,15 +24,22 @@ function Header() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await userApi.getCurrentUser()
-      const { email, fullName, avatar, _id } = data?.user
-      dispatch(login({email, fullName, avatar, userId: _id}))
+      try {
+        const data = await userApi.getCurrentUser()
+        const { email, fullName, avatar, _id, role } = data?.user
+        dispatch(login({email, fullName, avatar, userId: _id, role}))
+      } catch (error) {
+        if (error.response.status === 403 || error.response.status === 401) {
+          dispatch(logout())
+          navigate({ pathname: '/dang-nhap' })
+        }
+      }
     }
     const token = localStorage.getItem('accessToken')
-    if (token) {
+    if (token && !currentUser.userId) {
       fetchData()
     }
-  },[dispatch])
+  },[dispatch, navigate, currentUser])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +59,7 @@ function Header() {
     dispatch(logout())
     const token = localStorage.getItem('accessToken')
     if (token) {
-      localStorage.setItem('accessToken', '')
+      localStorage.removeItem('accessToken')
     }
     navigate({ pathname: '/' })
   }

@@ -1,0 +1,35 @@
+.bookItem {
+    margin-top: 16px;
+    background-color: rgb(241, 241, 241);
+}
+
+.bookItem img {
+    height: 200px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.name {
+    min-height: 55px;
+    font-size: 16px;
+    margin: 0;
+
+    /* word-break: break-all; */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.price {
+    font-weight: 600;
+    color: #539E31;
+    font-size: 18px;
+}
+
+.oldPrice {
+    text-decoration: line-through;
+    color: #666;
+    margin-left: 10px;
+}

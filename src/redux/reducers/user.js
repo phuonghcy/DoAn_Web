@@ -4,6 +4,7 @@ const initialState = {
         fullName: '',
         avatar: '',
         userId: '',
+        role: '',
     }
 };
 const userReducer = (state = initialState, action) => {
