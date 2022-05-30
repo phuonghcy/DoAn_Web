@@ -10,7 +10,7 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await bookApi.getAll({limit: 8})
+        const res = await bookApi.getAll({page: 1, limit: 8})
         console.log(res)
         setBooks(res.data)
         

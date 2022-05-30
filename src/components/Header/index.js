@@ -41,17 +41,17 @@ function Header() {
     }
   },[dispatch, navigate, currentUser])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await authorApi.getAll()
-      console.log(data)
-    }
-    const token = localStorage.getItem('accessToken')
-    if (token) {
-      fetchData()
-    }
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await authorApi.getAll({})
+  //     console.log(data)
+  //   }
+  //   const token = localStorage.getItem('accessToken')
+  //   if (token) {
+  //     fetchData()
+  //   }
     
-  },[])
+  // },[])
 
   const handleLogout = async () => {
     const resultLogout = await authApi.logout()

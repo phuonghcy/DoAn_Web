@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient"
 
 const bookApi = {
 
-    getAll: ({genre, page, limit, sortByPrice, sortByDate}) => {
+    getAll: ({genre, page = 1, limit, sortByPrice, sortByDate}) => {
         const url = 'books/'
         return axiosClient.get(url, { params: {genre, page, limit, sortByPrice, sortByDate}})
     },

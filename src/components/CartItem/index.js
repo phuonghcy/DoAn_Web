@@ -10,7 +10,27 @@ export default function CartItem(props) {
   const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.price);
   const formattedTotalCost = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(itemTotalCost);
 
+  function increaseQuantity() {
+    setQuantity(preValue => preValue + 1);
+    setItemTotalCost(props.price * (quantity + 1));
+}
 
+function decreaseQuantity() {
+  if (quantity > 0) {
+      setQuantity(preValue => preValue - 1);
+      setItemTotalCost(props.price * (quantity - 1));
+  }
+}
+
+function handleChange(event) {
+  const value = parseInt(event.target.value) > 0 ? parseInt(event.target.value) : 0;
+  setQuantity(value);
+  setItemTotalCost(props.price * value);
+}
+
+useEffect(() => {
+  props.updateCart(props.bookId, quantity);
+});
   return (
     <>
       <tr className={props.wrapper}>
@@ -22,13 +42,13 @@ export default function CartItem(props) {
         <td>
           <div className={styles.quantity_wrapper}>
             <button
-              className={styles.decrease_button}
+              className={styles.decrease_button} onClick={decreaseQuantity}
             >
               -
             </button>
-            <input type="number" value={props.quantity}/>
+            <input type="number" value={quantity} onChange={handleChange}/>
             <button
-              className={styles.increase_button}
+              className={styles.increase_button} onClick={increaseQuantity}
             >
               +
             </button>
