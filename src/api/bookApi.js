@@ -21,6 +21,10 @@ const bookApi = {
     updateBook: (id, data) => {
         const url = `books/${id}`
         return axiosClient.put(url, data)
+    },
+    deleteBook: (id) => {
+        const url = `books/${id}`
+        return axiosClient.delete(url)
     }
 
 }

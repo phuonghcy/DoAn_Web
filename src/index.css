@@ -125,3 +125,8 @@ svg {
 .card-body {
   padding: 0 10px;
 }
+
+.d-flex-center {
+  display: flex;
+  align-items: center;
+}

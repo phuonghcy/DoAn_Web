@@ -1,8 +1,10 @@
-.addWrapper {
+.addWrapper,
+.addWrapper .row {
     --bs-gutter-x: 0;
+    overflow: hidden;
 }
 
-.title {
+.header {
     font-size: 20px;
     font-weight: 500;
 }

@@ -133,9 +133,11 @@ function FormUpdateBook() {
               publisher: publisher._id,
           })
         }
+        alert("Lưu thay đổi thành công!")
         navigate({ pathname: "/admin/book" });
         
       } catch (error) {
+        alert("Lưu thay đổi thất bại!")
         console.log(error);
       }
     },
@@ -364,7 +366,8 @@ function FormUpdateBook() {
                   <div className={`form-group ${styles.formGroup}`}>
                     <label className={styles.formLabel}>Giá bán</label>
                     <input
-                      type="text"
+                      type="number"
+                      min="0"
                       name="price"
                       className={`form-control ${
                         formik.errors.price
@@ -390,7 +393,8 @@ function FormUpdateBook() {
                   <div className={`form-group ${styles.formGroup}`}>
                     <label className={styles.formLabel}>Giảm giá</label>
                     <input
-                      type="text"
+                      type="number"
+                      min="0"
                       name="discount"
                       className={`form-control ${
                         formik.errors.discount

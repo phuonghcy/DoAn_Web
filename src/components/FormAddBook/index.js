@@ -1,4 +1,4 @@
-import { Row, Col, Card, Form } from "react-bootstrap";
+import { Row, Col, Card, Form, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import PreviewImage from "../PreviewImage";
@@ -17,6 +17,8 @@ function FormAddBook() {
   const [authorList, setAuthorList] = useState([]);
   const [genreList, setGenreList] = useState([]);
   const [publisherList, setPublisherList] = useState([]);
+
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchAuthors = async () => {
@@ -101,6 +103,7 @@ function FormAddBook() {
         const formData = new FormData();
         formData.append("file", image);
         formData.append("upload_preset", "fti6du11");
+        setLoading(true)
         const resCloudinary = await axios.post("https://api.cloudinary.com/v1_1/dbynglvwk/image/upload", formData)
         const { secure_url, public_id } = resCloudinary.data
         if (secure_url && public_id) {
@@ -112,11 +115,15 @@ function FormAddBook() {
             imageUrl: secure_url,
             publicId: public_id
           })
+          setLoading(false)
+          alert("Thêm sách thành công!")
           navigate({ pathname: "/admin/book" });
         }
 
         
       } catch (error) {
+        setLoading(false)
+        alert("That bai! ", error)
         console.log(error);
       }
     },
@@ -150,7 +157,7 @@ function FormAddBook() {
     <Row className={styles.addWrapper}>
       <Col xl={12}>
         <Card>
-          <Card.Header className={styles.title}>Thêm sách mới</Card.Header>
+          <Card.Header className={styles.header}>Thêm sách mới</Card.Header>
           <Card.Body>
             <form onSubmit={formik.handleSubmit}>
               <Row>
@@ -346,7 +353,8 @@ function FormAddBook() {
                   <div className={`form-group ${styles.formGroup}`}>
                     <label className={styles.formLabel}>Giá bán</label>
                     <input
-                      type="text"
+                      type="number"
+                      min="0"
                       name="price"
                       className={`form-control ${
                         formik.errors.price
@@ -372,8 +380,9 @@ function FormAddBook() {
                   <div className={`form-group ${styles.formGroup}`}>
                     <label className={styles.formLabel}>Giảm giá</label>
                     <input
-                      type="text"
+                      type="number"
                       name="discount"
+                      min="0"
                       className={`form-control ${
                         formik.errors.discount
                           ? "is-invalid"
@@ -410,9 +419,9 @@ function FormAddBook() {
                       placeholder="Hình ảnh"
                       accept="image/png, image/gif, image/jpeg"
                       // value={formik.values.image[0]}
+                      onBlur={(e) => formik.setFieldValue('image', e.target.files[0])}
                       onChange={(e) => formik.setFieldValue('image', e.target.files[0])}
                     />
-                   {formik.values.image && <PreviewImage file={formik.values.image} />}
                     {formik.errors.image && (
                       <Form.Control.Feedback
                         type="invalid"
@@ -423,14 +432,17 @@ function FormAddBook() {
                     )}
                   </div>
                 </Col>
+                <Col xl={3}>
+                  {formik.values.image && <PreviewImage file={formik.values.image} />}
+                </Col>
               </Row>
 
-              <button
-                type="submit"
-                className={`bookstore-btn ${styles.submitBtn}`}
-              >
-                Thêm sách
-              </button>
+              <div className="d-flex-center">
+                <button type="submit" className={`bookstore-btn ${styles.submitBtn}`}>
+                  Thêm sách
+                </button>
+                {loading && <Spinner style={{ marginLeft: "20px" }} animation="border" variant="success" />}
+              </div>
             </form>
           </Card.Body>
         </Card>

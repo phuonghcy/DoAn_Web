@@ -78,9 +78,9 @@ function App() {
           </Route>
         )}
 
-        {/* {!currentUser.role && (
-          <Route path="/admin/*" element={<ProtectedRoute role={currentUser.role} />} />
-        )} */}
+        {!currentUser.role && (
+          <Route path="/admin/*" element={<AccessDenied />} />
+        )}
 
       </Routes> 
     </div>
