@@ -13,7 +13,7 @@ function BookItem({data}) {
   return (
     <div className={styles.bookItem}>
       <Card>
-        <Card.Img variant="top" src="https://itbook.store/img/books/9781617294136.png" />
+        <Card.Img variant="top" src={data.imageUrl} alt="" />
         <Card.Body>
           <Card.Title className={styles.name}>{data.name} - {data.author?.name || data.author[0]?.name}</Card.Title>
         </Card.Body>

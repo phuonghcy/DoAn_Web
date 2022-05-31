@@ -1,24 +1,43 @@
-import { Row, Col, Card, Form, Spinner } from "react-bootstrap";
+import { Row, Col, Card, Form } from "react-bootstrap";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PreviewImage from "../PreviewImage";
 import * as Yup from "yup";
-import styles from "./FormAddBook.module.css";
+import styles from "./FormUpdateBook.module.css";
 import { useEffect, useState } from "react";
 import authorApi from "../../api/authorApi";
 import genreApi from "../../api/genreApi";
-import publisherApi from "../../api/publisherApi";
 import bookApi from "../../api/bookApi";
+import publisherApi from "../../api/publisherApi";
 import axios from "axios";
 
-function FormAddBook() {
+function FormUpdateBook() {
+
+  const params = useParams()
+  const { id } = params
+
   const navigate = useNavigate();
 
   const [authorList, setAuthorList] = useState([]);
   const [genreList, setGenreList] = useState([]);
   const [publisherList, setPublisherList] = useState([]);
 
-  const [loading, setLoading] = useState(false)
+  const [bookData, setbookData] = useState({})
+
+  const [updateImage, setUpdateImage] = useState(false)
+
+  useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        const res = await bookApi.getById(id);
+        setbookData(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchBook();
+  }, [id]);
+
 
   useEffect(() => {
     const fetchAuthors = async () => {
@@ -56,41 +75,31 @@ function FormAddBook() {
     fetchGenres();
   }, []);
 
+
   const formik = useFormik({
     initialValues: {
-      bookId: "",
-      name: "",
-      year: "",
-      pages: "",
-      size: "",
-      price: "",
-      discount: "",
-      image: "",
-      author: authorList[0]
-        ? { _id: authorList[0]._id, name: authorList[0].name }
-        : {},
-      genre: genreList[0]
-        ? { _id: genreList[0]._id, name: genreList[0].name }
-        : {},
-      publisher: publisherList[0]
-        ? { _id: publisherList[0]._id, name: publisherList[0].name }
-        : {},
+      bookId: bookData.bookId ? bookData.bookId : "",
+      name: bookData.name ? bookData.name : "",
+      year: bookData.year ? bookData.year : "",
+      pages: bookData.pages ? bookData.pages : "",
+      size: bookData.size ? bookData.size : "",
+      price: bookData.price ? bookData.price : "",
+      discount: bookData.discount ? bookData.discount : "",
+      // image: bookData.bookId ? bookData.bookId : "",
+      author: bookData.author ? bookData.author : "",
+      genre: bookData.genre ? bookData.genre[0] : "",
+      publisher: bookData.publisher ? bookData.publisher : "",
     },
     enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: Yup.object({
-      bookId: Yup.string()
-        .required("Không được bỏ trống trường này!")
-        .test("is-use", "Mã sách đã tồn tại!", async function (value) {
-          const res = await bookApi.getByBookId(value);
-          return res.data._id ? false : true;
-        }),
+      bookId: Yup.string().required("Không được bỏ trống trường này!"),
       name: Yup.string().required("Không được bỏ trống trường này!"),
       price: Yup.number()
         .typeError("Vui lòng nhập giá hợp lệ!")
         .required("Không được bỏ trống trường này!"),
-      image: Yup.mixed().required("Không được bỏ trống trường này!")
+      image: updateImage && Yup.mixed().required("Không được bỏ trống trường này!")
       .test("FILE_SIZE", "Kích thước file quá lớn!", (value) => !value || (value && value.size < 1024 * 1024))
       .test("FILE_FORMAT", "File không đúng định dạng!", (value) => 
         !value || (value && ['image/png', 'image/gif', 'image/jpeg'].includes(value?.type) )
@@ -100,30 +109,35 @@ function FormAddBook() {
       console.log("kiem tra", formik.values);
       const { bookId, name, author, genre, publisher, year, pages, size, price, discount, image } = formik.values;
       try {
-        const formData = new FormData();
-        formData.append("file", image);
-        formData.append("upload_preset", "fti6du11");
-        setLoading(true)
-        const resCloudinary = await axios.post("https://api.cloudinary.com/v1_1/dbynglvwk/image/upload", formData)
-        const { secure_url, public_id } = resCloudinary.data
-        if (secure_url && public_id) {
-          await bookApi.createBook({ 
-            bookId, name, year, pages, size, price, discount,
-            author: author._id,
-            genre: genre._id,
-            publisher: publisher._id,
-            imageUrl: secure_url,
-            publicId: public_id
+        if (image) {
+          const formData = new FormData();
+          formData.append("file", image);
+          formData.append("upload_preset", "fti6du11");
+          const resCloudinary = await axios.post("https://api.cloudinary.com/v1_1/dbynglvwk/image/upload", formData)
+          const { secure_url, public_id } = resCloudinary.data
+          if (secure_url && public_id) {
+            await bookApi.updateBook(id, { 
+              bookId, name, year, pages, size, price, discount,
+              author: author._id,
+              genre: genre._id,
+              publisher: publisher._id,
+              imageUrl: secure_url,
+              publicId: public_id
+            })
+          } 
+        } else {
+            await bookApi.updateBook(id, { 
+              bookId, name, year, pages, size, price, discount,
+              author: author._id,
+              genre: genre._id,
+              publisher: publisher._id,
           })
-          setLoading(false)
-          alert("Thêm sách thành công!")
-          navigate({ pathname: "/admin/book" });
         }
-
+        alert("Lưu thay đổi thành công!")
+        navigate({ pathname: "/admin/book" });
         
       } catch (error) {
-        setLoading(false)
-        alert("That bai! ", error)
+        alert("Lưu thay đổi thất bại!")
         console.log(error);
       }
     },
@@ -157,7 +171,7 @@ function FormAddBook() {
     <Row className={styles.addWrapper}>
       <Col xl={12}>
         <Card>
-          <Card.Header className={styles.header}>Thêm sách mới</Card.Header>
+          <Card.Header className={styles.title}>Thêm sách mới</Card.Header>
           <Card.Body>
             <form onSubmit={formik.handleSubmit}>
               <Row>
@@ -174,8 +188,7 @@ function FormAddBook() {
                       }`}
                       placeholder="Mã sách"
                       value={formik.values.bookId}
-                      onBlur={formik.handleBlur}
-                      onChange={formik.handleChange}
+                      readOnly
                     />
                     {formik.errors.bookId && (
                       <Form.Control.Feedback type="invalid">
@@ -381,8 +394,8 @@ function FormAddBook() {
                     <label className={styles.formLabel}>Giảm giá</label>
                     <input
                       type="number"
-                      name="discount"
                       min="0"
+                      name="discount"
                       className={`form-control ${
                         formik.errors.discount
                           ? "is-invalid"
@@ -403,46 +416,53 @@ function FormAddBook() {
                     )}
                   </div>
                 </Col>
-              </Row>
-              <Row>
                 <Col xl={3}>
-                  <div className={`form-group ${styles.formGroup}`}>
-                    <label className={styles.formLabel}>Hình ảnh</label>
-                    <input
-                      type="file"
-                      name="image"
-                      className={`form-control ${
-                        formik.errors.image
-                          ? "is-invalid"
-                          : formik.values.image && "is-valid"
-                      }`}
-                      placeholder="Hình ảnh"
-                      accept="image/png, image/gif, image/jpeg"
-                      // value={formik.values.image[0]}
-                      onBlur={(e) => formik.setFieldValue('image', e.target.files[0])}
-                      onChange={(e) => formik.setFieldValue('image', e.target.files[0])}
-                    />
-                    {formik.errors.image && (
-                      <Form.Control.Feedback
-                        type="invalid"
-                        className={styles.feedback}
-                      >
-                        {formik.errors.image}
-                      </Form.Control.Feedback>
-                    )}
-                  </div>
-                </Col>
-                <Col xl={3}>
-                  {formik.values.image && <PreviewImage file={formik.values.image} />}
+                  {bookData.imageUrl && <PreviewImage src={bookData.imageUrl} />}
                 </Col>
               </Row>
-
-              <div className="d-flex-center">
-                <button type="submit" className={`bookstore-btn ${styles.submitBtn}`}>
-                  Thêm sách
-                </button>
-                {loading && <Spinner style={{ marginLeft: "20px" }} animation="border" variant="success" />}
+              <div>
+                <button type="button" className={`bookstore-btn ${styles.updateImage}`}
+                  onClick={() => setUpdateImage(!updateImage)}
+                >Thay đổi hình ảnh</button>
               </div>
+              {updateImage && (
+                <Row>
+                  <Col xl={3}>
+                    <div className={`form-group ${styles.formGroup}`}>
+                      <label className={styles.formLabel}>Thay đổi hình ảnh</label>
+                      <input
+                        type="file"
+                        name="image"
+                        className={`form-control ${
+                          formik.errors.image
+                            ? "is-invalid"
+                            : formik.values.image && "is-valid"
+                        }`}
+                        placeholder="Hình ảnh"
+                        accept="image/png, image/gif, image/jpeg"
+                        // value={formik.values.image[0]}
+                        onChange={(e) => formik.setFieldValue('image', e.target.files[0])}
+                      />
+                    {formik.values.image && <PreviewImage file={formik.values.image} />}
+                      {formik.errors.image && (
+                        <Form.Control.Feedback
+                          type="invalid"
+                          className={styles.feedback}
+                        >
+                          {formik.errors.image}
+                        </Form.Control.Feedback>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+              )}
+
+              <button
+                type="submit"
+                className={`bookstore-btn ${styles.submitBtn}`}
+              >
+                Lưu thay đổi
+              </button>
             </form>
           </Card.Body>
         </Card>
@@ -451,4 +471,4 @@ function FormAddBook() {
   );
 }
 
-export default FormAddBook;
+export default FormUpdateBook;

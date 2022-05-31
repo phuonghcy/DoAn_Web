@@ -1,10 +1,8 @@
-.addWrapper,
-.addWrapper .row {
+.addWrapper {
     --bs-gutter-x: 0;
-    overflow: hidden;
 }
 
-.header {
+.title {
     font-size: 20px;
     font-weight: 500;
 }
@@ -13,11 +11,16 @@
     margin-top: 8px;
 }
 
-.submitBtn {
+.submitBtn,
+.updateImage {
     padding: 8px 20px;
     background-color: #539E31;
     color: white;
     font-weight: 500;
     font-size: 16px;
     margin: 10px 0;
+}
+
+.updateImage {
+    background-color: #333;
 }
