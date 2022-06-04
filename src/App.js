@@ -10,6 +10,7 @@ import DiscountPage from "./pages/DiscountPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProductPage from "./pages/ProductPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import LikePage from "./pages/LikePage";
 import AccountPage from "./pages/AccountPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
@@ -61,6 +62,7 @@ function App() {
           <Route path="/dat-lai-mat-khau/:code" element={<ResetPasswordPage />} />
           <Route path="/dang-ki" element={<RegisterPage />} />
           <Route path="/san-pham" element={<ProductPage />} />
+          <Route path="/chi-tiet-san-pham" element={<ProductDetailPage />} />
           <Route path="/yeu-thich" element={<LikePage />} />
           <Route path="/tai-khoan" element={<AccountPage />} />
           <Route path="/thanh-toan" element={<PaymentPage />} />
