@@ -73,6 +73,8 @@ function Header() {
           <div className="d-flex">
               <div className={styles.headerTopLeft}>
                 <p>Chào mừng bạn đến với <span className={styles.bookstoreHighlight}>BookStore</span></p>
+                {currentUser && currentUser.role > 0 
+                && <Link to="/admin" className={`ms-4 ${styles.navigateAdmin}`}>Quản lý BookStore</Link>}
               </div>
               <div className={styles.headerTopRight}>
                 <p className={styles.hotline}>Hotline: <span className={styles.bookstoreHighlight}>08 111 222</span></p>
