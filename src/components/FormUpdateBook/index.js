@@ -85,7 +85,7 @@ function FormUpdateBook() {
       size: bookData.size ? bookData.size : "",
       price: bookData.price ? bookData.price : "",
       discount: bookData.discount ? bookData.discount : "",
-      // image: bookData.bookId ? bookData.bookId : "",
+      description: bookData.description ? bookData.description : "",
       author: bookData.author ? bookData.author : "",
       genre: bookData.genre ? bookData.genre[0] : "",
       publisher: bookData.publisher ? bookData.publisher : "",
@@ -107,7 +107,8 @@ function FormUpdateBook() {
     }),
     onSubmit: async () => {
       console.log("kiem tra", formik.values);
-      const { bookId, name, author, genre, publisher, year, pages, size, price, discount, image } = formik.values;
+      const { bookId, name, author, genre, publisher, description, 
+        year, pages, size, price, discount, image } = formik.values;
       try {
         if (image) {
           const formData = new FormData();
@@ -117,7 +118,7 @@ function FormUpdateBook() {
           const { secure_url, public_id } = resCloudinary.data
           if (secure_url && public_id) {
             await bookApi.updateBook(id, { 
-              bookId, name, year, pages, size, price, discount,
+              bookId, name, year, pages, size, price, discount, description,
               author: author._id,
               genre: genre._id,
               publisher: publisher._id,
@@ -127,7 +128,7 @@ function FormUpdateBook() {
           } 
         } else {
             await bookApi.updateBook(id, { 
-              bookId, name, year, pages, size, price, discount,
+              bookId, name, year, pages, size, price, discount, description,
               author: author._id,
               genre: genre._id,
               publisher: publisher._id,
@@ -171,7 +172,7 @@ function FormUpdateBook() {
     <Row className={styles.addWrapper}>
       <Col xl={12}>
         <Card>
-          <Card.Header className={styles.title}>Thêm sách mới</Card.Header>
+          <Card.Header className={styles.title}>Cập nhật sách thông tin sách</Card.Header>
           <Card.Body>
             <form onSubmit={formik.handleSubmit}>
               <Row>
@@ -418,6 +419,23 @@ function FormUpdateBook() {
                 </Col>
                 <Col xl={3}>
                   {bookData.imageUrl && <PreviewImage src={bookData.imageUrl} />}
+                </Col>
+                <Col xl={12}>
+                  <div className={`form-group ${styles.formGroup}`}>
+                    <label className={styles.formLabel}>Mô tả</label>
+                    <textarea
+                      name="description"
+                      rows={5}
+                      className={`form-control ${
+                        formik.errors.description
+                          ? "is-invalid"
+                          : formik.values.description && "is-valid"
+                      }`}
+                      placeholder="Mô tả"
+                      value={formik.values.description}
+                      onChange={formik.handleChange}
+                    />
+                  </div>
                 </Col>
               </Row>
               <div>

@@ -17,12 +17,17 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import PaymentPage from "./pages/PaymentPage";
 import GenreDetailPage from "./pages/GenreDetailPage";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import FormAddBook from "./components/FormAddBook"
 import FormUpdateBook from "./components/FormUpdateBook"
+import FormAddAuthor from "./components/FormAddAuthor"
+import FormUpdateAuthor from "./components/FormUpdateAuthor"
 import WelcomeAdmin from "./components/WelcomeAdmin"
 import BookList from "./components/BookList"
+import AuthorList from "./components/AuthorList"
 import AccessDenied from "./pages/AccessDenied"
+
 import './App.css';
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "./api/userApi";
@@ -76,6 +81,11 @@ function App() {
               <Route path="book" element={<BookList />} />
               <Route path="book/add" element={<FormAddBook />} />
               <Route path="book/update/:id" element={<FormUpdateBook />} />
+
+              <Route path="author" element={<AuthorList />} />
+              <Route path="author/add" element={<FormAddAuthor />} />
+              <Route path="author/update/:id" element={<FormUpdateAuthor />} />
+
             </Route>
           </Route>
         )}

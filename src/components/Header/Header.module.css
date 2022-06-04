@@ -15,6 +15,15 @@
     line-height: 30px;
 }
 
+.headerTopLeft {
+    display: flex;
+}
+
+.navigateAdmin {
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
 .headerTopRight {
     margin-left: auto;
     display: flex;

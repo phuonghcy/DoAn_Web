@@ -32,6 +32,18 @@ function AdminSideBar() {
               </div>
             </div>
           </li>
+          <li className={styles.navItem}>
+            <Link className={styles.navLink} to="/admin/author">
+              <span>Quản lý tác giả</span>
+            </Link>
+            <div className={styles.subnav}>
+              <div className={styles.navItem}>
+                <Link className={styles.navLink} to="/admin/author/add">
+                  Thêm tác giả mới
+                </Link>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

@@ -66,6 +66,7 @@ function FormAddBook() {
       price: "",
       discount: "",
       image: "",
+      description: "",
       author: authorList[0]
         ? { _id: authorList[0]._id, name: authorList[0].name }
         : {},
@@ -98,7 +99,8 @@ function FormAddBook() {
     }),
     onSubmit: async () => {
       console.log("kiem tra", formik.values);
-      const { bookId, name, author, genre, publisher, year, pages, size, price, discount, image } = formik.values;
+      const { bookId, name, author, genre, publisher, description, 
+        year, pages, size, price, discount, image } = formik.values;
       try {
         const formData = new FormData();
         formData.append("file", image);
@@ -108,7 +110,7 @@ function FormAddBook() {
         const { secure_url, public_id } = resCloudinary.data
         if (secure_url && public_id) {
           await bookApi.createBook({ 
-            bookId, name, year, pages, size, price, discount,
+            bookId, name, year, pages, size, price, discount, description,
             author: author._id,
             genre: genre._id,
             publisher: publisher._id,
@@ -119,7 +121,6 @@ function FormAddBook() {
           alert("Thêm sách thành công!")
           navigate({ pathname: "/admin/book" });
         }
-
         
       } catch (error) {
         setLoading(false)
@@ -401,6 +402,24 @@ function FormAddBook() {
                         {formik.errors.discount}
                       </Form.Control.Feedback>
                     )}
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xl={12}>
+                  <div className={`form-group ${styles.formGroup}`}>
+                    <label className={styles.formLabel}>Mô tả</label>
+                    <textarea
+                      name="description"
+                      className={`form-control ${
+                        formik.errors.description
+                          ? "is-invalid"
+                          : formik.values.description && "is-valid"
+                      }`}
+                      placeholder="Mô tả"
+                      value={formik.values.description}
+                      onChange={formik.handleChange}
+                    />
                   </div>
                 </Col>
               </Row>
