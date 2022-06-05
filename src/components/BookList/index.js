@@ -113,10 +113,7 @@ function BookList() {
                           {item.name} - {item.author?.name}
                         </td>
                         <td>
-                          {item.genre.length > 0 &&
-                            item.genre.map((theloai) => (
-                              <span key={theloai._id}>{theloai.name}</span>
-                            ))}
+                          {item.genre?.name}
                         </td>
                         <td>
                           {item.publisher?.name} - {item.year}

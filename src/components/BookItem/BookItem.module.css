@@ -14,6 +14,10 @@
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.15);
 }
 
+.bookInfo {
+    flex: 1;
+}
+
 .bookItem img {
     height: 250px;
     margin: 0 auto;

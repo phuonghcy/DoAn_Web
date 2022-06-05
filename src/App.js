@@ -17,6 +17,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import PaymentPage from "./pages/PaymentPage";
 import GenreDetailPage from "./pages/GenreDetailPage";
+import SearchPage from "./pages/SearchPage";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import FormAddBook from "./components/FormAddBook"
@@ -67,11 +68,12 @@ function App() {
           <Route path="/dat-lai-mat-khau/:code" element={<ResetPasswordPage />} />
           <Route path="/dang-ki" element={<RegisterPage />} />
           <Route path="/san-pham" element={<ProductPage />} />
-          <Route path="/chi-tiet-san-pham" element={<ProductDetailPage />} />
+          <Route path="/chi-tiet-san-pham/:slug" element={<ProductDetailPage />} />
           <Route path="/yeu-thich" element={<LikePage />} />
           <Route path="/tai-khoan" element={<AccountPage />} />
           <Route path="/thanh-toan" element={<PaymentPage />} />
           <Route path="/san-pham/the-loai/:genre" element={<GenreDetailPage/>} />
+          <Route path="/tim-kiem" element={<SearchPage />} />
         </Route>
 
         {currentUser && currentUser.role && (

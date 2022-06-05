@@ -37,9 +37,19 @@
 }
 
 .price {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+.description {
+    text-align: justify;
+}
+
+.oldPrice {
+    text-decoration: line-through;
+    color: #666;
+    margin-left: 16px;
 }
 
 .descreaseBtn,
