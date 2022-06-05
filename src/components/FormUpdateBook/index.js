@@ -1,3 +1,5 @@
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Row, Col, Card, Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,6 +27,7 @@ function FormUpdateBook() {
   const [bookData, setbookData] = useState({})
 
   const [updateImage, setUpdateImage] = useState(false)
+
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -421,21 +424,25 @@ function FormUpdateBook() {
                   {bookData.imageUrl && <PreviewImage src={bookData.imageUrl} />}
                 </Col>
                 <Col xl={12}>
-                  <div className={`form-group ${styles.formGroup}`}>
-                    <label className={styles.formLabel}>Mô tả</label>
-                    <textarea
-                      name="description"
-                      rows={5}
-                      className={`form-control ${
-                        formik.errors.description
-                          ? "is-invalid"
-                          : formik.values.description && "is-valid"
-                      }`}
-                      placeholder="Mô tả"
-                      value={formik.values.description}
-                      onChange={formik.handleChange}
-                    />
-                  </div>
+                  <label className={styles.formLabel}>Mô tả</label>
+                  <CKEditor
+                      editor={ ClassicEditor }
+                      data={formik.values.description}
+                      onReady={ editor => {
+                          // You can store the "editor" and use when it is needed.
+                          console.log( 'Editor is ready to use!', editor );
+                      } }
+                      onChange={ ( event, editor ) => {
+                          const data = editor.getData();
+                          formik.setFieldValue("description", data);
+                      } }
+                      onBlur={ ( event, editor ) => {
+                          console.log( 'Blur.', editor );
+                      } }
+                      onFocus={ ( event, editor ) => {
+                          console.log( 'Focus.', editor );
+                      } }
+                  />
                 </Col>
               </Row>
               <div>

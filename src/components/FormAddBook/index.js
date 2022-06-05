@@ -1,3 +1,5 @@
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Row, Col, Card, Form, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -406,21 +408,26 @@ function FormAddBook() {
                 </Col>
               </Row>
               <Row>
-                <Col xl={12}>
-                  <div className={`form-group ${styles.formGroup}`}>
-                    <label className={styles.formLabel}>Mô tả</label>
-                    <textarea
-                      name="description"
-                      className={`form-control ${
-                        formik.errors.description
-                          ? "is-invalid"
-                          : formik.values.description && "is-valid"
-                      }`}
-                      placeholder="Mô tả"
-                      value={formik.values.description}
-                      onChange={formik.handleChange}
-                    />
-                  </div>
+              <Col xl={12}>
+                  <label className={styles.formLabel}>Mô tả</label>
+                  <CKEditor
+                      editor={ ClassicEditor }
+                      data={formik.values.description}
+                      onReady={ editor => {
+                          // You can store the "editor" and use when it is needed.
+                          console.log( 'Editor is ready to use!', editor );
+                      } }
+                      onChange={ ( event, editor ) => {
+                          const data = editor.getData();
+                          formik.setFieldValue("description", data);
+                      } }
+                      onBlur={ ( event, editor ) => {
+                          console.log( 'Blur.', editor );
+                      } }
+                      onFocus={ ( event, editor ) => {
+                          console.log( 'Focus.', editor );
+                      } }
+                  />
                 </Col>
               </Row>
               <Row>

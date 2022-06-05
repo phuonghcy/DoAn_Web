@@ -1,21 +1,28 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
-
+import { useParams } from 'react-router-dom';
+import bookApi from "../../api/bookApi";
 import format from "../../helper/format";
 import styles from './ProductDetailPage.module.css'
 
 export default function DetailProduct() {
-  const data= {
-    bookId: "book01",
-    image: "https://picsum.photos/175/120",
-    name: "Đắc nhân tâm",
-    author: "Dada Cambrige",
-    price: 320000,
-    quantity: 1,
-    total_cost: 320000,
-    content: "Đắc nhân tâm của Dale Carnegie là quyển sách duy nhất về thể loại self-help liên tục đứng đầu danh mục sách bán chạy nhất (best-selling Books) do báo The New York Times bình chọn suốt 10 năm liền. Được xuất bản năm 1936, với số lượng bán ra hơn 15 triệu bản, tính đến nay, sách đã được dịch ra ở hầu hết các ngôn ngữ, trong đó có cả Việt Nam, và đã nhận được sự đón tiếp nhiệt tình của đọc giả ở hầu hết các quốc gia."
-  }
+
+  const params = useParams()
+  const { slug } = params
+  const [bookData, setbookData] = useState({})
+
+  useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        const res = await bookApi.getBySlug(slug);
+        setbookData(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchBook();
+  }, [slug]);
 
   const [quantity, setQuantity] = useState(1);
   const [fav, setFav]= useState(false);
@@ -54,20 +61,46 @@ export default function DetailProduct() {
       <Container>
         <div className={styles.productBriefing}>
             <div className={styles.imgBriefing}>
-              <img src="https://picsum.photos/175/120" />
+              <img src={bookData && bookData.imageUrl} alt="" />
             </div>
 
             <div className={styles.infoBriefing}>
               <div>
-                <h2>{data.name}</h2>
-                <p className={styles.price}>{format.formatPrice(data.price)}</p>
+                <h2>{bookData && bookData.name}</h2>
+                <div className={styles.price}>
+                  {bookData.discount > 0 ? 
+                  (<p>
+                    <span>{format.formatPrice(bookData.price - bookData.price * bookData.discount / 100)}</span>
+                    <span className={styles.oldPrice}>{format.formatPrice(bookData.price)}</span>
+                  </p>)
+                  : format.formatPrice(bookData.price)}
+                </div>
                 <div className={`d-flex ${styles.itemBriefing}`}>
                   <div>Tác giả: &nbsp;</div>
-                  <div className={styles.author}>{data.author}</div>
+                  <div className={styles.author}>{bookData && bookData.author?.name}</div>
                 </div>
 
                 <div className={`d-flex ${styles.itemBriefing}`}>
-                  <div>{data.content}</div>
+                  <div>Nhà xuất bản: &nbsp;</div>
+                  <div className={styles.author}>
+                    {bookData && bookData.publisher?.name} - {bookData && bookData.year} 
+                  </div>
+                </div>
+
+                <div className={`d-flex ${styles.itemBriefing}`}>
+                  <div>Số trang: &nbsp;</div>
+                  <div className={styles.author}>{bookData && bookData.pages}</div>
+                </div>
+
+                <div className={`d-flex ${styles.itemBriefing}`}>
+                  <div>Kích thước: &nbsp;</div>
+                  <div className={styles.author}>
+                    {bookData && bookData.size}
+                  </div>
+                </div>
+
+                <div className={`d-flex ${styles.itemBriefing} ${styles.description}`}>
+                  <div dangerouslySetInnerHTML={{__html:bookData?.description}} />
                 </div>
 
                 <div className={`d-flex ${styles.itemBriefing}`}>
