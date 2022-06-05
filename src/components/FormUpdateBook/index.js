@@ -87,7 +87,7 @@ function FormUpdateBook() {
       discount: bookData.discount ? bookData.discount : "",
       description: bookData.description ? bookData.description : "",
       author: bookData.author ? bookData.author : "",
-      genre: bookData.genre ? bookData.genre[0] : "",
+      genre: bookData.genre ? bookData.genre : "",
       publisher: bookData.publisher ? bookData.publisher : "",
     },
     enableReinitialize: true,
