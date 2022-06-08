@@ -26,11 +26,12 @@ axiosClient.interceptors.request.use(async (config) => {
     const decodedToken = jwt_decode(accessToken)
     if (decodedToken.exp < date.getTime() / 1000) {
       try {
-
         const res = await jwtAxios.post(`auth/refresh-token/`);
         const newAccessToken = res.data.token
-        localStorage.setItem('accessToken', newAccessToken)
-        config.headers.Authorization = `Bearer ${newAccessToken}`;
+        if (newAccessToken) {
+          localStorage.setItem('accessToken', newAccessToken)
+          config.headers.Authorization = `Bearer ${newAccessToken}`;
+        }
         
       } catch (error) {
         if (error.response.status === 403 || error.response.status === 401) {

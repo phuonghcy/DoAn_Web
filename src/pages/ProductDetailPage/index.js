@@ -8,18 +8,18 @@ import { useDispatch } from "react-redux"
 import format from "../../helper/format";
 import styles from './ProductDetailPage.module.css'
 
-export default function DetailProduct() {
+export default function ProductDetailPage() {
 
   const dispatch = useDispatch()
   const params = useParams()
   const { slug } = params
-  const [bookData, setbookData] = useState({})
+  const [bookData, setBookData] = useState({})
 
   useEffect(() => {
     const fetchBook = async () => {
       try {
         const res = await bookApi.getBySlug(slug);
-        setbookData(res.data)
+        setBookData(res.data)
       } catch (error) {
         console.log(error);
       }
@@ -60,8 +60,14 @@ export default function DetailProduct() {
   }
 
   const handleAddToCart = () => {
-    const { _id, name, imageUrl, slug, price } = bookData
-    const action = addToCart({quantity, _id, name, imageUrl, slug, price, totalPriceItem: price * quantity})
+    const { _id, name, imageUrl, slug, price, discount } = bookData
+    let newPrice = price
+    if (discount > 0) {
+      newPrice = price - price * discount / 100
+    }
+    const action = addToCart({quantity, _id, name, imageUrl, slug, 
+      price: newPrice, 
+      totalPriceItem: newPrice * quantity})
     dispatch(action)
     alert("Thêm sản phẩm vào giỏ hàng thành công!")
   }
