@@ -31,11 +31,6 @@
     color: #539E31;
 }
 
-.cart_body {
-    display: flex;
-
-}
-
 .cart_table {
     width: 750px;
     margin: 10px auto;
@@ -47,9 +42,11 @@
 
 }
 
-.cart_table td,tr {
+.cart_table td,
+.cart_table th,
+.cart_table tr {
     padding: 10px;
-    /* border-bottom: 1px solid gray; */
+    border-bottom: 1px solid gray;
 }
 .cart_table td:last-child {
     border: none;
@@ -69,14 +66,13 @@
 }
 .cart_info p {
     background-color: white;
-    padding: 15px 5px;
+    padding: 8px 10px;
     margin: 0px ;
     font-size: larger;
     color: gray;
 }
 
 .cart_voucher button {
-
     border: none;
     background-color: #539E31;
     color: white;
@@ -114,6 +110,27 @@
     font-size: larger;
 }
 
-.container {
-    padding: 20px 50px;
+.empty {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 50px;
+    background-color: white;
+}
+
+.empty img {
+    width: 150px;
+}
+
+.backHome {
+    background-color: #17a2b8;
+    color: white;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.backHome:hover {
+    color: white;
+    opacity: 0.9;
 }

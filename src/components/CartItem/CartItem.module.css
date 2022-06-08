@@ -6,8 +6,8 @@ button {
 	border: none;
 	border-bottom: 1px solid #707070;
 }
-.wrapper img {
-	width: 50px;
+.wrapper .image {
+	width: 100px;
 }
 
 .remove_button {

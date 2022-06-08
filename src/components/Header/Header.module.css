@@ -60,6 +60,9 @@
     text-align: center;
 }
 
+.headerIcon a {
+    position: relative;
+}
 
 .header .headerBottom {
     height: 50px;
@@ -105,21 +108,14 @@
     background-color: #fafafa;
 }
 
-.badge {
-    position: relative;
-    display: block;
-}
-
-.badge_quantity {
+.count {
     position: absolute;
-    top: 0; left: 50%;
-    transform: translateY(-30%);
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 6px;
-    background-color: #f50057;
-    border-radius: 10px;
-    color: #fff;
+    top: -15px;
+    right: 10px;
+    background: orange;
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 15px;
 }

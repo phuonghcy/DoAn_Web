@@ -44,6 +44,11 @@ function AdminSideBar() {
               </div>
             </div>
           </li>
+          <li className={styles.navItem}>
+            <Link className={styles.navLink} to="/admin/order">
+              <span>Quản lý đơn hàng</span>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

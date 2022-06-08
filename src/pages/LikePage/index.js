@@ -1,7 +1,6 @@
 import React from 'react';
-import {Container, Table} from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import format from "../../helper/format";
 import styles from './LikePage.module.css';
@@ -73,7 +72,7 @@ export default function LikePage() {
                   <tr key={item.bookId}>
                     <td>{index + 1}</td>
                     <td>
-                      <img src={item.image}/>
+                      <img src={item.image} alt="" />
                     </td>
                     <td>{item.name}</td>
                     <td>{format.formatPrice(item.price)}</td>
@@ -82,7 +81,6 @@ export default function LikePage() {
                     </td>
                     <td>
                       <button className={styles.add_cart_btn} onClick={notifyAdd}>Thêm vào giỏ</button>
-                      <ToastContainer />
                     </td>
                   </tr>
                 ))}
@@ -91,6 +89,7 @@ export default function LikePage() {
           </div>
         </div>
       </Container>
+      <ToastContainer />
     </div>
   )
 }

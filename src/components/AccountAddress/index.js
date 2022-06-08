@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { FaCheckCircle } from "react-icons/fa";
@@ -128,9 +128,9 @@ function AccountAddress() {
     }
   };
 
-  const handleGetAddress = (data) => {
+  const handleGetAddress = useCallback((data) => {
     setNewAddress(data)
-  }
+  }, [])
 
   return (
     <>
