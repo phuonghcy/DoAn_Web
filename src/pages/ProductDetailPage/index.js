@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { useParams } from 'react-router-dom';
 import bookApi from "../../api/bookApi";
+import { addToCart } from "../../redux/actions/cart"
+import { useDispatch } from "react-redux"
 import format from "../../helper/format";
 import styles from './ProductDetailPage.module.css'
 
 export default function DetailProduct() {
 
+  const dispatch = useDispatch()
   const params = useParams()
   const { slug } = params
   const [bookData, setbookData] = useState({})
@@ -54,6 +57,13 @@ export default function DetailProduct() {
 
   const handleFav = () => {
     setFav(!fav)
+  }
+
+  const handleAddToCart = () => {
+    const { _id, name, imageUrl, slug, price } = bookData
+    const action = addToCart({quantity, _id, name, imageUrl, slug, price, totalPriceItem: price * quantity})
+    dispatch(action)
+    alert("Thêm sản phẩm vào giỏ hàng thành công!")
   }
 
   return (
@@ -109,7 +119,7 @@ export default function DetailProduct() {
                     <button className={styles.descreaseBtn} onClick={decQuantity}>
                       <AiOutlineMinus />
                     </button>
-                    <input type="text" className={styles.quantityInput} value={quantity} onChange={handleChange}></input>
+                    <input type="text" className={styles.quantityInput} value={quantity} onChange={handleChange} />
                     <button className={styles.increaseBtn} onClick={incQuantity}>
                       <AiOutlinePlus />
                     </button>
@@ -123,7 +133,7 @@ export default function DetailProduct() {
                   </button>
 
                   <div className={styles.actions_bottom}>
-                    <button className={styles.addToCartBtn}>
+                    <button className={styles.addToCartBtn} onClick={handleAddToCart}>
                       <AiOutlineShoppingCart className={styles.addToCartIcon} />
                       Thêm vào giỏ hàng
                     </button>

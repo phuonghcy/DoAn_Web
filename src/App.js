@@ -27,6 +27,7 @@ import FormUpdateAuthor from "./components/FormUpdateAuthor"
 import WelcomeAdmin from "./components/WelcomeAdmin"
 import BookList from "./components/BookList"
 import AuthorList from "./components/AuthorList"
+import OrderList from "./components/OrderList";
 import AccessDenied from "./pages/AccessDenied"
 
 import './App.css';
@@ -42,8 +43,8 @@ function App() {
     const fetchData = async () => {
       try {
         const data = await userApi.getCurrentUser()
-        const { email, fullName, avatar, _id, role } = data?.user
-        dispatch(login({email, fullName, avatar, userId: _id, role}))
+        const { email, fullName, phoneNumber, avatar, _id, role } = data?.user
+        dispatch(login({email, fullName, phoneNumber, avatar, userId: _id, role}))
       } catch (error) {
         if (error.response.status === 403 || error.response.status === 401) {
           dispatch(logout())
@@ -87,6 +88,9 @@ function App() {
               <Route path="author" element={<AuthorList />} />
               <Route path="author/add" element={<FormAddAuthor />} />
               <Route path="author/update/:id" element={<FormUpdateAuthor />} />
+
+
+              <Route path="order" element={<OrderList />} />
 
             </Route>
           </Route>

@@ -1,81 +1,16 @@
-import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CartItem from "../../components/CartItem";
+import { useSelector } from "react-redux";
+import format from "../../helper/format";
 import styles from "./CartPage.module.css";
 
 function CartPage() {
-  const cartData = {
-    items: [
-      {
-        bookId: "book01",
-        image: "https://picsum.photos/175/120",
-        name: "Đắc nhân tâm",
-        price: 320000,
-        quantity: 1,
-        total_cost: 320000,
-      },
-      {
-        bookId: "book02",
-        image: "https://picsum.photos/175/120",
-        name: "Đắc nhân tâm 2",
-        price: 320000,
-        quantity: 1,
-        total_cost: 320000,
-      },
-      {
-        bookId: "book03",
-        image: "https://picsum.photos/175/120",
-        name: "Đắc nhân tâm 3",
-        price: 320000,
-        quantity: 1,
-        total_cost: 320000,
-      },
-      {
-        bookId: "book04",
-        image: "https://picsum.photos/175/120",
-        name: "Đắc nhân tâm 4",
-        price: 320000,
-        quantity: 1,
-        total_cost: 320000,
-      },
-    ],
-    sub_total: 1280000,
-    shipping_fee: 30000,
-    grand_total: 1310000,
-  };
-  const [subTotal, setSubTotal] = useState(cartData.sub_total);
-  const [shippingFee, setShippingFee] = useState(cartData.shipping_fee);
-  const [grandTotal, setGrandTotal] = useState(cartData.grand_total);
+  const cartData = useSelector((state) => state.cart);
 
-  // format currency
-  const formattedSubTotal = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  }).format(subTotal);
-  const formattedShippingFee = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  }).format(shippingFee);
-  const formattedGrandTotal = new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-  }).format(grandTotal);
-
-  function updateCart(bookId, quantity) {
-    const item = cartData.items.find((item) => item.bookId === bookId);
-    item.quantity = quantity;
-    item.total_cost = quantity * item.price;
-    cartData.sub_total = cartData.items.reduce(
-      (sum, item) => sum + item.total_cost,
-      0
-    );
-    setSubTotal(cartData.sub_total);
-    setGrandTotal(cartData.sub_total + shippingFee);
-  }
   return (
-    <div>
-      <div className={styles.container}>
-        <br></br>
+    <div className="main">
+      <Container>
         <div className={styles.cart_header}>
           <ul>
             <li>Trang chủ</li>
@@ -84,67 +19,90 @@ function CartPage() {
           <h1>GIỎ HÀNG</h1>
         </div>
         <div className={styles.cart_body}>
-          <div className={styles.cart_table}>
-            <table>
-              <thead>
-                <tr>
-                  <td>Sản phẩm</td>
-                  <td></td>
-                  <td>Đơn giá</td>
-                  <td>Số lượng</td>
-                  <td>Thành tiền</td>
-                  <td></td>
-                </tr>
-              </thead>
-              <tbody>
-                {cartData.items.map((item) => (
-                  <CartItem
-                    key={item.bookId}
-                    bookId={item.bookId}
-                    name={item.name}
-                    image={item.image}
-                    price={item.price}
-                    quantity={item.quantity}
-                    total_cost={item.total_cost}
-                    updateCart={updateCart}
-                  ></CartItem>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {cartData.list.length > 0 ? (
+            <Row>
+              <Col xl={8}>
+                <div className={styles.cart_table}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th colSpan={2}>Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartData.list.map((item) => (
+                        <CartItem
+                          key={item._id}
+                          _id={item._id}
+                          name={item.name}
+                          imageUrl={item.imageUrl}
+                          price={item.price}
+                          quantity={item.quantity}
+                          totalPriceItem={item.totalPriceItem}
+                        ></CartItem>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Col>
 
-          <div className={styles.cart_voucher}>
-            <div className={styles.input}>
-              <input type="text" placeholder="Nhập mã giảm giá" />
-              <button>Áp dụng</button>
+              <Col xl={4}>
+                <div className={styles.cart_voucher}>
+                  <div className={styles.input}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Nhập mã giảm giá"
+                    />
+                    <button>Áp dụng</button>
+                  </div>
+                  <div className={styles.cart_info}>
+                    <p>
+                      Tạm tính{" "}
+                      <span className={styles.info_right}>
+                        {format.formatPrice(cartData.subTotal)}
+                      </span>
+                    </p>{" "}
+                    <br></br>
+                    <p>
+                      Giảm giá{" "}
+                      <span className={styles.info_right}>
+                        {format.formatPrice(cartData.discount)}
+                      </span>
+                    </p>{" "}
+                    <br></br>
+                    <p>
+                      Thành tiền{" "}
+                      <span className={styles.info_right}>
+                        {format.formatPrice(cartData.total)}
+                      </span>
+                    </p>{" "}
+                    <br></br>
+                  </div>
+                  <Link to="/thanh-toan">
+                    <button className={styles.pay_button}>
+                      Tiến hành thanh toán
+                    </button>
+                  </Link>
+                </div>
+              </Col>
+            </Row>
+          ) : 
+          <Row>
+            <Col xl={12}>
+            <div className={styles.empty}>
+            <img src="https://www.hanoicomputer.vn/template/july_2021/images/tk-shopping-img.png" alt="" />
+            <p>Không có sản phẩm nào trong giỏ hàng của bạn!</p>
+            <Link to="/" className={`bookstore-btn ${styles.backHome}`}>Tiếp tục mua sắm</Link>
             </div>
-            <div className={styles.cart_info}>
-              <p>
-                Tạm tính{" "}
-                <span className={styles.info_right}>{formattedSubTotal}</span>
-              </p>{" "}
-              <br></br>
-              <p>
-                Giảm giá{" "}
-                <span className={styles.info_right}>
-                  {formattedShippingFee}
-                </span>
-              </p>{" "}
-              <br></br>
-              <p>
-                Thành tiền{" "}
-                <span className={styles.info_right}>{formattedGrandTotal}</span>
-              </p>{" "}
-              <br></br>
-            </div>
-            <Link to="/thanh-toan">
-              <button className={styles.pay_button}>
-                Tiến hành thanh toán
-              </button>
-            </Link>
-          </div>
+            </Col>
+          </Row>}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

@@ -60,6 +60,9 @@
     text-align: center;
 }
 
+.headerIcon a {
+    position: relative;
+}
 
 .header .headerBottom {
     height: 50px;
@@ -103,4 +106,16 @@
 
 .accountPopup .popupLink:hover {
     background-color: #fafafa;
+}
+
+.count {
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    background: orange;
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 15px;
 }
