@@ -1,5 +1,7 @@
 import React from 'react';
 import {Container, Table} from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import format from "../../helper/format";
 import styles from './LikePage.module.css';
@@ -41,6 +43,14 @@ export default function LikePage() {
     },
   ]
 
+  const notifyAdd = () => (
+    toast.success('Sách đã được thêm vào giỏ hàng', {autoClose: 2000})
+  )
+
+  const notifyDelete = () => (
+    toast.error('Sách đã được xóa khỏi yêu thích', {autoClose: 2000})
+  )
+
   return (
     <div className="main">
       <Container>
@@ -68,10 +78,11 @@ export default function LikePage() {
                     <td>{item.name}</td>
                     <td>{format.formatPrice(item.price)}</td>
                     <td>
-                      <button className={styles.remove_btn}>Xóa</button>
+                      <button className={styles.remove_btn} onClick={notifyDelete}>Xóa</button>
                     </td>
                     <td>
-                      <button className={styles.add_cart_btn}>Thêm</button>
+                      <button className={styles.add_cart_btn} onClick={notifyAdd}>Thêm vào giỏ</button>
+                      <ToastContainer />
                     </td>
                   </tr>
                 ))}

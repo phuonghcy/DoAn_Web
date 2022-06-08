@@ -16,12 +16,8 @@
     width: 450px;
     padding: 15px;
     border-right: 1px solid #ccc;
+    align-self: center;
 }
-
-.imgBriefing img {
-    width: 100%;
-}
-
 .infoBriefing {
     flex: 1;
     padding: 15px;
@@ -104,6 +100,9 @@
 
 .buyBtn,
 .addToCartBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 240px;
     padding: 8px 32px;
     border-radius: 6px;

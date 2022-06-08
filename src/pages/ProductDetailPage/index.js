@@ -1,9 +1,16 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { ToastContainer, toast } from 'react-toastify';
+import { Image } from 'antd';
+import 'react-toastify/dist/ReactToastify.css';
+import 'antd/dist/antd.css';
 
+import DetailedBookInfo from '../../components/DetailedBookInfo'
 import format from "../../helper/format";
 import styles from './ProductDetailPage.module.css'
+
 
 export default function DetailProduct() {
   const data= {
@@ -11,14 +18,21 @@ export default function DetailProduct() {
     image: "https://picsum.photos/175/120",
     name: "Đắc nhân tâm",
     author: "Dada Cambrige",
+    publisher: "NXB Tuổi Trẻ",
+    publication_date: "1/1/2022",
+    size: "14 x 20 cm",
+    cover_type: "Bìa mềm",
+    num_page: 320,
     price: 320000,
-    quantity: 1,
-    total_cost: 320000,
     content: "Đắc nhân tâm của Dale Carnegie là quyển sách duy nhất về thể loại self-help liên tục đứng đầu danh mục sách bán chạy nhất (best-selling Books) do báo The New York Times bình chọn suốt 10 năm liền. Được xuất bản năm 1936, với số lượng bán ra hơn 15 triệu bản, tính đến nay, sách đã được dịch ra ở hầu hết các ngôn ngữ, trong đó có cả Việt Nam, và đã nhận được sự đón tiếp nhiệt tình của đọc giả ở hầu hết các quốc gia."
   }
 
   const [quantity, setQuantity] = useState(1);
   const [fav, setFav]= useState(false);
+
+  const notify = () => (
+    toast.success('Sách đã được thêm vào giỏ hàng')
+  )
 
   const decQuantity = () => {
     if(quantity > 0) {
@@ -37,11 +51,9 @@ export default function DetailProduct() {
     const newQuantity = parseInt(e.target.value)
     if(newQuantity){
       setQuantity(newQuantity)
-      console.log('ok')
     }
     else {
       setQuantity('')
-      e.target.value = null;
     }
   }
 
@@ -54,7 +66,10 @@ export default function DetailProduct() {
       <Container>
         <div className={styles.productBriefing}>
             <div className={styles.imgBriefing}>
-              <img src="https://picsum.photos/175/120" />
+              <Image 
+                width={"100%"}
+                src={data.image}
+              />
             </div>
 
             <div className={styles.infoBriefing}>
@@ -90,16 +105,19 @@ export default function DetailProduct() {
                   </button>
 
                   <div className={styles.actions_bottom}>
-                    <button className={styles.addToCartBtn}>
+                    <button className={styles.addToCartBtn} onClick={notify}>
                       <AiOutlineShoppingCart className={styles.addToCartIcon} />
                       Thêm vào giỏ hàng
                     </button>
-                    <button className={styles.buyBtn}>Mua ngay</button>
+                    <Link to="/gio-hang" className={styles.buyBtn}>Mua ngay</Link>
+                    <ToastContainer />
                   </div>
                 </div>
               </div>
             </div>
         </div>
+
+        <DetailedBookInfo data={data} />
       </Container>
     </div>
   )
