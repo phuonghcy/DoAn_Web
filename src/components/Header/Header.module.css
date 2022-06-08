@@ -104,3 +104,22 @@
 .accountPopup .popupLink:hover {
     background-color: #fafafa;
 }
+
+.badge {
+    position: relative;
+    display: block;
+}
+
+.badge_quantity {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateY(-30%);
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6px;
+    background-color: #f50057;
+    border-radius: 10px;
+    color: #fff;
+}

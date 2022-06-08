@@ -118,7 +118,10 @@ function Header() {
                 </div>
                 <div className={styles.headerIcon}>
                   <Link to="/gio-hang">
-                    <BsCart2 />
+                    <span className={styles.badge}>
+                      <BsCart2 />
+                      <span className={styles.badge_quantity}>5</span>
+                    </span>
                     <p>Giỏ hàng</p>
                   </Link>
                 </div>
