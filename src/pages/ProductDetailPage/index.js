@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import { Container } from 'react-bootstrap'
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { ToastContainer, toast } from 'react-toastify';
+import { Image } from 'antd';
+
+import DetailedBookInfo from '../../components/DetailedBookInfo'
 import { useParams } from 'react-router-dom';
 import bookApi from "../../api/bookApi";
 import { addToCart } from "../../redux/actions/cart"
@@ -47,11 +51,9 @@ export default function ProductDetailPage() {
     const newQuantity = parseInt(e.target.value)
     if(newQuantity){
       setQuantity(newQuantity)
-      console.log('ok')
     }
     else {
       setQuantity('')
-      e.target.value = null;
     }
   }
 
@@ -69,7 +71,7 @@ export default function ProductDetailPage() {
       price: newPrice, 
       totalPriceItem: newPrice * quantity})
     dispatch(action)
-    alert("Thêm sản phẩm vào giỏ hàng thành công!")
+    toast.success('Thêm sản phẩm vào giỏ hàng thành công!', {autoClose: 2000})
   }
 
   return (
@@ -77,7 +79,10 @@ export default function ProductDetailPage() {
       <Container>
         <div className={styles.productBriefing}>
             <div className={styles.imgBriefing}>
-              <img src={bookData && bookData.imageUrl} alt="" />
+              <Image 
+                width={"100%"}
+                src={bookData && bookData.imageUrl}
+              />
             </div>
 
             <div className={styles.infoBriefing}>
@@ -100,18 +105,6 @@ export default function ProductDetailPage() {
                   <div>Nhà xuất bản: &nbsp;</div>
                   <div className={styles.author}>
                     {bookData && bookData.publisher?.name} - {bookData && bookData.year} 
-                  </div>
-                </div>
-
-                <div className={`d-flex ${styles.itemBriefing}`}>
-                  <div>Số trang: &nbsp;</div>
-                  <div className={styles.author}>{bookData && bookData.pages}</div>
-                </div>
-
-                <div className={`d-flex ${styles.itemBriefing}`}>
-                  <div>Kích thước: &nbsp;</div>
-                  <div className={styles.author}>
-                    {bookData && bookData.size}
                   </div>
                 </div>
 
@@ -149,6 +142,8 @@ export default function ProductDetailPage() {
               </div>
             </div>
         </div>
+        <DetailedBookInfo data={bookData} />
+        <ToastContainer />
       </Container>
     </div>
   )
