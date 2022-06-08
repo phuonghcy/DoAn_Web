@@ -14,6 +14,14 @@ const bookApi = {
         const url = `books/bookId/${bookId}`
         return axiosClient.get(url)
     },
+    getBySlug: (slug) => {
+        const url = `books/slug/${slug}`
+        return axiosClient.get(url)
+    },
+    search: (key) => {
+        const url = `books/search`
+        return axiosClient.get(url, { params: {key}})
+    },
     createBook: (data) => {
         const url = `books/`
         return axiosClient.post(url, data)

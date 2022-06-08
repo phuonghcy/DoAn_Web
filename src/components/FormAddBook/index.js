@@ -1,3 +1,5 @@
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Row, Col, Card, Form, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -66,6 +68,7 @@ function FormAddBook() {
       price: "",
       discount: "",
       image: "",
+      description: "",
       author: authorList[0]
         ? { _id: authorList[0]._id, name: authorList[0].name }
         : {},
@@ -98,7 +101,8 @@ function FormAddBook() {
     }),
     onSubmit: async () => {
       console.log("kiem tra", formik.values);
-      const { bookId, name, author, genre, publisher, year, pages, size, price, discount, image } = formik.values;
+      const { bookId, name, author, genre, publisher, description, 
+        year, pages, size, price, discount, image } = formik.values;
       try {
         const formData = new FormData();
         formData.append("file", image);
@@ -108,7 +112,7 @@ function FormAddBook() {
         const { secure_url, public_id } = resCloudinary.data
         if (secure_url && public_id) {
           await bookApi.createBook({ 
-            bookId, name, year, pages, size, price, discount,
+            bookId, name, year, pages, size, price, discount, description,
             author: author._id,
             genre: genre._id,
             publisher: publisher._id,
@@ -119,7 +123,6 @@ function FormAddBook() {
           alert("Thêm sách thành công!")
           navigate({ pathname: "/admin/book" });
         }
-
         
       } catch (error) {
         setLoading(false)
@@ -402,6 +405,29 @@ function FormAddBook() {
                       </Form.Control.Feedback>
                     )}
                   </div>
+                </Col>
+              </Row>
+              <Row>
+              <Col xl={12}>
+                  <label className={styles.formLabel}>Mô tả</label>
+                  <CKEditor
+                      editor={ ClassicEditor }
+                      data={formik.values.description}
+                      onReady={ editor => {
+                          // You can store the "editor" and use when it is needed.
+                          console.log( 'Editor is ready to use!', editor );
+                      } }
+                      onChange={ ( event, editor ) => {
+                          const data = editor.getData();
+                          formik.setFieldValue("description", data);
+                      } }
+                      onBlur={ ( event, editor ) => {
+                          console.log( 'Blur.', editor );
+                      } }
+                      onFocus={ ( event, editor ) => {
+                          console.log( 'Focus.', editor );
+                      } }
+                  />
                 </Col>
               </Row>
               <Row>

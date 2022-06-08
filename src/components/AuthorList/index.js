@@ -3,17 +3,16 @@ import { Link } from "react-router-dom"
 import PaginationBookStore from "../PaginationBookStore";
 
 import { Row, Col, Card, Table, Spinner, Modal, Button } from "react-bootstrap";
-import bookApi from "../../api/bookApi";
-import format from "../../helper/format";
-import styles from "./BookList.module.css";
+import authorApi from "../../api/authorApi";
+import styles from "./AuthorList.module.css";
 
-function BookList() {
-  const [bookData, setBookData] = useState({});
+function AuthorList() {
+  const [authorData, setAuthorData] = useState({});
   const [page, setPage] = useState(1);
 
   const [loading, setLoading] = useState(false);
 
-  const [bookDelete, setBookDelete] = useState({})
+  const [authorDelete, setAuthorDelete] = useState({})
 
   const [showModal, setShowModal] = useState(false);
 
@@ -21,9 +20,9 @@ function BookList() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await bookApi.getAll({ page: page, limit: 10, sortByDate: "desc" });
+        const res = await authorApi.getAll({ page: page, limit: 10, sortByDate: "desc" });
         setLoading(false);
-        setBookData({ books: res.data, totalPage: res.pagination.totalPage });
+        setAuthorData({ authors: res.data, totalPage: res.pagination.totalPage });
       } catch (error) {
         setLoading(false);
         console.log(error);
@@ -32,8 +31,8 @@ function BookList() {
     fetchData();
   }, [page]);
 
-  const handleClickDeleteBook = (e) => {
-    setBookDelete({
+  const handleClickDeleteAuthor = (e) => {
+    setAuthorDelete({
       _id: e.target.getAttribute("data-id"),
       name: e.target.getAttribute("data-name")
     })
@@ -46,14 +45,14 @@ function BookList() {
 
   const handleCallApiDelete = async (e) => {
     try {
-      await bookApi.deleteBook(bookDelete._id);
+      await authorApi.deleteAuthor(authorDelete._id);
       setShowModal(false)
       alert("Xóa thành công!")
-      setBookData((preState) => {
-        const newArray = [...preState.books];
+      setAuthorData((preState) => {
+        const newArray = [...preState.authors];
         return {
           ...preState,
-          books: newArray.filter((item) => item._id !== bookDelete._id)
+          authors: newArray.filter((item) => item._id !== authorDelete._id)
         }
       });
     } catch (error) {
@@ -66,9 +65,9 @@ function BookList() {
     <Row>
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Xóa sách</Modal.Title>
+          <Modal.Title>Xóa tác giả</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Bạn có chắc xóa sách <b>{bookDelete && bookDelete.name}</b> này không?</Modal.Body>
+        <Modal.Body>Bạn có chắc xóa tác giả <b>{authorDelete && authorDelete.name}</b> này không?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Hủy
@@ -80,49 +79,38 @@ function BookList() {
       </Modal>
       <Col xl={12}>
         <Card>
-          <Card.Header className={styles.title}>Danh sách sản phẩm</Card.Header>
-          <Card.Body className={styles.bookList}>
+          <Card.Header className={styles.title}>Danh sách tác giả</Card.Header>
+          <Card.Body className={styles.authorList}>
             <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th className={styles.name}>Tên sách</th>
-                  <th>Thể loại</th>
-                  <th>Xuất bản</th>
-                  <th>Giá</th>
-                  <th>Khuyến mãi (%)</th>
+                  <th className={styles.name}>Tác giả</th>
                   <th colSpan="2">Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={7}>
+                    <td colSpan={3}>
                       <Spinner
                         animation="border"
                         variant="success"
                       />
                     </td>
                   </tr>
-                ) : bookData.books && bookData.books.length > 0 ? (
-                  bookData.books.map((item, index) => {
+                ) : authorData.authors && authorData.authors.length > 0 ? (
+                  authorData.authors.map((item, index) => {
                     return (
                       <tr key={item._id}>
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td>
-                          {item.name} - {item.author?.name}
+                          {item.name} {item.year && "-"} {item?.year}
                         </td>
-                        <td>
-                          {item.genre?.name}
-                        </td>
-                        <td>
-                          {item.publisher?.name} - {item.year}
-                        </td>
-                        <td>{format.formatPrice(item.price)}</td>
-                        <td>{item.discount}</td>
+                        
                         <td>
                           <Link
-                            to={`/admin/book/update/${item._id}`}
+                            to={`/admin/author/update/${item._id}`}
                             className="btn btn-warning"
                             data-id={item._id}
                           >
@@ -134,7 +122,7 @@ function BookList() {
                             className="btn btn-danger"
                             data-id={item._id}
                             data-name={item.name}
-                            onClick={handleClickDeleteBook}
+                            onClick={handleClickDeleteAuthor}
                           >
                             Xóa
                           </button>
@@ -152,9 +140,9 @@ function BookList() {
             <div className={styles.pagination}>
             <Row>
               <Col xl={12}>
-                {bookData.totalPage > 1 ? (
+                {authorData.totalPage > 1 ? (
                   <PaginationBookStore
-                    totalPage={bookData.totalPage}
+                    totalPage={authorData.totalPage}
                     currentPage={page}
                     onChangePage={handleChangePage}
                   />
@@ -169,4 +157,4 @@ function BookList() {
   );
 }
 
-export default BookList;
+export default AuthorList;

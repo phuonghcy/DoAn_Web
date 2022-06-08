@@ -1,3 +1,5 @@
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Row, Col, Card, Form } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,6 +27,7 @@ function FormUpdateBook() {
   const [bookData, setbookData] = useState({})
 
   const [updateImage, setUpdateImage] = useState(false)
+
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -85,9 +88,9 @@ function FormUpdateBook() {
       size: bookData.size ? bookData.size : "",
       price: bookData.price ? bookData.price : "",
       discount: bookData.discount ? bookData.discount : "",
-      // image: bookData.bookId ? bookData.bookId : "",
+      description: bookData.description ? bookData.description : "",
       author: bookData.author ? bookData.author : "",
-      genre: bookData.genre ? bookData.genre[0] : "",
+      genre: bookData.genre ? bookData.genre : "",
       publisher: bookData.publisher ? bookData.publisher : "",
     },
     enableReinitialize: true,
@@ -107,7 +110,8 @@ function FormUpdateBook() {
     }),
     onSubmit: async () => {
       console.log("kiem tra", formik.values);
-      const { bookId, name, author, genre, publisher, year, pages, size, price, discount, image } = formik.values;
+      const { bookId, name, author, genre, publisher, description, 
+        year, pages, size, price, discount, image } = formik.values;
       try {
         if (image) {
           const formData = new FormData();
@@ -117,7 +121,7 @@ function FormUpdateBook() {
           const { secure_url, public_id } = resCloudinary.data
           if (secure_url && public_id) {
             await bookApi.updateBook(id, { 
-              bookId, name, year, pages, size, price, discount,
+              bookId, name, year, pages, size, price, discount, description,
               author: author._id,
               genre: genre._id,
               publisher: publisher._id,
@@ -127,7 +131,7 @@ function FormUpdateBook() {
           } 
         } else {
             await bookApi.updateBook(id, { 
-              bookId, name, year, pages, size, price, discount,
+              bookId, name, year, pages, size, price, discount, description,
               author: author._id,
               genre: genre._id,
               publisher: publisher._id,
@@ -171,7 +175,7 @@ function FormUpdateBook() {
     <Row className={styles.addWrapper}>
       <Col xl={12}>
         <Card>
-          <Card.Header className={styles.title}>Thêm sách mới</Card.Header>
+          <Card.Header className={styles.title}>Cập nhật sách thông tin sách</Card.Header>
           <Card.Body>
             <form onSubmit={formik.handleSubmit}>
               <Row>
@@ -418,6 +422,27 @@ function FormUpdateBook() {
                 </Col>
                 <Col xl={3}>
                   {bookData.imageUrl && <PreviewImage src={bookData.imageUrl} />}
+                </Col>
+                <Col xl={12}>
+                  <label className={styles.formLabel}>Mô tả</label>
+                  <CKEditor
+                      editor={ ClassicEditor }
+                      data={formik.values.description}
+                      onReady={ editor => {
+                          // You can store the "editor" and use when it is needed.
+                          console.log( 'Editor is ready to use!', editor );
+                      } }
+                      onChange={ ( event, editor ) => {
+                          const data = editor.getData();
+                          formik.setFieldValue("description", data);
+                      } }
+                      onBlur={ ( event, editor ) => {
+                          console.log( 'Blur.', editor );
+                      } }
+                      onFocus={ ( event, editor ) => {
+                          console.log( 'Focus.', editor );
+                      } }
+                  />
                 </Col>
               </Row>
               <div>

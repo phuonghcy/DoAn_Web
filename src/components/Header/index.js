@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { BsSearch, BsSuitHeart, BsPerson, BsCart2 } from "react-icons/bs";
+import { BsSuitHeart, BsPerson, BsCart2 } from "react-icons/bs";
 import { IoMailOutline } from "react-icons/io5";
 import NavBar from "../NavBar";
+import SearchForm from "../SearchForm";
 import authApi from "../../api/authApi";
 import userApi from "../../api/userApi";
 // import authorApi from "../../api/authorApi"
@@ -73,6 +74,8 @@ function Header() {
           <div className="d-flex">
               <div className={styles.headerTopLeft}>
                 <p>Chào mừng bạn đến với <span className={styles.bookstoreHighlight}>BookStore</span></p>
+                {currentUser && currentUser.role > 0 
+                && <Link to="/admin" className={`ms-4 ${styles.navigateAdmin}`}>Quản lý BookStore</Link>}
               </div>
               <div className={styles.headerTopRight}>
                 <p className={styles.hotline}>Hotline: <span className={styles.bookstoreHighlight}>08 111 222</span></p>
@@ -88,16 +91,7 @@ function Header() {
             <div className="d-flex align-items-center">
               <h1 className={`${styles.bookstoreHighlight} me-5`}>BookStore</h1>
               <div className={styles.search}>
-                <form>
-                  <div className={styles.searchWrapper}>
-                    <button className={`bookstore-btn ${styles.searchBtn}`}>
-                      <BsSearch />
-                    </button>
-                    <div className="form-group">
-                      <input type="text" className={`form-control ${styles.formControl}`} placeholder="Tìm kiếm sản phẩm..." />
-                    </div>
-                  </div>
-                </form>
+                <SearchForm />
               </div>
 
               <div className={`${styles.headerCenterRight} d-flex`}>
