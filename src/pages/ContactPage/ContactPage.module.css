@@ -29,7 +29,7 @@
 }
 
 .contact {
-    margin: 30px 30px;
+    margin: 200px 30px 30px;
 
 }
 
@@ -37,4 +37,8 @@
     height: 15px;
     background-image: linear-gradient(#539E31, #1c7d13);
     margin: 20px 0px;
+}
+.link {
+    color: #539E31;
+    font-weight: bold;
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import ContactForm from "../../components/ContactForm";
-import styles from './ContactPage.module.css'
+import styles from "./ContactPage.module.css";
+import { Link } from 'react-router-dom';
 
 export default function ContactPage() {
   return (
     <>
-    <div className={styles.contact}>
+      <div className={styles.contact}>
         <div className={styles.contact}>
           <h2>CÁC CÂU HỎI THƯỜNG GẶP VÀ LIÊN HỆ</h2>
           <div className={styles.hr} style={{ height: "25px" }}></div>
@@ -13,19 +14,18 @@ export default function ContactPage() {
           <h3>1. CÁC CÂU HỎI THƯỜNG GẶP</h3>
           <div className={styles.question}>
             <div className={styles.item}>
-              <button disabled={true} >Trang trợ giúp </button>
+              <button disabled={true}>Trang trợ giúp </button>
               <p>
-                Để biết thông tin và được hỗ trợ với các câu hỏi về Fantasy
-                League, vui lòng truy cập ....
+                Để biết thông tin và được hỗ trợ với các câu hỏi về <Link className={styles.link} to='/'>BookStore</Link>,
+                vui lòng truy cập điền Form Liên hệ.
               </p>
             </div>
           </div>
           <div className={styles.item}>
             <button>Thắc mắc chung</button>
             <p>
-              Vui lòng liên hệ .... nếu có bất kỳ thắc mắc nào liên quan đến sản
-              phẩm và chất lượng đến từ công ty cổ phần trang sức DIAMOND
-              JEWELRY.{" "}
+              Vui lòng liên hệ <b>hotline 0123456789</b>  nếu có bất kỳ thắc mắc nào liên quan đến sản
+              phẩm và chất lượng đến từ <Link className={styles.link} to='/'>BookStore</Link>.{" "}
             </p>
           </div>
 
@@ -42,8 +42,8 @@ export default function ContactPage() {
             </p>
             <p>
               Nếu bạn không nhận được lời nhắc mật khẩu, vui lòng kiểm tra thư
-              mục Rác trong hộp thư đến của bạn và thêm
-              noreply@mailout.users.diamondcity.com vào sổ địa chỉ của bạn.
+              mục Rác trong hộp thư đến của bạn và thêm 
+              <b> noreply@mailout.users.bookstore.com</b> vào sổ địa chỉ của bạn.
             </p>
           </div>
 
@@ -66,8 +66,8 @@ export default function ContactPage() {
 
           <h3>2. FORM LIÊN HỆ </h3>
           <ContactForm />
-          </div>
-          </div>
+        </div>
+      </div>
     </>
   );
 }
