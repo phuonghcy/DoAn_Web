@@ -26,8 +26,8 @@ function LoginPage() {
     console.log({responseServer})
     const { token, user } = responseServer
     localStorage.setItem('accessToken', token)
-    const { email, fullName, userId, avatar, role } = user
-    dispatch(login({ email, fullName, avatar, userId, role }))
+    const { email, fullName, phoneNumber, userId, avatar, role } = user
+    dispatch(login({ email, fullName, phoneNumber, avatar, userId, role }))
     navigate({ pathname: '/' })
    } catch (error) {
      console.log(error)
@@ -54,8 +54,8 @@ function LoginPage() {
     // Nhan token tu server
     const { token, user } = responseServer
     localStorage.setItem('accessToken', token)
-    const { userId, role } = user
-    dispatch(login({ email, fullName: name, avatar, userId, role }))
+    const { userId, role, phoneNumber } = user
+    dispatch(login({ email, fullName: name, phoneNumber, avatar, userId, role }))
     navigate({ pathname: '/' })
   }
 
@@ -79,8 +79,8 @@ function LoginPage() {
     // Nhan token tu server
     const { token, user } = res
     localStorage.setItem('accessToken', token)
-    const { fullName, userId, avatar, role } = user
-    dispatch(login({ email, fullName, avatar, userId, role }))
+    const { fullName, phoneNumber, userId, avatar, role } = user
+    dispatch(login({ email, fullName, phoneNumber, avatar, userId, role }))
     navigate({ pathname: '/' })
   }
 

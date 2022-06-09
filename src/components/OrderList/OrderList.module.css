@@ -1,0 +1,16 @@
+.title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.orderList {
+    padding: 10px;
+}
+
+.orderList table {
+    text-align: center;
+}
+
+.orderDetail img {
+    width: 150px;
+}

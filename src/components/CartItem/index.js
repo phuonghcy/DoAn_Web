@@ -1,66 +1,64 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateQuantity, removeItem } from "../../redux/actions/cart";
+import format from "../../helper/format";
 import styles from "./CartItem.module.css";
 
 export default function CartItem(props) {
+  const dispatch = useDispatch();
 
-
-  const [ quantity, setQuantity ] = useState(props.quantity);
-  const [ itemTotalCost, setItemTotalCost ] = useState(props.total_cost);
-  // format currency
-  const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.price);
-  const formattedTotalCost = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(itemTotalCost);
+  const [quantity, setQuantity] = useState(props.quantity);
+  const [totalPriceItem, setTotalPriceItem] = useState(props.totalPriceItem);
 
   function increaseQuantity() {
-    setQuantity(preValue => preValue + 1);
-    setItemTotalCost(props.price * (quantity + 1));
-}
-
-function decreaseQuantity() {
-  if (quantity > 0) {
-      setQuantity(preValue => preValue - 1);
-      setItemTotalCost(props.price * (quantity - 1));
+    setQuantity((preValue) => preValue + 1);
+    setTotalPriceItem(props.price * (quantity + 1));
   }
-}
 
-function handleChange(event) {
-  const value = parseInt(event.target.value) > 0 ? parseInt(event.target.value) : 0;
-  setQuantity(value);
-  setItemTotalCost(props.price * value);
-}
+  function decreaseQuantity() {
+    if (quantity > 0) {
+      setQuantity((preValue) => preValue - 1);
+      setTotalPriceItem(props.price * (quantity - 1));
+    }
+  }
 
-useEffect(() => {
-  props.updateCart(props.bookId, quantity);
-});
+  function handleChange(event) {
+    const value =
+      parseInt(event.target.value) > 0 ? parseInt(event.target.value) : 0;
+    setQuantity(value);
+    setTotalPriceItem(props.price * value);
+  }
+
+  const handleRemoveItem = (_id) => {
+    dispatch(removeItem({ _id}));
+  }
+
+  useEffect(() => {
+    dispatch(updateQuantity({ _id: props._id, quantity }));
+  }, [quantity, dispatch, props._id]);
+
   return (
-    <>
-      <tr className={props.wrapper}>
-        <td>
-          <img src={props.image} alt={props.name} />
-        </td>
-        <td>{props.name}</td>
-        <td className={styles.price}>{formattedPrice}</td>
-        <td>
-          <div className={styles.quantity_wrapper}>
-            <button
-              className={styles.decrease_button} onClick={decreaseQuantity}
-            >
-              -
-            </button>
-            <input type="number" value={quantity} onChange={handleChange}/>
-            <button
-              className={styles.increase_button} onClick={increaseQuantity}
-            >
-              +
-            </button>
-          </div>
-        </td>
-        <td>{formattedTotalCost}</td>
-        <td>
-          <button className={styles.remove_button}>
-            X
+    <tr className={styles.wrapper}>
+      <td>
+        <img src={props.imageUrl} alt={props.name} className={styles.image} />
+      </td>
+      <td>{props.name}</td>
+      <td className={styles.price}>{format.formatPrice(props.price)}</td>
+      <td>
+        <div className={styles.quantity_wrapper}>
+          <button className={styles.decrease_button} onClick={decreaseQuantity}>
+            -
           </button>
-        </td>
-      </tr>
-    </>
+          <input type="number" value={quantity} onChange={handleChange} />
+          <button className={styles.increase_button} onClick={increaseQuantity}>
+            +
+          </button>
+        </div>
+      </td>
+      <td>{format.formatPrice(totalPriceItem)}</td>
+      <td>
+        <button className={styles.remove_button} onClick={() => handleRemoveItem(props._id)}>X</button>
+      </td>
+    </tr>
   );
 }

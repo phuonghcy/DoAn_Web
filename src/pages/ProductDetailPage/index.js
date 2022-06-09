@@ -1,43 +1,29 @@
 import React, {useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify';
 import { Image } from 'antd';
-import 'react-toastify/dist/ReactToastify.css';
-import 'antd/dist/antd.css';
 
 import DetailedBookInfo from '../../components/DetailedBookInfo'
 import { useParams } from 'react-router-dom';
 import bookApi from "../../api/bookApi";
+import { addToCart } from "../../redux/actions/cart"
+import { useDispatch } from "react-redux"
 import format from "../../helper/format";
 import styles from './ProductDetailPage.module.css'
 
+export default function ProductDetailPage() {
 
-export default function DetailProduct() {
-  const data= {
-    bookId: "book01",
-    image: "https://picsum.photos/175/120",
-    name: "Đắc nhân tâm",
-    author: "Dada Cambrige",
-    publisher: "NXB Tuổi Trẻ",
-    publication_date: "1/1/2022",
-    size: "14 x 20 cm",
-    cover_type: "Bìa mềm",
-    num_page: 320,
-    price: 320000,
-    content: "Đắc nhân tâm của Dale Carnegie là quyển sách duy nhất về thể loại self-help liên tục đứng đầu danh mục sách bán chạy nhất (best-selling Books) do báo The New York Times bình chọn suốt 10 năm liền. Được xuất bản năm 1936, với số lượng bán ra hơn 15 triệu bản, tính đến nay, sách đã được dịch ra ở hầu hết các ngôn ngữ, trong đó có cả Việt Nam, và đã nhận được sự đón tiếp nhiệt tình của đọc giả ở hầu hết các quốc gia."
-  }
-
+  const dispatch = useDispatch()
   const params = useParams()
   const { slug } = params
-  const [bookData, setbookData] = useState({})
+  const [bookData, setBookData] = useState({})
 
   useEffect(() => {
     const fetchBook = async () => {
       try {
         const res = await bookApi.getBySlug(slug);
-        setbookData(res.data)
+        setBookData(res.data)
       } catch (error) {
         console.log(error);
       }
@@ -47,10 +33,6 @@ export default function DetailProduct() {
 
   const [quantity, setQuantity] = useState(1);
   const [fav, setFav]= useState(false);
-
-  const notify = () => (
-    toast.success('Sách đã được thêm vào giỏ hàng')
-  )
 
   const decQuantity = () => {
     if(quantity > 0) {
@@ -77,6 +59,19 @@ export default function DetailProduct() {
 
   const handleFav = () => {
     setFav(!fav)
+  }
+
+  const handleAddToCart = () => {
+    const { _id, name, imageUrl, slug, price, discount } = bookData
+    let newPrice = price
+    if (discount > 0) {
+      newPrice = price - price * discount / 100
+    }
+    const action = addToCart({quantity, _id, name, imageUrl, slug, 
+      price: newPrice, 
+      totalPriceItem: newPrice * quantity})
+    dispatch(action)
+    toast.success('Thêm sản phẩm vào giỏ hàng thành công!', {autoClose: 2000})
   }
 
   return (
@@ -113,18 +108,6 @@ export default function DetailProduct() {
                   </div>
                 </div>
 
-                <div className={`d-flex ${styles.itemBriefing}`}>
-                  <div>Số trang: &nbsp;</div>
-                  <div className={styles.author}>{bookData && bookData.pages}</div>
-                </div>
-
-                <div className={`d-flex ${styles.itemBriefing}`}>
-                  <div>Kích thước: &nbsp;</div>
-                  <div className={styles.author}>
-                    {bookData && bookData.size}
-                  </div>
-                </div>
-
                 <div className={`d-flex ${styles.itemBriefing} ${styles.description}`}>
                   <div dangerouslySetInnerHTML={{__html:bookData?.description}} />
                 </div>
@@ -135,7 +118,7 @@ export default function DetailProduct() {
                     <button className={styles.descreaseBtn} onClick={decQuantity}>
                       <AiOutlineMinus />
                     </button>
-                    <input type="text" className={styles.quantityInput} value={quantity} onChange={handleChange}></input>
+                    <input type="text" className={styles.quantityInput} value={quantity} onChange={handleChange} />
                     <button className={styles.increaseBtn} onClick={incQuantity}>
                       <AiOutlinePlus />
                     </button>
@@ -149,19 +132,18 @@ export default function DetailProduct() {
                   </button>
 
                   <div className={styles.actions_bottom}>
-                    <button className={styles.addToCartBtn} onClick={notify}>
+                    <button className={styles.addToCartBtn} onClick={handleAddToCart}>
                       <AiOutlineShoppingCart className={styles.addToCartIcon} />
                       Thêm vào giỏ hàng
                     </button>
-                    <Link to="/gio-hang" className={styles.buyBtn}>Mua ngay</Link>
-                    <ToastContainer />
+                    <button className={styles.buyBtn}>Mua ngay</button>
                   </div>
                 </div>
               </div>
             </div>
         </div>
-
-        <DetailedBookInfo data={data} />
+        <DetailedBookInfo data={bookData} />
+        <ToastContainer />
       </Container>
     </div>
   )

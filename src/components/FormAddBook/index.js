@@ -237,7 +237,7 @@ function FormAddBook() {
                     <label className={styles.formLabel}>Thể loại</label>
                     <select
                       className="form-select"
-                      name="author"
+                      name="genre"
                       value={formik.values.genre._id}
                       onBlur={formik.handleBlur}
                       onChange={handleChangeGenre}
@@ -256,7 +256,7 @@ function FormAddBook() {
                     <label className={styles.formLabel}>Nhà xuất bản</label>
                     <select
                       className="form-select"
-                      name="author"
+                      name="publisher"
                       value={formik.values.publisher._id}
                       onBlur={formik.handleBlur}
                       onChange={handleChangePublisher}

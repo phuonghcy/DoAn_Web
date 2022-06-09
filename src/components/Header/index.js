@@ -21,14 +21,15 @@ function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.user.currentUser)
+  const cart = useSelector((state) => state.cart)
  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await userApi.getCurrentUser()
-        const { email, fullName, avatar, _id, role } = data?.user
-        dispatch(login({email, fullName, avatar, userId: _id, role}))
+        const { email, fullName, phoneNumber, avatar, _id, role } = data?.user
+        dispatch(login({email, fullName, phoneNumber, avatar, userId: _id, role}))
       } catch (error) {
         if (error.response.status === 403 || error.response.status === 401) {
           dispatch(logout())
@@ -118,11 +119,9 @@ function Header() {
                 </div>
                 <div className={styles.headerIcon}>
                   <Link to="/gio-hang">
-                    <span className={styles.badge}>
-                      <BsCart2 />
-                      <span className={styles.badge_quantity}>5</span>
-                    </span>
+                    <BsCart2 />
                     <p>Giỏ hàng</p>
+                    <span className={styles.count}>{cart.list.length}</span>
                   </Link>
                 </div>
               </div>

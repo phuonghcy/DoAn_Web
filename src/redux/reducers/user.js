@@ -2,6 +2,7 @@ const initialState = {
     currentUser: {
         email: '',
         fullName: '',
+        phoneNumber: '',
         avatar: '',
         userId: '',
         role: '',

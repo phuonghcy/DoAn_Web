@@ -1,7 +1,8 @@
 .main{
     --primary-color: #539E31;
     margin-top: 165px;
-    padding-top: 32px
+    padding-top: 32px;
+    padding-bottom: 32px;
 }
 
 .textBold {

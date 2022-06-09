@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import styles from "./AddressSelect.module.css";
 function AddressSelect({ onChangeAddress }) {
   const [provinceList, setProvinceList] = useState([]);
@@ -133,6 +133,7 @@ function AddressSelect({ onChangeAddress }) {
           type="text"
           name="newAddress"
           className="form-control"
+          placeholder="Địa chỉ"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
@@ -141,4 +142,4 @@ function AddressSelect({ onChangeAddress }) {
   );
 }
 
-export default AddressSelect;
+export default memo(AddressSelect);
