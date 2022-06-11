@@ -7,16 +7,10 @@
     width: 450px;
 }
 
-.bookList {
+.voucherList {
     padding: 10px;
 }
 
-.bookList table {
+.voucherList table {
     text-align: center;
-}
-
-.inputSearch {
-    width: 300px;
-    display: inline-block;
-    margin-right: 10px;
 }

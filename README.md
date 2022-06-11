@@ -1,3 +1,77 @@
+<p align="center">
+  <a href="https://www.uit.edu.vn/" title="Trường Đại học Công nghệ Thông tin" style="border: 5;">
+    <img src="https://i.imgur.com/WmMnSRt.png" alt="Trường Đại học Công nghệ Thông tin | University of Information Technology">
+  </a>
+</p>
+
+<!-- Title -->
+<h1 align="center"><b>IE213.M21 - Kỹ thuật phát triển hệ thống Web</b></h1>
+
+## ĐỒ ÁN MÔN HỌC
+* Tên đồ án: **Xây dựng Website cửa hàng bán sách**
+
+## GIẢNG VIÊN HƯỚNG DẪN
+* **ThS. Võ Ngọc Tân**
+
+
+## SINH VIÊN THỰC HIỆN
+| STT    | MSSV          | Họ và Tên              |  Email                   |
+| ------ |:-------------:| ----------------------:| -------------------------:
+| 1      | 19522068      | Nguyễn Thị Minh Thư    | 19522068@gm.uit.edu.vn   |
+| 2      | 19522068      | Thị Kim Phương         | 19522068@gm.uit.edu.vn   |
+| 3      | 19520800      | Ngô Hữu Nhân           | 19520800@gm.uit.edu.vn   |
+
+## CÁC CÔNG NGHỆ SỬ DỤNG
+
+- **Frond-End:** HTML, CSS, Javascript, ReactJS
+- **Back-End:** NodeJS(Express)
+- **Database:** NoSQL(MongoDB)
+
+## CHỨC NĂNG
+
+- Trang chủ:
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943599/ie213/Capture1_h80noq.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943598/ie213/Capture2_kyv3k0.png)
+- Trang lọc sản phẩm
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943598/ie213/Capture3_tpgikm.png)
+- Trang chi tiết sản phẩm
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943597/ie213/Capture4_zcfctj.png)
+- Tìm kiếm sản phẩm
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943597/ie213/Capture5_oc1d63.png)
+
+- Xác thực người dùng
+    - Đăng nhập
+    - Đăng nhập với Google
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943920/ie213/Capture6_ddfeec.png)
+    - Đăng nhập với Facebook
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943920/ie213/Capture7_pe2szd.png)
+
+
+- Chức năng giỏ hàng, đặt hàng
+
+- Trang thông tin người dùng
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943920/ie213/Capture8_y11khn.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943920/ie213/Capture9_fdsko1.png)
+
+- ### **Trang Quản Lý**
+- Trang thống kê
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture10_rne5ps.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture11_gvajph.png)
+- Trang quản lý sách
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture12_ezvvik.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture13_tjjhau.png)
+    - Thêm sách
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture14_ldhbfd.png)
+    - Cập nhật thông tin
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944199/ie213/Capture15_cjzfh0.png)
+
+- Quản lý đơn hàng
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944339/ie213/Capture16_ht5k3u.png)
+    - Chi tiết đơn hàng
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944339/ie213/Capture17_reu1pm.png)
+    - Cập nhật trạng thái đơn hàng
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

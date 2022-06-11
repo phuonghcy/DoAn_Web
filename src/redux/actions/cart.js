@@ -19,6 +19,11 @@ export const removeItem = (data) => {
     }
 }
 
+export const destroy = () => {
+    return  {
+        type: 'DESTROY',
+    }
+}
 
 
 

@@ -7,6 +7,14 @@ import styles from "./CartPage.module.css";
 
 function CartPage() {
   const cartData = useSelector((state) => state.cart);
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const handleNavigateToCheckout = (e) => {
+    if (!currentUser.userId) {
+      e.preventDefault()
+      alert("Bạn cần đăng nhập để thực hiện thanh toán!")
+    }
+  }
 
   return (
     <div className="main">
@@ -83,7 +91,7 @@ function CartPage() {
                     </p>{" "}
                     <br></br>
                   </div>
-                  <Link to="/thanh-toan">
+                  <Link to="/thanh-toan" onClick={handleNavigateToCheckout}>
                     <button className={styles.pay_button}>
                       Tiến hành thanh toán
                     </button>

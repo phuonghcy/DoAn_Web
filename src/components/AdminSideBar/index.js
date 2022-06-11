@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./AdminSideBar.module.css";
+import logo from '../../assets/images/logo.png'
 
 function AdminSideBar() {
   return (
@@ -7,7 +8,7 @@ function AdminSideBar() {
       <div className={styles.logo}>
         <Link to="/">
           <img
-            src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png"
+            src={logo}
             alt=""
           />
           <span>BookStore</span>
@@ -48,6 +49,18 @@ function AdminSideBar() {
             <Link className={styles.navLink} to="/admin/order">
               <span>Quản lý đơn hàng</span>
             </Link>
+          </li>
+          <li className={styles.navItem}>
+            <Link className={styles.navLink} to="/admin/voucher">
+              <span>Mã giảm giá</span>
+            </Link>
+            <div className={styles.subnav}>
+              <div className={styles.navItem}>
+                <Link className={styles.navLink} to="/admin/voucher/add">
+                  Thêm mã giảm giá
+                </Link>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
