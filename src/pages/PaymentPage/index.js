@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form } from "react-bootstrap";
 import PayItem from "../../components/PayItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import format from "../../helper/format";
@@ -13,6 +13,9 @@ import styles from "./PaymentPage.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { destroy } from "../../redux/actions/cart"
+
+
 export default function PaymentPage() {
   const [shippingAddress, setShippingAddress] = useState("");
   const [address, setAddress] = useState([]);
@@ -21,6 +24,15 @@ export default function PaymentPage() {
   const [defaultAddress, setDefaultAddress] = useState("");
   const [showAddressSelect, setShowAddressSelect] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+   
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken')
+    if (!currentUser.userId || !token) {
+      navigate({ pathname: '/' })
+    }
+  }, [navigate, currentUser])
 
   useEffect(() => {
     // Call API lấy danh sách địa chỉ
@@ -88,6 +100,7 @@ export default function PaymentPage() {
           cart: cartData.list,
         });
         alert("Đặt mua hàng thành công!")
+        dispatch(destroy())
         navigate({ pathname: '/' })
 
       } catch (error) {

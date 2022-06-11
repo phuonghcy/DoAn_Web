@@ -24,11 +24,15 @@ import FormAddBook from "./components/FormAddBook"
 import FormUpdateBook from "./components/FormUpdateBook"
 import FormAddAuthor from "./components/FormAddAuthor"
 import FormUpdateAuthor from "./components/FormUpdateAuthor"
-import WelcomeAdmin from "./components/WelcomeAdmin"
+import FormAddVoucher from "./components/FormAddVoucher"
+import FormUpdateVoucher from "./components/FormUpdateVoucher"
+import AnalyticsPage from "./components/AnalyticsPage"
 import BookList from "./components/BookList"
 import AuthorList from "./components/AuthorList"
 import OrderList from "./components/OrderList";
+import VoucherList from "./components/VoucherList";
 import AccessDenied from "./pages/AccessDenied"
+
 
 import './App.css';
 import { useDispatch, useSelector } from "react-redux";
@@ -81,7 +85,7 @@ function App() {
         {currentUser && currentUser.role && (
           <Route path="/admin" element={<ProtectedRoute role={currentUser.role} />}>
             <Route element={<AdminLayout />}>
-              <Route path="" element={<WelcomeAdmin />} />
+              <Route path="" element={<AnalyticsPage />} />
               <Route path="book" element={<BookList />} />
               <Route path="book/add" element={<FormAddBook />} />
               <Route path="book/update/:id" element={<FormUpdateBook />} />
@@ -92,6 +96,12 @@ function App() {
 
 
               <Route path="order" element={<OrderList />} />
+
+              <Route path="voucher" element={<VoucherList />} />
+              <Route path="voucher/add" element={<FormAddVoucher />} />
+              <Route path="voucher/update/:id" element={<FormUpdateVoucher />} />
+
+              
 
             </Route>
           </Route>

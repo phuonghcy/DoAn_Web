@@ -1,4 +1,6 @@
 .contentWrapper {
     margin-left: 240px;
     background-color: #f4f6f9;
+    overflow: hidden;
+    padding: 10px;
 }

@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Image } from 'antd';
 
 import DetailedBookInfo from '../../components/DetailedBookInfo'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import bookApi from "../../api/bookApi";
 import { addToCart } from "../../redux/actions/cart"
 import { useDispatch } from "react-redux"
@@ -15,6 +15,7 @@ import styles from './ProductDetailPage.module.css'
 export default function ProductDetailPage() {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const params = useParams()
   const { slug } = params
   const [bookData, setBookData] = useState({})
@@ -72,6 +73,19 @@ export default function ProductDetailPage() {
       totalPriceItem: newPrice * quantity})
     dispatch(action)
     toast.success('Thêm sản phẩm vào giỏ hàng thành công!', {autoClose: 2000})
+  }
+
+  const handleBuyNow = () => {
+    const { _id, name, imageUrl, slug, price, discount } = bookData
+    let newPrice = price
+    if (discount > 0) {
+      newPrice = price - price * discount / 100
+    }
+    const action = addToCart({quantity, _id, name, imageUrl, slug, 
+      price: newPrice, 
+      totalPriceItem: newPrice * quantity})
+    dispatch(action)
+    navigate({ pathname: "/gio-hang" });
   }
 
   return (
@@ -136,7 +150,7 @@ export default function ProductDetailPage() {
                       <AiOutlineShoppingCart className={styles.addToCartIcon} />
                       Thêm vào giỏ hàng
                     </button>
-                    <button className={styles.buyBtn}>Mua ngay</button>
+                    <button className={styles.buyBtn} onClick={handleBuyNow}>Mua ngay</button>
                   </div>
                 </div>
               </div>

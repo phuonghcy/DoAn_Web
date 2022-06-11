@@ -3,42 +3,39 @@ import { Link } from "react-router-dom"
 import PaginationBookStore from "../PaginationBookStore";
 
 import { Row, Col, Card, Table, Spinner, Modal, Button } from "react-bootstrap";
-import bookApi from "../../api/bookApi";
 import format from "../../helper/format";
-import styles from "./BookList.module.css";
+import voucherApi from "../../api/voucherApi";
+import styles from "./VoucherList.module.css";
 
-function BookList() {
-  const [bookData, setBookData] = useState({});
+function VoucherList() {
+  const [voucherData, setVoucherData] = useState({});
   const [page, setPage] = useState(1);
 
   const [loading, setLoading] = useState(false);
 
-  const [bookDelete, setBookDelete] = useState({})
+  const [voucherDelete, setVoucherDelete] = useState({})
 
   const [showModal, setShowModal] = useState(false);
-
-  const [search, setSearch] = useState("")
-  const [keySearch, setKeySearch] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await bookApi.getAll({ key: keySearch, page: page, limit: 10, sortByDate: "desc" });
+        const res = await voucherApi.getAll({ page: page, limit: 10, sortByDate: "desc" });
         setLoading(false);
-        setBookData({ books: res.data, totalPage: res.pagination.totalPage });
+        setVoucherData({ vouchers: res.data, totalPage: res.pagination.totalPage });
       } catch (error) {
         setLoading(false);
         console.log(error);
       }
     };
     fetchData();
-  }, [page, keySearch]);
+  }, [page]);
 
-  const handleClickDeleteBook = (e) => {
-    setBookDelete({
+  const handleClickDeleteAuthor = (e) => {
+    setVoucherDelete({
       _id: e.target.getAttribute("data-id"),
-      name: e.target.getAttribute("data-name")
+      code: e.target.getAttribute("data-code")
     })
     setShowModal(true)
   }
@@ -49,14 +46,14 @@ function BookList() {
 
   const handleCallApiDelete = async (e) => {
     try {
-      await bookApi.deleteBook(bookDelete._id);
+      await voucherApi.deleteVoucher(voucherDelete._id);
       setShowModal(false)
       alert("Xóa thành công!")
-      setBookData((preState) => {
-        const newArray = [...preState.books];
+      setVoucherData((preState) => {
+        const newArray = [...preState.vouchers];
         return {
           ...preState,
-          books: newArray.filter((item) => item._id !== bookDelete._id)
+          vouchers: newArray.filter((item) => item._id !== voucherDelete._id)
         }
       });
     } catch (error) {
@@ -69,9 +66,9 @@ function BookList() {
     <Row>
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Xóa sách</Modal.Title>
+          <Modal.Title>Xóa mã giảm giá</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Bạn có chắc xóa sách <b>{bookDelete && bookDelete.name}</b> này không?</Modal.Body>
+        <Modal.Body>Bạn có chắc mã giảm giá <b>{voucherDelete && voucherDelete.code}</b> này không?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Hủy
@@ -83,35 +80,17 @@ function BookList() {
       </Modal>
       <Col xl={12}>
         <Card>
-          <Card.Header className={styles.title}>Danh sách sản phẩm</Card.Header>
-          <Card.Body className={styles.bookList}>
-            <div className="d-flex mb-2">
-              <input 
-                className={`form-control ${styles.inputSearch}`}
-                placeholder="Tìm kiếm" 
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <button 
-                type="button" 
-                className="btn btn-primary" 
-                onClick={() => {
-                  setKeySearch(search)
-                  setPage(1)
-                }}
-                >
-                  Tìm kiếm
-              </button>
-            </div>
+          <Card.Header className={styles.title}>Danh sách Mã giảm giá</Card.Header>
+          <Card.Body className={styles.voucherList}>
             <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th className={styles.name}>Tên sách</th>
-                  <th>Thể loại</th>
-                  <th>Xuất bản</th>
-                  <th>Giá</th>
-                  <th>Khuyến mãi (%)</th>
+                  <th>Mã giảm giá</th>
+                  <th>Yêu cầu</th>
+                  <th>Giảm (%)</th>
+                  <th>Số lượng</th>
+                  <th>Đã dùng</th>
                   <th colSpan="2">Hành động</th>
                 </tr>
               </thead>
@@ -125,25 +104,20 @@ function BookList() {
                       />
                     </td>
                   </tr>
-                ) : bookData.books && bookData.books.length > 0 ? (
-                  bookData.books.map((item, index) => {
+                ) : voucherData.vouchers && voucherData.vouchers.length > 0 ? (
+                  voucherData.vouchers.map((item, index) => {
                     return (
                       <tr key={item._id}>
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
-                        <td>
-                          {item.name} - {item.author?.name}
-                        </td>
-                        <td>
-                          {item.genre?.name}
-                        </td>
-                        <td>
-                          {item.publisher?.name} - {item.year}
-                        </td>
-                        <td>{format.formatPrice(item.price)}</td>
+                        <td>{item.code}</td>
+                        <td>{`Giá trị đơn hàng > ${format.formatPrice(item.price_request)}`}</td>
                         <td>{item.discount}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.used_quantity}</td>
+                        
                         <td>
                           <Link
-                            to={`/admin/book/update/${item._id}`}
+                            to={`/admin/voucher/update/${item._id}`}
                             className="btn btn-warning"
                             data-id={item._id}
                           >
@@ -154,8 +128,8 @@ function BookList() {
                           <button
                             className="btn btn-danger"
                             data-id={item._id}
-                            data-name={item.name}
-                            onClick={handleClickDeleteBook}
+                            data-code={item.code}
+                            onClick={handleClickDeleteAuthor}
                           >
                             Xóa
                           </button>
@@ -173,9 +147,9 @@ function BookList() {
             <div className={styles.pagination}>
             <Row>
               <Col xl={12}>
-                {bookData.totalPage > 1 ? (
+                {voucherData.totalPage > 1 ? (
                   <PaginationBookStore
-                    totalPage={bookData.totalPage}
+                    totalPage={voucherData.totalPage}
                     currentPage={page}
                     onChangePage={handleChangePage}
                   />
@@ -190,4 +164,4 @@ function BookList() {
   );
 }
 
-export default BookList;
+export default VoucherList;

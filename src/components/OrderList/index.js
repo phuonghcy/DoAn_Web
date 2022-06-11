@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import PaginationBookStore from "../PaginationBookStore";
-
+import { FaCheckCircle } from "react-icons/fa";
 import { Row, Col, Card, Table, Spinner, Modal } from "react-bootstrap";
 import orderApi from "../../api/orderApi";
 import format from "../../helper/format";
+import date from "../../helper/date";
 import styles from "./OrderList.module.css";
 
 function OrderList() {
@@ -23,7 +24,7 @@ function OrderList() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await orderApi.getAll({ page: page, limit: 10 });
+        const res = await orderApi.getAll({ page: page, limit: 10, sortByDate: "desc" });
         setLoading(false);
         setOrderData({ orders: res.data, totalPage: res.pagination.totalPage });
       } catch (error) {
@@ -71,13 +72,38 @@ function OrderList() {
   const handleChangeStatus = (e) => {
     const index = e.target.selectedIndex;
     setStatus({
-      key: e.target.value,
+      key: parseInt(e.target.value),
       text: e.target[index].text
     });
   }
 
-  const handleCallApiChangeStatus = () => {
+  const handleCallApiChangeStatus = async () => {
     console.log(status)
+    console.log(orderDetail._id)
+    try {
+      await orderApi.updateStatusById(orderDetail._id, status)
+      setOrderDetail(pre => {
+        return {
+          ...pre,
+          status: status
+        }
+      }) 
+      setOrderData(pre => {
+        const newArray = [...pre.orders];
+        return {
+          ...pre,
+          orders: newArray.map((item) => {
+            return item._id === orderDetail._id
+              ? { ...item, status: status }
+              : item;
+          })
+        }
+      })
+      alert("Cập nhật thành công!")
+    } catch (error) {
+      alert("Cập nhật thất bại!")
+      console.log(error)
+    }
   }
 
   return (
@@ -107,7 +133,9 @@ function OrderList() {
               </select>
             </div>
           )}
-          <button type="button" onClick={handleCallApiChangeStatus}>Lưu</button>
+          <button type="button" className="btn btn-success mt-2" onClick={handleCallApiChangeStatus}>
+            Lưu
+          </button>
         </Modal.Body>
       </Modal>
       <Modal
@@ -122,10 +150,16 @@ function OrderList() {
         <Modal.Body>
           {showModal && orderDetail && (
             <div>
-              <p>Tạm tính:{" "}<b>{format.formatPrice(orderDetail?.cost?.subTotal)}</b></p>
-              <p>Giám giá:{" "}<b>{format.formatPrice(orderDetail?.cost?.discount)}</b></p>
-              <p>Tổng cộng: <b>{format.formatPrice(orderDetail?.cost.total)}</b></p>
-              <p>Trạng thái: <b>{orderDetail?.status.text}</b></p>
+              <div className={styles.boxOrderDetail}>
+                <p>Email:{" "}<b>{orderDetail?.email}</b></p>
+                <p>SĐT:{" "}<b>{orderDetail?.phoneNumber}</b></p>
+              </div>
+              <div>
+                <p>Tạm tính:{" "}<b>{format.formatPrice(orderDetail?.cost?.subTotal)}</b></p>
+                <p>Giám giá:{" "}<b>{format.formatPrice(orderDetail?.cost?.discount)}</b></p>
+                <p>Tổng cộng: <b>{format.formatPrice(orderDetail?.cost.total)}</b></p>
+                <p>Trạng thái: <b>{orderDetail?.status.text}</b></p>
+              </div>
             </div>
           )}
           <Table striped bordered hover>
@@ -135,6 +169,7 @@ function OrderList() {
                 <th>Mã sản phẩm</th>
                 <th colSpan={2}>Sản phẩm</th>
                 <th>Số lượng</th>
+                <th>Giá</th>
                 <th>Thành tiền</th>
               </tr>
             </thead>
@@ -153,6 +188,7 @@ function OrderList() {
                         <img src={items?.product.imageUrl} alt="" />
                       </td>
                       <td>{items?.quantity}</td>
+                      <td>{format.formatPrice(items?.price)}</td>
                       <td>{format.formatPrice(items?.totalItem)}</td>
                     </tr>
                   );
@@ -175,11 +211,10 @@ function OrderList() {
                 <tr>
                   <th>STT</th>
                   <th>Họ và tên</th>
-                  <th>SĐT</th>
-                  <th>Email</th>
                   <th>Địa chỉ</th>
                   <th>Ngày đặt hàng</th>
                   <th>Tổng tiền</th>
+                  <th>Tình trạng</th>
                   <th colSpan="2">Hành động</th>
                 </tr>
               </thead>
@@ -196,12 +231,19 @@ function OrderList() {
                       <tr key={item._id}>
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td>{item.fullName}</td>
-                        <td>{item.phoneNumber}</td>
-                        <td>{item.email}</td>
                         <td>{item.address}</td>
-                        <td>{format.formatDate(item.createdAt)}</td>
+                        <td>
+                          {format.formatDate(item.createdAt)}
+                          {date.isToday(item.createdAt) && (
+                             <button className="btn btn-danger">Hôm nay</button>
+                          )}
+                        </td>
                         <td>{format.formatPrice(item.cost.total)}</td>
-
+                        <td>{item.status.text} {item.status.key === 3 && 
+                          <button className={`bookstore-btn ${styles.btnCheck}`}>
+                            < FaCheckCircle />
+                          </button>}
+                       </td>
                         <td>
                           <button
                             className="btn btn-success"

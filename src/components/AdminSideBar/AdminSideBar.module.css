@@ -19,6 +19,8 @@
 .adminSideBar .logo img {
     width: 50px;
     opacity: 8;
+    background-color: #539E31;
+    border-radius: 50%;
 }
 
 .adminSideBar .logo a {

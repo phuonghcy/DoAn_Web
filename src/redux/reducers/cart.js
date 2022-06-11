@@ -107,6 +107,23 @@ const cartReducer = (state = initialState, action) => {
             }
         }
 
+        case "DESTROY": {
+            
+            localStorage.setItem("cart", JSON.stringify({
+               ...state,
+               list: [],
+               subTotal: 0,
+               total: 0
+           }))
+
+           return {
+               ...state,
+               list: [],
+               subTotal: 0,
+               total: 0
+           }
+       }
+
         default: {
             return state;
         }

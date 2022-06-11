@@ -14,3 +14,16 @@
 .orderDetail img {
     width: 150px;
 }
+
+.orderList .btnCheck {
+    color: #539E31;
+    vertical-align: text-bottom;
+}
+
+.boxOrderDetail {
+    display: flex;
+}
+
+.boxOrderDetail p {
+    margin-right: 20px;
+}

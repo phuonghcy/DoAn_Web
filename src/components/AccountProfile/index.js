@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Form } from "react-bootstrap"
+import { ToastContainer, toast } from 'react-toastify';
 import { updateFullName } from "../../redux/actions/user"
 import userApi from "../../api/userApi"
 import styles from "./AccountProfile.module.css"
@@ -63,6 +64,7 @@ function AccountProfile() {
           fullName, gender, phoneNumber, birthday
         })
         dispatch(updateFullName({fullName: result.data.fullName}))
+        toast.success('Cập nhật thành công!', {autoClose: 2000})
       } catch (error) {
         console.log(error)
       }
@@ -71,6 +73,7 @@ function AccountProfile() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      <ToastContainer />
       <div className={`form-group ${styles.formGroup}`}>
         <label className={styles.formLabel}>Email</label>
         <input
