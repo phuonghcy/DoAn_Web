@@ -19,6 +19,13 @@ export const removeItem = (data) => {
     }
 }
 
+export const udpateVoucher = (data) => {
+    return  {
+        type: 'UPDATE_VOUCHER',
+        payload: data
+    }
+}
+
 export const destroy = () => {
     return  {
         type: 'DESTROY',

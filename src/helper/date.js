@@ -9,8 +9,8 @@ const date = {
     getSunday: (date) => {
         const first = date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)
         const sunday = new Date(date.setDate(first + 6))
-        sunday.setUTCHours(0, 0, 0, 0)
-        sunday.setHours(0)
+        sunday.setHours(23);
+        sunday.setMinutes(59);
         return sunday
     },
     isToday: (date) => {

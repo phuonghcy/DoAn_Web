@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import PaginationBookStore from "../PaginationBookStore";
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Row, Col, Card, Table, Spinner, Modal, Button } from "react-bootstrap";
 import bookApi from "../../api/bookApi";
@@ -49,9 +50,14 @@ function BookList() {
 
   const handleCallApiDelete = async (e) => {
     try {
+      const canDelete = await bookApi.checkIsOrdered(bookDelete._id)
+      if (canDelete.data.length > 0) {
+        toast.error('Sản phẩm đã được mua, không thể xóa!', {autoClose: 2000})
+        return
+      }
       await bookApi.deleteBook(bookDelete._id);
+      toast.success("Xóa thành công!", {autoClose: 2000})
       setShowModal(false)
-      alert("Xóa thành công!")
       setBookData((preState) => {
         const newArray = [...preState.books];
         return {
@@ -67,6 +73,7 @@ function BookList() {
 
   return (
     <Row>
+      <ToastContainer />
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Xóa sách</Modal.Title>

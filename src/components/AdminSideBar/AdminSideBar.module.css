@@ -50,6 +50,12 @@
     position: relative;
 }
 
+.navItem.active > a {
+    background-color: #586685;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
 .navItem:hover .subnav {
     display: block;
 }
@@ -62,7 +68,7 @@
     font-size: 18px;
     cursor: pointer;
     padding-left: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.125); */
 }
 
 .adminSideBar .subnav {

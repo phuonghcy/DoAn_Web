@@ -1,5 +1,6 @@
 const initialState = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : {
     list: [],
+    voucher: "",
     subTotal: 0,
     discount: 0,
     total: 0,
@@ -28,21 +29,21 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             })
 
             localStorage.setItem("cart", JSON.stringify({
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             }))
 
             return {
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             }
         }
 
@@ -62,21 +63,21 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             })
 
             localStorage.setItem("cart", JSON.stringify({
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             }))
 
             return {
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             }
         }
 
@@ -89,21 +90,49 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             })
 
              localStorage.setItem("cart", JSON.stringify({
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
             }))
 
             return {
                 ...state,
                 list: newList,
                 subTotal: subTotal,
-                total: subTotal + state.discount
+                total: subTotal - state.discount
+            }
+        }
+
+        case "UPDATE_VOUCHER": {
+            
+            const subTotal = state.list.reduce((sum, product) => sum + product.totalPriceItem, 0)
+            console.log({
+                ...state,
+                voucher: action.payload.voucher,
+                subTotal: subTotal,
+                discount: action.payload.discount,
+                total: subTotal - action.payload.discount
+            })
+
+             localStorage.setItem("cart", JSON.stringify({
+                ...state,
+                voucher: action.payload.voucher,
+                subTotal: subTotal,
+                discount: action.payload.discount,
+                total: subTotal - action.payload.discount
+            }))
+
+            return {
+                ...state,
+                voucher: action.payload.voucher,
+                subTotal: subTotal,
+                discount: action.payload.discount,
+                total: subTotal - action.payload.discount
             }
         }
 

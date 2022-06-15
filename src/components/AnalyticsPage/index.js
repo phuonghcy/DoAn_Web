@@ -12,10 +12,14 @@ import {
 } from "chart.js";
 import { Line, Pie } from "react-chartjs-2";
 import { Row, Col } from "react-bootstrap";
+import bookApi from "../../api/bookApi";
+import orderApi from "../../api/orderApi";
 import analyticApi from "../../api/analyticApi";
 import date from "../../helper/date"
 import styles from "./AnalyticsPage.module.css";
 import { useEffect, useState } from "react";
+import DashboardCard from "../DashboardCard";
+import { FaBook, FaChartBar, FaShoppingBag } from "react-icons/fa"
 
 ChartJS.register(
   ArcElement,
@@ -33,9 +37,32 @@ function AnalyticsPage() {
 
   const [revenueLifeTimeDataChart, setRevenueLifeTimeDataChart] = useState({});
   const [countOrderLifeTimeDataChart, setCountOrderLifeTimeDataChart] = useState({});
-  const [flowerBestSellerDataChart, setFlowerBestSellerDataChart] = useState({});
+  const [bookBestSellerDataChart, setBookBestSellerDataChart] = useState({});
 
   const [revenueTime, setRevenueTime] = useState({value: 1, text: "Toàn thời gian"})
+
+  const [cardData, setCardData] = useState({})
+
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const resBook = await bookApi.getAll({})
+        const resOrder = await orderApi.getAll({})
+        const resRevenue = await analyticApi.getTotalRevenue()
+        setCardData(pre => {
+          return {
+            ...pre, 
+            book: resBook.count,
+            order: resOrder.count,
+            revenue: resRevenue.data[0].revenue
+          }
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchCardData()
+  }, [])
 
   useEffect(() => {
     const fetchRevenueLifeTime = async () => {
@@ -119,12 +146,12 @@ function AnalyticsPage() {
       }
     };
 
-    const fetchFlowerBestSeller = async () => {
+    const fetchBookBestSeller = async () => {
       try {
         const res = await analyticApi.getBestSeller();
         const dataChart = res.data;
         console.log(dataChart);
-        setFlowerBestSellerDataChart({
+        setBookBestSellerDataChart({
           labels: dataChart.map((item) => item.product[0].name),
           datasets: [
             {
@@ -140,7 +167,7 @@ function AnalyticsPage() {
     };
 
     fetchCountOrderLifeTime();
-    fetchFlowerBestSeller();
+    fetchBookBestSeller();
   }, []);
 
   const handleChangeRevenueTime = (e) => {
@@ -153,9 +180,33 @@ function AnalyticsPage() {
 
   return (
     <div className={styles.wrapperDashboard}>
+      <Row className="mb-4">
+        <Col xl={3}>
+            <DashboardCard 
+              name="Sản phẩm" 
+              quantity={cardData && cardData.book} 
+              bgColor="bg-success" 
+              Icon={FaBook} />
+        </Col>
+        <Col xl={3}>
+          <DashboardCard 
+            name="Đơn hàng" 
+            quantity={cardData && cardData.order} 
+            bgColor="bg-info" 
+            Icon={FaShoppingBag} />
+        </Col>
+        <Col xl={3}>
+          <DashboardCard 
+            name="Doanh thu (triệu)" 
+            quantity={cardData && ((cardData.revenue / 1000000).toFixed(2))} 
+            bgColor="bg-danger" 
+            Icon={FaChartBar} />
+        </Col>
+      </Row>
       <Row>
         <Col xl={8}>
           <div>
+            <h2>DOANH THU</h2>
             <select 
               className={`form-select ${styles.revenueSelectTime}`} 
               value={revenueTime && revenueTime.value}
@@ -185,7 +236,8 @@ function AnalyticsPage() {
           )}
         </Col>
         <Col xl={4}>
-          {flowerBestSellerDataChart && flowerBestSellerDataChart.datasets && (
+          <h2>SÁCH BÁN CHẠY</h2>
+          {bookBestSellerDataChart && bookBestSellerDataChart.datasets && (
             <Pie
               options={{
                 responsive: true,
@@ -200,11 +252,12 @@ function AnalyticsPage() {
                   },
                 },
               }}
-              data={flowerBestSellerDataChart}
+              data={bookBestSellerDataChart}
             />
           )}
         </Col>
         <Col xl={8}>
+          <h2>SỐ LƯỢNG ĐƠN HÀNG</h2>
           {countOrderLifeTimeDataChart && countOrderLifeTimeDataChart.datasets && (
             <Line
               options={{

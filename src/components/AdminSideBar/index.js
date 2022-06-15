@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./AdminSideBar.module.css";
 import logo from '../../assets/images/logo.png'
+import { useState } from "react";
 
 function AdminSideBar() {
+  const [active, setActive] = useState("analytics")
   return (
     <div className={styles.adminSideBar}>
       <div className={styles.logo}>
@@ -16,12 +18,12 @@ function AdminSideBar() {
       </div>
       <div className={styles.sidebarContainer}>
         <ul className={styles.navList}>
-          <li className={styles.navItem}>
+          <li className={`${styles.navItem} ${active === "analytics" ? styles.active : ""}`} onClick={() => setActive("analytics")}>
             <Link className={styles.navLink} to="/admin">
               <span>Tổng quan</span>
             </Link>
           </li>
-          <li className={styles.navItem}>
+          <li className={`${styles.navItem} ${active === "books" ? styles.active : ""}`} onClick={() => setActive("books")}>
             <Link className={styles.navLink} to="/admin/book">
               <span>Quản lý sách</span>
             </Link>
@@ -33,7 +35,7 @@ function AdminSideBar() {
               </div>
             </div>
           </li>
-          <li className={styles.navItem}>
+          <li className={`${styles.navItem} ${active === "authors" ? styles.active : ""}`}  onClick={() => setActive("authors")}>
             <Link className={styles.navLink} to="/admin/author">
               <span>Quản lý tác giả</span>
             </Link>
@@ -45,12 +47,12 @@ function AdminSideBar() {
               </div>
             </div>
           </li>
-          <li className={styles.navItem}>
+          <li className={`${styles.navItem} ${active === "orders" ? styles.active : ""}`}  onClick={() => setActive("orders")}>
             <Link className={styles.navLink} to="/admin/order">
               <span>Quản lý đơn hàng</span>
             </Link>
           </li>
-          <li className={styles.navItem}>
+          <li className={`${styles.navItem} ${active === "vouchers" ? styles.active : ""}`} onClick={() => setActive("vouchers")}>
             <Link className={styles.navLink} to="/admin/voucher">
               <span>Mã giảm giá</span>
             </Link>

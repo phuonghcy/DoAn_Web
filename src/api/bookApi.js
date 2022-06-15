@@ -18,6 +18,10 @@ const bookApi = {
         const url = `books/slug/${slug}`
         return axiosClient.get(url)
     },
+    checkIsOrdered: (id) => {
+        const url = `books/is-ordered/${id}`
+        return axiosClient.get(url)
+    },
     search: (key) => {
         const url = `books/search`
         return axiosClient.get(url, { params: {key}})
