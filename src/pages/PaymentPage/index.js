@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import format from "../../helper/format";
 import AddressSelect from "../../components/AddressSelect";
+import { ToastContainer, toast } from 'react-toastify';
 
 import orderApi from "../../api/orderApi";
 import userApi from "../../api/userApi";
@@ -92,6 +93,7 @@ export default function PaymentPage() {
           fullName,
           phoneNumber,
           address: fullAddress,
+          voucher: cartData.voucher,
           cost: {
             subTotal: cartData.subTotal,
             discount: cartData.discount,
@@ -99,12 +101,12 @@ export default function PaymentPage() {
           },
           cart: cartData.list,
         });
-        alert("Đặt mua hàng thành công!")
+        toast.success("Đặt mua hàng thành công!", {autoClose: 2000})
         dispatch(destroy())
-        navigate({ pathname: '/' })
+        setTimeout(() => navigate({ pathname: '/' }), 3000)
 
       } catch (error) {
-        console.log(error);
+        toast.info(`${error.response.data.message}`, {autoClose: 2000})
       }
     },
   });
@@ -115,6 +117,7 @@ export default function PaymentPage() {
 
   return (
     <div className="main">
+      <ToastContainer />
       <Container>
         <div className={styles.payment_header}>
           <ul>

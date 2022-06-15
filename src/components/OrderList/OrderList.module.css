@@ -27,3 +27,7 @@
 .boxOrderDetail p {
     margin-right: 20px;
 }
+
+.orderList .success {
+    background-color: #d4edda;
+}

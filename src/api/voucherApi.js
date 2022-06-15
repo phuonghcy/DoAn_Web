@@ -10,6 +10,10 @@ const voucherApi = {
         const url = `vouchers/${id}`
         return axiosClient.get(url)
     },
+    getByCode: (code) => {
+        const url = `vouchers/code/${code}`
+        return axiosClient.get(url)
+    },
     createVoucher: (data) => {
         const url = `vouchers/`
         return axiosClient.post(url, data)

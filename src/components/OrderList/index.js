@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import PaginationBookStore from "../PaginationBookStore";
-import { FaCheckCircle } from "react-icons/fa";
 import { Row, Col, Card, Table, Spinner, Modal } from "react-bootstrap";
 import orderApi from "../../api/orderApi";
 import format from "../../helper/format";
@@ -24,7 +23,10 @@ function OrderList() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await orderApi.getAll({ page: page, limit: 10, sortByDate: "desc" });
+        const res = await orderApi.getAll({ 
+          page: page, 
+          limit: 10, 
+          sortByDate: "desc" });
         setLoading(false);
         setOrderData({ orders: res.data, totalPage: res.pagination.totalPage });
       } catch (error) {
@@ -43,7 +45,7 @@ function OrderList() {
     try {
       const orderId = e.target.getAttribute("data-id");
       if (!(orderDetail._id === orderId)) {
-        const res = await orderApi.getById(orderId);
+        const res = await orderApi.getById(orderId, {});
         setOrderDetail(res.data);
       }
       setShowModal(true);
@@ -56,7 +58,7 @@ function OrderList() {
     try {
       const orderId = e.target.getAttribute("data-id");
       if (!(orderDetail._id === orderId)) {
-        const res = await orderApi.getById(orderId);
+        const res = await orderApi.getById(orderId, {});
         setOrderDetail(res.data);
         setStatus({
           key: res.data.status.key,
@@ -228,7 +230,7 @@ function OrderList() {
                 ) : orderData.orders && orderData.orders.length > 0 ? (
                   orderData.orders.map((item, index) => {
                     return (
-                      <tr key={item._id}>
+                      <tr key={item._id} className={`${item.status.key === 3 ? styles.success : ''}`}>
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td>{item.fullName}</td>
                         <td>{item.address}</td>
@@ -239,11 +241,7 @@ function OrderList() {
                           )}
                         </td>
                         <td>{format.formatPrice(item.cost.total)}</td>
-                        <td>{item.status.text} {item.status.key === 3 && 
-                          <button className={`bookstore-btn ${styles.btnCheck}`}>
-                            < FaCheckCircle />
-                          </button>}
-                       </td>
+                        <td>{item.status.text}</td>
                         <td>
                           <button
                             className="btn btn-success"

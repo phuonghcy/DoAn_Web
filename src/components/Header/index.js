@@ -43,18 +43,6 @@ function Header() {
     }
   },[dispatch, navigate, currentUser])
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await authorApi.getAll({})
-  //     console.log(data)
-  //   }
-  //   const token = localStorage.getItem('accessToken')
-  //   if (token) {
-  //     fetchData()
-  //   }
-    
-  // },[])
-
   const handleLogout = async () => {
     const resultLogout = await authApi.logout()
     console.log(resultLogout)
@@ -66,8 +54,6 @@ function Header() {
     navigate({ pathname: '/' })
   }
 
-  // console.log(currentUser)
- 
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -110,7 +96,7 @@ function Header() {
                       <p>{currentUser.fullName}</p>
                       <div className={styles.accountPopup}>
                           <div className={styles.item}><Link className={styles.popupLink} to="/tai-khoan">Tài khoản của tôi</Link></div>
-                          <div className={styles.item}><Link className={styles.popupLink} to="">Đơn hàng</Link></div>
+                          <div className={styles.item}><Link className={styles.popupLink} to="/don-hang">Đơn hàng</Link></div>
                           <div className={styles.item}><p className={styles.popupLink} onClick={handleLogout} to="">Đăng xuất</p></div>
                       </div>
                     </div>

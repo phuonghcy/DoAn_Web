@@ -1,14 +1,19 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CartItem from "../../components/CartItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import format from "../../helper/format";
 import styles from "./CartPage.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import { udpateVoucher } from "../../redux/actions/cart"
+import { useState } from "react";
+import voucherApi from "../../api/voucherApi"
 
 function CartPage() {
   const cartData = useSelector((state) => state.cart);
   const currentUser = useSelector((state) => state.user.currentUser);
-
+  const dispatch = useDispatch()
+  const [voucher, setVoucher] = useState(cartData.voucher || "")
   const handleNavigateToCheckout = (e) => {
     if (!currentUser.userId) {
       e.preventDefault()
@@ -16,9 +21,44 @@ function CartPage() {
     }
   }
 
+  const handleApplyVoucher = async () => {
+    console.log(voucher)
+    try {
+      if (!voucher) {
+        dispatch(udpateVoucher({
+          voucher: "",
+          discount: 0
+        }))
+        return
+      }
+      if (voucher === cartData.voucher) return
+      const res = await voucherApi.getByCode(voucher)
+      const voucherData = res.data
+      console.log(voucherData)
+      if (cartData.subTotal < voucherData.price_request) {
+        toast.info(
+          `Giá trị đơn hàng cần tối thiểu ${format.formatPrice(voucherData.price_request)} để áp dụng!`, 
+          {autoClose: 2000})
+        return
+      }
+      if (voucherData.used_quantity >= voucherData.quantity) {
+        toast.info("Số lượng sử dụng voucher này đã hết!", {autoClose: 2000})
+        return
+      }
+      const discountPrice = cartData.subTotal * voucherData.discount / 100
+      dispatch(udpateVoucher({
+        voucher: voucher,
+        discount: discountPrice
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="main">
       <Container>
+        <ToastContainer />
         <div className={styles.cart_header}>
           <ul>
             <li>Trang chủ</li>
@@ -65,8 +105,10 @@ function CartPage() {
                       type="text"
                       className="form-control"
                       placeholder="Nhập mã giảm giá"
+                      value={voucher}
+                      onChange={(e) => setVoucher(e.target.value)}
                     />
-                    <button>Áp dụng</button>
+                    <button type="button" onClick={handleApplyVoucher}>Áp dụng</button>
                   </div>
                   <div className={styles.cart_info}>
                     <p>
