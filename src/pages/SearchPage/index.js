@@ -16,7 +16,7 @@ function SearchPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await bookApi.search(key)
+        const res = await bookApi.search({key})
         console.log(res)
         setBooks(res.data)
         

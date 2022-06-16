@@ -32,6 +32,7 @@ import BookList from "./components/BookList"
 import AuthorList from "./components/AuthorList"
 import OrderList from "./components/OrderList";
 import VoucherList from "./components/VoucherList";
+import FeedbackList from "./components/FeedbackList";
 import AccessDenied from "./pages/AccessDenied"
 
 
@@ -108,6 +109,7 @@ function App() {
               <Route path="voucher/add" element={<FormAddVoucher />} />
               <Route path="voucher/update/:id" element={<FormUpdateVoucher />} />
 
+              <Route path="feedback" element={<FeedbackList />} />
               
 
             </Route>
