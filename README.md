@@ -17,7 +17,7 @@
 ## SINH VIÊN THỰC HIỆN
 | STT    | MSSV          | Họ và Tên              |  Email                   |
 | ------ |:-------------:| ----------------------:| -------------------------:
-| 1      | 19522068      | Nguyễn Thị Minh Thư    | 19522068@gm.uit.edu.vn   |
+| 1      | 19522308      | Nguyễn Thị Minh Thư    | 19522308@gm.uit.edu.vn   |
 | 2      | 19522068      | Thị Kim Phương         | 19522068@gm.uit.edu.vn   |
 | 3      | 19520800      | Ngô Hữu Nhân           | 19520800@gm.uit.edu.vn   |
 
@@ -47,7 +47,20 @@
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943920/ie213/Capture7_pe2szd.png)
 
 
-- Chức năng giỏ hàng, đặt hàng
+- Chức năng giỏ hàng, đặt hàng, thanh toán
+    - Trang giỏ hàng
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350339/ie213/Capture1_swjonr.png)
+    - Trang đặt hàng
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350339/ie213/Capture2_vlwjq0.png)
+    - Sau khi đặt hàng thành công
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350339/ie213/Capture3_orrx37.png)
+    - Thanh toán qua PayPal
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350339/ie213/Capture4_ou6j25.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350339/ie213/Capture5_ygryst.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350340/ie213/Capture6_gp8ldv.png)
+    - Sau khi thanh toán thành công
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655350341/ie213/Capture7_m8thhe.png)
+
 
 - Trang thông tin người dùng
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943920/ie213/Capture8_y11khn.png)

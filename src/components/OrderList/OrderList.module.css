@@ -31,3 +31,7 @@
 .orderList .success {
     background-color: #d4edda;
 }
+
+.orderList .error {
+    background-color: #f8d7da;
+}

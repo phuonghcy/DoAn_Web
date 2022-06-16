@@ -2,9 +2,9 @@ import axiosClient from "./axiosClient"
 
 const voucherApi = {
 
-    getAll: ({page, limit, sortByDate}) => {
+    getAll: ({page, limit, sortByDate, canUse}) => {
         const url = 'vouchers/'
-        return axiosClient.get(url, { params: {page, limit, sortByDate}})
+        return axiosClient.get(url, { params: {page, limit, sortByDate, canUse}})
     },
     getById: (id) => {
         const url = `vouchers/${id}`

@@ -5,7 +5,7 @@ const format = {
     formatDate: (date) => {
         if (date) {
             const newDate = new Date(date)
-            return newDate.toISOString().slice(0, 10) + " " + newDate.toLocaleTimeString('en-GB')
+            return newDate.toLocaleDateString().slice(0, 10) + " " + newDate.toLocaleTimeString('en-GB')
         } 
         return date
     }

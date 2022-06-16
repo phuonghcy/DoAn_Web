@@ -17,6 +17,10 @@ const orderApi = {
         const url = `orders/${id}/status`
         return axiosClient.put(url, data)
     },
+    updatePaymentStatusById: (id, data) => {
+        const url = `orders/${id}/payment-status`
+        return axiosClient.put(url, data)
+    },
 }
 
 export default orderApi

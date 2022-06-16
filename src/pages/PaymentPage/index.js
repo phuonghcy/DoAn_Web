@@ -9,7 +9,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import orderApi from "../../api/orderApi";
 import userApi from "../../api/userApi";
-
 import styles from "./PaymentPage.module.css";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +63,7 @@ export default function PaymentPage() {
       phoneNumber:
         currentUser && currentUser.phoneNumber ? currentUser.phoneNumber : "",
       address: defaultAddress,
+      method: 0,
     },
     enableReinitialize: true,
     validateOnChange: false,
@@ -77,7 +77,7 @@ export default function PaymentPage() {
     }),
     onSubmit: async () => {
       console.log("kiem tra", formik.values);
-      const { email, fullName, phoneNumber, address } = formik.values;
+      const { email, fullName, phoneNumber, address, method } = formik.values;
       let fullAddress = address
       if (!fullAddress || showAddressSelect) {
         const { province, district, ward, address } = shippingAddress;
@@ -94,6 +94,7 @@ export default function PaymentPage() {
           phoneNumber,
           address: fullAddress,
           voucher: cartData.voucher,
+          method,
           cost: {
             subTotal: cartData.subTotal,
             discount: cartData.discount,
@@ -103,7 +104,7 @@ export default function PaymentPage() {
         });
         toast.success("Đặt mua hàng thành công!", {autoClose: 2000})
         dispatch(destroy())
-        setTimeout(() => navigate({ pathname: '/' }), 3000)
+        setTimeout(() => navigate({ pathname: '/don-hang' }), 3000)
 
       } catch (error) {
         toast.info(`${error.response.data.message}`, {autoClose: 2000})
@@ -265,10 +266,21 @@ export default function PaymentPage() {
                 <br></br>
                 <h4>PHƯƠNG THỨC THANH TOÁN</h4>
                 <div>
-                  <input type="radio" value="crash" name="pay-method"  checked={true}/> Trả
-                  tiền mặt khi nhận hàng <br></br>
-                  <input type="radio" value="bank" name="pay-method" /> Chuyển
-                  khoản ngân hàng
+                  <input 
+                    type="radio" 
+                    name="method" 
+                    value="0" 
+                    checked={parseInt(formik.values.method) === 0}
+                    onChange={formik.handleChange}
+                  />Trả tiền mặt khi nhận hàng
+                  <br />
+                  <input 
+                    type="radio" 
+                    name="method"
+                    value="1"
+                    checked={parseInt(formik.values.method) === 1}
+                    onChange={formik.handleChange}
+                     /> Thanh toán qua Paypal
                 </div>
                 <button type="submit" onClick={formik.handleSubmit}>
                   ĐẶT HÀNG
