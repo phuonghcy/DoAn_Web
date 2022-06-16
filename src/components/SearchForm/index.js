@@ -1,6 +1,11 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { BsSearch } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
+import { Spinner } from "react-bootstrap";
+import SearchResultItem from "../SearchResultItem";
+import useDebounce from "../../hooks/useDebounce"
+import bookApi from "../../api/bookApi"
 import styles from "./SearchForm.module.css"
 
 function SearchForm() {
@@ -8,9 +13,34 @@ function SearchForm() {
   const navigate = useNavigate()
 
   const [key, setKey] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [searchResult, setSearchResult] = useState([])
+  const [showResult, setShowResult] = useState(false)
+  const debounced = useDebounce(key, 1000)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!debounced.trim()) {
+          setSearchResult([])
+          return
+        }
+        setLoading(true)
+        const res = await bookApi.search({key: debounced, limit: 5})
+        setLoading(false)
+        setSearchResult(res.data)
+        setShowResult(true)
+        console.log(res.data)
+      } catch (error) {
+        setLoading(false)
+        console.log(error)
+      }
+    }
+    fetchData()
+  }, [debounced])
 
   const handleSubmitSearch = (e) => {
     e.preventDefault()
+    setShowResult(false)
     navigate({
       pathname: '/tim-kiem',
       search: `key=${key}`
@@ -24,6 +54,12 @@ function SearchForm() {
         <button className={`bookstore-btn ${styles.searchBtn}`}>
           <BsSearch />
         </button>
+        <button type="button" onClick={() => setKey("")} className={`bookstore-btn ${styles.resetKey} ${key && !loading ? styles.active : ""}`}>
+          <IoClose />
+        </button>
+        {loading && <div className={styles.loading}>
+          <Spinner animation="border" variant="success" size="sm" />
+        </div>}
         <div className="form-group">
           <input
             type="text"
@@ -33,6 +69,11 @@ function SearchForm() {
             onChange={(e) => setKey(e.target.value)}
           />
         </div>
+        {showResult && searchResult && searchResult.length > 0 && (
+          <div className={styles.resultSearch}>
+            {searchResult.map(book => <SearchResultItem key={book._id} data={book} />)}
+          </div>
+        )}
       </div>
     </form>
   );

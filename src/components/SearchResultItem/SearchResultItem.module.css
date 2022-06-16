@@ -1,0 +1,30 @@
+
+.resultItem {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+}
+
+.img {
+    flex-shrink: 0;
+    width: 100px;
+}
+
+.name {
+    font-weight: 500;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resultItem img {
+    height: 80px;
+    object-fit: contain;
+}
+
+.resultItem .bookInfo {
+    margin-left: 10px;
+}
