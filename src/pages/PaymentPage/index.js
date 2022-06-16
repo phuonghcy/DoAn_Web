@@ -265,7 +265,7 @@ export default function PaymentPage() {
                 <br></br>
                 <h4>PHƯƠNG THỨC THANH TOÁN</h4>
                 <div>
-                  <input type="radio" value="crash" name="pay-method" /> Trả
+                  <input type="radio" value="crash" name="pay-method"  checked={true}/> Trả
                   tiền mặt khi nhận hàng <br></br>
                   <input type="radio" value="bank" name="pay-method" /> Chuyển
                   khoản ngân hàng

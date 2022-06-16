@@ -11,7 +11,7 @@ function Footer() {
         <Row>
           <Col xl={3}>
             <div className={styles.footerGroup}>
-              <h1 className={`${styles.bookstoreHighlight} me-5`}>BookStore</h1>
+              <Link to='/'><h1 className={`${styles.bookstoreHighlight} me-5`}>BookStore</h1></Link>
               <p>Khu phố 6, phường Linh Trung, TP Thủ Đức, TP HCM</p>
               <p>bookstore@gmail.com</p>
             </div>

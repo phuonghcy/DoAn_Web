@@ -3,6 +3,7 @@
     background-color: rgb(241, 241, 241);
     background-color: white;
     height: 360px;
+    vertical-align: middle;
 }
 
 .bookItem .card {
@@ -16,6 +17,11 @@
 
 .bookInfo {
     flex: 1;
+}
+.name {
+    margin: auto 0px;
+    text-align: center;
+    padding-top: 10px;
 }
 
 .bookItem img {
@@ -38,12 +44,14 @@
 
 .cardFooter {
     padding: 6px;
+    text-align: center;
 }
 
 .price {
     font-weight: 600;
     color: #539E31;
     font-size: 18px;
+    font-weight: bold;
 }
 
 .oldPrice {

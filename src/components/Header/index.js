@@ -76,7 +76,7 @@ function Header() {
       <div className={styles.headerCenter}>
           <Container>
             <div className="d-flex align-items-center">
-              <h1 className={`${styles.bookstoreHighlight} me-5`}>BookStore</h1>
+              <Link to='/' ><h1 className={`${styles.bookstoreHighlight} me-5`}>BookStore</h1></Link>
               <div className={styles.search}>
                 <SearchForm />
               </div>
