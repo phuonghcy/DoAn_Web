@@ -1,0 +1,16 @@
+.title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.name {
+    width: 450px;
+}
+
+.authorList {
+    padding: 10px;
+}
+
+.authorList table {
+    text-align: center;
+}

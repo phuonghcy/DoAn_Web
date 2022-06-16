@@ -64,6 +64,11 @@ function AdminSideBar() {
               </div>
             </div>
           </li>
+           <li className={`${styles.navItem} ${active === "feedbacks" ? styles.active : ""}`}  onClick={() => setActive("feedbacks")}>
+            <Link className={styles.navLink} to="/admin/feedback">
+              <span>Quản lý phản hồi</span>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

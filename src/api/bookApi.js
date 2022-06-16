@@ -22,9 +22,9 @@ const bookApi = {
         const url = `books/is-ordered/${id}`
         return axiosClient.get(url)
     },
-    search: (key) => {
+    search: ({key, limit}) => {
         const url = `books/search`
-        return axiosClient.get(url, { params: {key}})
+        return axiosClient.get(url, { params: {key, limit}})
     },
     createBook: (data) => {
         const url = `books/`
