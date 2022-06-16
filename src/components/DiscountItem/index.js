@@ -5,7 +5,7 @@ import { ProgressBar } from "react-bootstrap";
 import styles from "./DiscountItem.module.css";
 import format from "../../helper/format";
 import logo from "../../assets/images/logo.png";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
 import { udpateVoucher } from "../../redux/actions/cart";
 import voucherApi from "../../api/voucherApi";
@@ -28,6 +28,10 @@ const DiscountItem = ({ item }) => {
 
   const handleUseNow = async (code) => {
     try {
+      if (cartData?.list.length <= 0) {
+        toast.info("Giỏ hàng của bạn đang rỗng!", { autoClose: 2000 });
+        return
+      }
       if (!code) {
         dispatch(udpateVoucher({
             voucher: "",
@@ -71,7 +75,6 @@ const DiscountItem = ({ item }) => {
 
   return (
     <div className={`d-flex ${styles.discount_item}`}>
-      <ToastContainer />
       <div className={styles.discount_item_left}>
         <img src={logo} alt="" />
       </div>

@@ -157,6 +157,11 @@ function OrderList() {
                 <p>SĐT:{" "}<b>{orderDetail?.phoneNumber}</b></p>
               </div>
               <div>
+                <p>Phương thức thanh toán: <b>{orderDetail?.method === 0 ? "Trả tiền mặt khi nhận hàng" : "Paypal"}</b></p>
+                {(orderDetail?.method === 1 && !orderDetail?.isPaid) ? <button className="btn btn-danger">Chưa thanh toán</button> : null}
+                {(orderDetail?.method === 1 && orderDetail?.isPaid) ? <button className="btn btn-success">Đã thanh toán</button> : null}
+              </div>
+              <div>
                 <p>Tạm tính:{" "}<b>{format.formatPrice(orderDetail?.cost?.subTotal)}</b></p>
                 <p>Giám giá:{" "}<b>{format.formatPrice(orderDetail?.cost?.discount)}</b></p>
                 <p>Tổng cộng: <b>{format.formatPrice(orderDetail?.cost.total)}</b></p>
@@ -230,7 +235,9 @@ function OrderList() {
                 ) : orderData.orders && orderData.orders.length > 0 ? (
                   orderData.orders.map((item, index) => {
                     return (
-                      <tr key={item._id} className={`${item.status.key === 3 ? styles.success : ''}`}>
+                      <tr key={item._id} 
+                          className={`${item.status.key === 3 ? styles.success : ''} ${!item.isPaid && item.method === 1 ? styles.error : ""}`}
+                          >
                         <td>{(1 && page - 1) * 10 + (index + 1)}</td>
                         <td>{item.fullName}</td>
                         <td>{item.address}</td>
@@ -247,6 +254,7 @@ function OrderList() {
                             className="btn btn-success"
                             data-id={item._id}
                             onClick={handleUpdateOrder}
+                            disabled={item?.method === 1 && !item?.isPaid}
                           >
                             Sửa
                           </button>

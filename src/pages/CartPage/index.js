@@ -35,6 +35,14 @@ function CartPage() {
       const res = await voucherApi.getByCode(voucher)
       const voucherData = res.data
       console.log(voucherData)
+      if (!voucherData.discount) {
+        toast.info("Voucher này không tồn tại!", {autoClose: 2000})
+        dispatch(udpateVoucher({
+          voucher: "",
+          discount: 0
+        }))
+        return
+      }
       if (cartData.subTotal < voucherData.price_request) {
         toast.info(
           `Giá trị đơn hàng cần tối thiểu ${format.formatPrice(voucherData.price_request)} để áp dụng!`, 
