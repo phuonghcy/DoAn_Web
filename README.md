@@ -17,7 +17,7 @@
 ## SINH VIÊN THỰC HIỆN
 | STT    | MSSV          | Họ và Tên              |  Email                   |
 | ------ |:-------------:| ----------------------:| -------------------------:
-| 1      | 19522068      | Nguyễn Thị Minh Thư    | 19522068@gm.uit.edu.vn   |
+| 1      | 19522308      | Nguyễn Thị Minh Thư    | 19522068@gm.uit.edu.vn   |
 | 2      | 19522068      | Thị Kim Phương         | 19522068@gm.uit.edu.vn   |
 | 3      | 19520800      | Ngô Hữu Nhân           | 19520800@gm.uit.edu.vn   |
 
