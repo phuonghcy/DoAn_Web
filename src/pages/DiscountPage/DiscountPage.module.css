@@ -2,3 +2,35 @@
     margin-top: 165px;
     padding-top: 32px;
 }
+.discount_header {
+    padding: 20px;
+    text-align: center;
+    color: #000;
+}
+
+.discount_header ul {
+    list-style: none;
+    padding: 0;
+}
+
+.discount_header li {
+    display: inline;
+}
+
+.discount_header li:not(:last-child) {
+    padding-right: 10px;
+}
+
+.discount_header li:not(:last-child)::after {
+    content: ">";
+    position: relative;
+    left: 5px;
+}
+
+.discount_header li:last-child {
+    color: red;
+}
+
+.discount_header h1 {
+    color: #539E31;
+}

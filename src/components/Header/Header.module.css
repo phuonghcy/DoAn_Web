@@ -7,10 +7,11 @@
     background-color: white;
     height: 165px;
     box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+    background-color:  rgb(250, 250, 246);
 }
 
 .headerTop {
-    background-color: #E9E9E9;
+    background-color: #dbdada;
     height: 30px;
     line-height: 30px;
 }

@@ -42,7 +42,8 @@ function SearchPage() {
                 <Col xl={3} key={book._id}>
                   <BookItem data={book} />
                 </Col>)
-            ) : null}
+            ) :
+            <p className={styles.notfound}>Không tìm thấy kết quả phù hợp với từ khóa "<span className={styles.keyword}>{key}</span>"</p>}
           </Row>
         </div>
       </Container>

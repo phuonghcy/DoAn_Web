@@ -2,10 +2,12 @@ import React from "react";
 import ContactForm from "../../components/ContactForm";
 import styles from "./ContactPage.module.css";
 import { Link } from 'react-router-dom';
+import { Container } from "react-bootstrap";
 
 export default function ContactPage() {
   return (
     <>
+    <Container>
       <div className={styles.contact}>
         <div className={styles.contact}>
           <h2>CÁC CÂU HỎI THƯỜNG GẶP VÀ LIÊN HỆ</h2>
@@ -68,6 +70,7 @@ export default function ContactPage() {
           <ContactForm />
         </div>
       </div>
+      </Container>
     </>
   );
 }

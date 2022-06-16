@@ -4,6 +4,7 @@
     border: 1px solid #ccc;
     margin:0 auto 16px;
     overflow: hidden;
+    background-color: #fff;
 }
 
 .discount_item_left {

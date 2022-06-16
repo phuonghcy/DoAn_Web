@@ -32,3 +32,13 @@
     height: 2px;
     background-color: var(--primary-color);
 }
+.notfound {
+    font-size: 30px;
+    text-align: center;
+    font-style: italic;
+    padding: 20px;
+    background-color: rgb(228, 228, 228);
+}
+.keyword {
+    font-weight: bold;
+}
