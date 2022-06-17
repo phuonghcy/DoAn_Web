@@ -1,10 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./AdminSideBar.module.css";
 import logo from '../../assets/images/logo.png'
 import { useState } from "react";
+import authApi from "../../api/authApi";
+import { logout } from '../../redux/actions/user';
+import { useDispatch } from "react-redux";
 
 function AdminSideBar() {
   const [active, setActive] = useState("analytics")
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleLogout = async () => {
+    const resultLogout = await authApi.logout()
+    console.log(resultLogout)
+    dispatch(logout())
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      localStorage.removeItem('accessToken')
+    }
+    navigate({ pathname: '/' })
+  }
   return (
     <div className={styles.adminSideBar}>
       <div className={styles.logo}>
@@ -68,6 +84,11 @@ function AdminSideBar() {
             <Link className={styles.navLink} to="/admin/feedback">
               <span>Quản lý phản hồi</span>
             </Link>
+          </li>
+          <li className={styles.navItem} onClick={handleLogout}>
+            <p className={styles.navLink}>
+              <span>Đăng xuất</span>
+            </p>
           </li>
         </ul>
       </div>

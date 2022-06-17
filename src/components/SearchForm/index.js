@@ -41,6 +41,9 @@ function SearchForm() {
   const handleSubmitSearch = (e) => {
     e.preventDefault()
     setShowResult(false)
+    if (!key.trim()) {
+      return
+    }
     navigate({
       pathname: '/tim-kiem',
       search: `key=${key}`

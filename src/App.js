@@ -34,6 +34,7 @@ import OrderList from "./components/OrderList";
 import VoucherList from "./components/VoucherList";
 import FeedbackList from "./components/FeedbackList";
 import AccessDenied from "./pages/AccessDenied"
+import NotFound from "./pages/NotFound"
 
 
 import './App.css';
@@ -119,6 +120,8 @@ function App() {
         {!currentUser.role && (
           <Route path="/admin/*" element={<AccessDenied />} />
         )}
+
+        <Route path="*" element={<NotFound />} />
 
       </Routes> 
     </div>
