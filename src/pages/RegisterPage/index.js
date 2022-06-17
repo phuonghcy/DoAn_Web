@@ -257,7 +257,7 @@ export default function RegisterPage() {
                 authorizationUrl="https://accounts.google.com/o/oauth2/auth"
                 responseType="token"
                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                redirectUri="http://localhost:3000"
+                redirectUri={process.env.REACT_APP_REDIRECT_LOGIN_GOOGLE}
                 scope="email profile"
                 onSuccess={responseSuccessGoogle}
                 onFailure={responseFailureGoogle}
@@ -275,7 +275,7 @@ export default function RegisterPage() {
                 authorizationUrl="https://www.facebook.com/dialog/oauth"
                 responseType="token"
                 clientId="990086591697823"
-                redirectUri="http://localhost:3000"
+                redirectUri={process.env.REACT_APP_REDIRECT_LOGIN_FACEBOOK}
                 scope="public_profile"
                 onSuccess={responseSuccessFacebook}
                 onFailure={responseFailureFacebook}
