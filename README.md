@@ -37,6 +37,7 @@
 - Trang chi tiết sản phẩm
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943597/ie213/Capture4_zcfctj.png)
 - Tìm kiếm sản phẩm
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466125/ie213/Capture3_lmbywi.png)
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654943597/ie213/Capture5_oc1d63.png)
 
 - Xác thực người dùng
@@ -68,8 +69,9 @@
 
 - ### **Trang Quản Lý**
 - Trang thống kê
-    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture10_rne5ps.png)
-    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture11_gvajph.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466124/ie213/Capture4_zk1dpe.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466124/ie213/Capture5_tbhb2p.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466124/ie213/Capture6_invckk.png)
 - Trang quản lý sách
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture12_ezvvik.png)
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944198/ie213/Capture13_tjjhau.png)
@@ -79,10 +81,11 @@
     ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944199/ie213/Capture15_cjzfh0.png)
 
 - Quản lý đơn hàng
-    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944339/ie213/Capture16_ht5k3u.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466124/ie213/Capture1_gblsyf.png)
     - Chi tiết đơn hàng
-    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1654944339/ie213/Capture17_reu1pm.png)
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466124/ie213/Capture2_knqd7r.png)
     - Cập nhật trạng thái đơn hàng
+    ![](https://res.cloudinary.com/dbynglvwk/image/upload/v1655466370/ie213/Capture7_k9oes3.png)
 
 
 # Getting Started with Create React App
